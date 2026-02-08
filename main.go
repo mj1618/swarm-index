@@ -287,6 +287,29 @@ func main() {
 			}
 		}
 
+	case "todos":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 100)
+		tag := parseStringFlag(extraArgs, "--tag", "")
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		todosResult, err := idx.Todos(tag, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(todosResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatTodos(todosResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -333,6 +356,17 @@ func parseIntFlag(args []string, flag string, defaultVal int) int {
 			if err == nil && n > 0 {
 				return n
 			}
+		}
+	}
+	return defaultVal
+}
+
+// parseStringFlag scans args for --flag value and returns its value, or
+// defaultVal if the flag is absent.
+func parseStringFlag(args []string, flag string, defaultVal string) string {
+	for i, arg := range args {
+		if arg == flag && i+1 < len(args) {
+			return args[i+1]
 		}
 	}
 	return defaultVal
@@ -448,6 +482,7 @@ Usage:
   swarm-index show <path> [--lines M:N]   Read a file with line numbers
   swarm-index refs <symbol> [--root <dir>] [--max N]   Find all references to a symbol
   swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
+  swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

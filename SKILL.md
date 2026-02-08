@@ -45,6 +45,11 @@ swarm-index outline main.go
 swarm-index outline app.py
 swarm-index outline app.tsx
 
+# Find TODO/FIXME/HACK/XXX comments across the codebase
+swarm-index todos
+swarm-index todos --tag FIXME
+swarm-index todos --max 20
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

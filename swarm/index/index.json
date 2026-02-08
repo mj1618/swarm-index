@@ -28,6 +28,13 @@
     "package": "(root)"
   },
   {
+    "name": "cli_test.go",
+    "kind": "file",
+    "path": "cli_test.go",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
     "name": "go.mod",
     "kind": "file",
     "path": "go.mod",
@@ -49,6 +56,20 @@
     "package": "index"
   },
   {
+    "name": "refs.go",
+    "kind": "file",
+    "path": "index/refs.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "refs_test.go",
+    "kind": "file",
+    "path": "index/refs_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "search.go",
     "kind": "file",
     "path": "index/search.go",
@@ -63,6 +84,34 @@
     "package": "index"
   },
   {
+    "name": "show.go",
+    "kind": "file",
+    "path": "index/show.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "show_test.go",
+    "kind": "file",
+    "path": "index/show_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "stale.go",
+    "kind": "file",
+    "path": "index/stale.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "stale_test.go",
+    "kind": "file",
+    "path": "index/stale_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "summary.go",
     "kind": "file",
     "path": "index/summary.go",
@@ -73,6 +122,20 @@
     "name": "summary_test.go",
     "kind": "file",
     "path": "index/summary_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "todos.go",
+    "kind": "file",
+    "path": "index/todos.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "todos_test.go",
+    "kind": "file",
+    "path": "index/todos_test.go",
     "line": 0,
     "package": "index"
   },
@@ -103,6 +166,55 @@
     "path": "main_test.go",
     "line": 0,
     "package": "(root)"
+  },
+  {
+    "name": "goparser.go",
+    "kind": "file",
+    "path": "parsers/goparser.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "goparser_test.go",
+    "kind": "file",
+    "path": "parsers/goparser_test.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "jsparser.go",
+    "kind": "file",
+    "path": "parsers/jsparser.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "jsparser_test.go",
+    "kind": "file",
+    "path": "parsers/jsparser_test.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "parsers.go",
+    "kind": "file",
+    "path": "parsers/parsers.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "pyparser.go",
+    "kind": "file",
+    "path": "parsers/pyparser.go",
+    "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "pyparser_test.go",
+    "kind": "file",
+    "path": "parsers/pyparser_test.go",
+    "line": 0,
+    "package": "parsers"
   },
   {
     "name": "swarm-index",

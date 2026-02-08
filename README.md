@@ -54,6 +54,12 @@ swarm-index refs "HandleAuth"
 # Show top-level symbols of a file (functions, types, etc.)
 swarm-index outline main.go
 
+# Find TODO/FIXME/HACK/XXX comments
+swarm-index todos
+
+# Filter by tag
+swarm-index todos --tag FIXME
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -79,6 +85,7 @@ swarm-index lookup "handleAuth" --json
 | `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
 | `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
 | `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go, Python, JavaScript, and TypeScript files. |
+| `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -112,6 +119,8 @@ swarm-index/
 │   ├── show_test.go     # Tests for show functionality
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
+│   ├── todos.go         # TODO/FIXME/HACK/XXX comment collection
+│   ├── todos_test.go    # Tests for todos functionality
 │   ├── tree.go          # Directory tree building and rendering
 │   └── tree_test.go     # Tests for tree functionality
 ├── parsers/
@@ -145,7 +154,7 @@ go test ./... -v
 - [ ] `context` — symbol definition with imports and doc comments
 - [x] `refs` — find all usages of a symbol
 - [ ] `related` — files connected to a given file (imports, importers, tests)
-- [ ] `todos` — collect TODO/FIXME/HACK/XXX comments
+- [x] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [ ] `diff-summary` — files changed since a git ref with affected symbols
 - [x] `stale` — report new, deleted, or modified files since last scan
 - [ ] `history` — recent git commits that touched a file
