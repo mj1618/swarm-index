@@ -166,12 +166,13 @@ func Scan(root string) (*Index, error) {
 	return idx, nil
 }
 
-// Match returns all entries whose name contains the query (case-insensitive).
+// Match returns all entries whose name or path contains the query (case-insensitive).
 func (idx *Index) Match(query string) []Entry {
 	q := strings.ToLower(query)
 	var results []Entry
 	for _, e := range idx.Entries {
-		if strings.Contains(strings.ToLower(e.Name), q) {
+		if strings.Contains(strings.ToLower(e.Name), q) ||
+			strings.Contains(strings.ToLower(e.Path), q) {
 			results = append(results, e)
 		}
 	}

@@ -36,6 +36,8 @@ func TestMatch(t *testing.T) {
 			{Name: "handler.go", Kind: "file", Path: "api/handler.go", Package: "api"},
 			{Name: "auth.go", Kind: "file", Path: "api/auth.go", Package: "api"},
 			{Name: "utils.go", Kind: "file", Path: "pkg/utils.go", Package: "pkg"},
+			{Name: "util.go", Kind: "file", Path: "lib/util.go", Package: "lib"},
+			{Name: "helper.go", Kind: "file", Path: "lib/helper.go", Package: "lib"},
 		},
 	}
 
@@ -45,9 +47,16 @@ func TestMatch(t *testing.T) {
 	}{
 		{"main", 1},
 		{"auth", 1},
-		{".go", 4},
+		{".go", 6},
 		{"handler", 1},
 		{"nonexistent", 0},
+		// Path-based matching
+		{"api/handler", 1},
+		{"api/", 2},
+		{"lib/", 2},
+		{"lib/util", 1},
+		// No duplicates when both name and path match
+		{"handler.go", 1},
 	}
 
 	for _, tt := range tests {
