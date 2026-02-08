@@ -45,6 +45,10 @@ swarm-index outline main.go
 swarm-index outline app.py
 swarm-index outline app.tsx
 
+# Show a symbol's full definition with imports and doc comments
+swarm-index context Save index/index.go
+swarm-index context handleAuth server.go --root ~/code/my-project
+
 # List exported/public symbols of a file or directory
 swarm-index exports index/index.go
 swarm-index exports parsers

@@ -431,6 +431,28 @@ func main() {
 			fmt.Print(index.FormatDeps(depsResult))
 		}
 
+	case "context":
+		if len(args) < 4 {
+			fatal(jsonOutput, "usage: swarm-index context <symbol> <file> [--root <dir>]")
+		}
+		symbol := args[2]
+		filePath := args[3]
+		extraArgs := args[4:]
+		root := parseStringFlag(extraArgs, "--root", "")
+		if root != "" {
+			filePath = filepath.Join(root, filePath)
+		}
+		contextResult, err := index.Context(filePath, symbol)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(contextResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatContext(contextResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -604,6 +626,7 @@ Usage:
   swarm-index refs <symbol> [--root <dir>] [--max N]   Find all references to a symbol
   swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
   swarm-index exports <file|directory> [--root <dir>]   List exported/public symbols
+  swarm-index context <symbol> <file> [--root <dir>]   Show symbol definition with imports and doc comments
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
   swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)

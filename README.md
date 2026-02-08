@@ -54,6 +54,10 @@ swarm-index refs "HandleAuth"
 # Show top-level symbols of a file (functions, types, etc.)
 swarm-index outline main.go
 
+# Show a symbol's full definition with imports and doc comments
+swarm-index context Save index/index.go
+swarm-index context handleAuth server.go --root ~/code/my-project
+
 # List exported/public symbols of a file or directory
 swarm-index exports index/index.go
 swarm-index exports parsers
@@ -111,6 +115,7 @@ swarm-index lookup "handleAuth" --json
 | `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
 | `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go, Python, JavaScript, and TypeScript files. |
 | `exports <file\|directory> [--root <dir>]` | List exported/public symbols of a file or package directory. Uses language-aware parsers to identify exports (Go: uppercase names, JS/TS: `export` keyword, Python: names not starting with `_`). Supports `--json`. |
+| `context <symbol> <file> [--root <dir>]` | Show a symbol's full definition context: file imports, doc comments, and the complete definition body. Supports Go, Python, JS, and TS files. |
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
@@ -155,6 +160,8 @@ swarm-index/
 │   ├── diffsummary_test.go # Tests for diff summary
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
+│   ├── context.go       # Symbol definition context (imports, doc comments, body)
+│   ├── context_test.go  # Tests for context functionality
 │   ├── exports.go       # Exported/public symbol listing
 │   ├── exports_test.go  # Tests for exports functionality
 │   ├── history.go       # Git commit history for a file
@@ -191,7 +198,7 @@ go test ./... -v
 - [ ] `config` — detect project toolchain (framework, build tool, test runner)
 - [x] `deps` — parse dependency manifests and list libraries with versions
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
-- [ ] `context` — symbol definition with imports and doc comments
+- [x] `context` — symbol definition with imports and doc comments
 - [x] `refs` — find all usages of a symbol
 - [x] `related` — files connected to a given file (imports, importers, tests)
 - [x] `todos` — collect TODO/FIXME/HACK/XXX comments
