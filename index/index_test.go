@@ -243,6 +243,32 @@ func TestLookupIntegration(t *testing.T) {
 	}
 }
 
+func TestScanNonexistentDir(t *testing.T) {
+	_, err := Scan("/tmp/nonexistent-path-swarm-index-test")
+	if err == nil {
+		t.Fatal("Scan() should return error for nonexistent path")
+	}
+	if !strings.Contains(err.Error(), "cannot access") {
+		t.Errorf("error = %q, want it to contain %q", err.Error(), "cannot access")
+	}
+}
+
+func TestScanFileNotDir(t *testing.T) {
+	tmp := t.TempDir()
+	f := filepath.Join(tmp, "afile.txt")
+	if err := os.WriteFile(f, []byte("hello"), 0o644); err != nil {
+		t.Fatal(err)
+	}
+
+	_, err := Scan(f)
+	if err == nil {
+		t.Fatal("Scan() should return error when given a file")
+	}
+	if !strings.Contains(err.Error(), "not a directory") {
+		t.Errorf("error = %q, want it to contain %q", err.Error(), "not a directory")
+	}
+}
+
 func mkFile(t *testing.T, base, relPath, content string) {
 	t.Helper()
 	full := filepath.Join(base, relPath)

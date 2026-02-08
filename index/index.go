@@ -128,6 +128,14 @@ func Scan(root string) (*Index, error) {
 		return nil, fmt.Errorf("resolving path: %w", err)
 	}
 
+	info, err := os.Stat(root)
+	if err != nil {
+		return nil, fmt.Errorf("cannot access %s: %w", root, err)
+	}
+	if !info.IsDir() {
+		return nil, fmt.Errorf("%s is not a directory", root)
+	}
+
 	idx := &Index{Root: root}
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
