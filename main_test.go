@@ -48,6 +48,25 @@ func TestParseMaxNoValue(t *testing.T) {
 	}
 }
 
+func TestValidateQuery(t *testing.T) {
+	tests := []struct {
+		query   string
+		wantErr bool
+	}{
+		{"hello", false},
+		{"", true},
+		{"   ", true},
+		{"\t", true},
+		{"a", false},
+	}
+	for _, tt := range tests {
+		err := validateQuery(tt.query)
+		if (err != nil) != tt.wantErr {
+			t.Errorf("validateQuery(%q) error = %v, wantErr %v", tt.query, err, tt.wantErr)
+		}
+	}
+}
+
 func TestResolveRootWithFlag(t *testing.T) {
 	tmp := t.TempDir()
 	args := []string{"--root", tmp}

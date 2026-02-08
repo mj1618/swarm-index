@@ -44,6 +44,10 @@ func main() {
 			os.Exit(1)
 		}
 		query := os.Args[2]
+		if err := validateQuery(query); err != nil {
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			os.Exit(1)
+		}
 		extraArgs := os.Args[3:]
 		root, err := resolveRoot(extraArgs)
 		if err != nil {
@@ -141,6 +145,13 @@ func extensionSummary(counts map[string]int) string {
 		parts[i] = fmt.Sprintf("%s: %d", ec.ext, ec.count)
 	}
 	return strings.Join(parts, ", ")
+}
+
+func validateQuery(q string) error {
+	if strings.TrimSpace(q) == "" {
+		return fmt.Errorf("query must not be empty")
+	}
+	return nil
 }
 
 func printUsage() {

@@ -37,22 +37,21 @@ go build -o swarm-index .
 ## Quick start
 
 ```bash
-
 # Scan a project and persist the index
-./swarm-index scan ~/code/my-project
+swarm-index scan ~/code/my-project
 
 # Get a quick orientation
-./swarm-index summary ~/code/my-project
-./swarm-index tree ~/code/my-project --depth 3
+swarm-index summary ~/code/my-project
+swarm-index tree ~/code/my-project --depth 3
 
 # Look up a symbol or filename
-./swarm-index lookup "handleAuth"
+swarm-index lookup "handleAuth"
 
 # Understand a file without reading the whole thing
-./swarm-index outline src/auth/handler.go
+swarm-index outline src/auth/handler.go
 
 # All commands support --json for structured output
-./swarm-index outline src/auth/handler.go --json
+swarm-index outline src/auth/handler.go --json
 ```
 
 ## Global flags
