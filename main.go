@@ -191,6 +191,28 @@ func main() {
 			fmt.Print(index.RenderTree(tree))
 		}
 
+	case "show":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index show <path> [--lines M:N]")
+		}
+		filePath := args[2]
+		startLine, endLine, err := parseLineRange(args[3:])
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		result, err := index.ShowFile(filePath, startLine, endLine)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(result, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			for _, line := range result.Lines {
+				fmt.Printf("%6d\t%s\n", line.Number, line.Content)
+			}
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -281,6 +303,44 @@ func validateQuery(q string) error {
 	return nil
 }
 
+// parseLineRange scans args for --lines and parses the value as M:N.
+// Supports formats: "M:N" (range), "M:" (from M to end), ":N" (from start to N), "M" (single line).
+// Returns (0, 0, nil) if --lines is absent.
+func parseLineRange(args []string) (int, int, error) {
+	for i, arg := range args {
+		if arg == "--lines" {
+			if i+1 >= len(args) {
+				return 0, 0, fmt.Errorf("--lines requires a value (e.g. --lines 10:20)")
+			}
+			val := args[i+1]
+			if idx := strings.Index(val, ":"); idx >= 0 {
+				var start, end int
+				var err error
+				if idx > 0 {
+					start, err = strconv.Atoi(val[:idx])
+					if err != nil {
+						return 0, 0, fmt.Errorf("invalid line range: %s", val)
+					}
+				}
+				if idx < len(val)-1 {
+					end, err = strconv.Atoi(val[idx+1:])
+					if err != nil {
+						return 0, 0, fmt.Errorf("invalid line range: %s", val)
+					}
+				}
+				return start, end, nil
+			}
+			// Single line number.
+			n, err := strconv.Atoi(val)
+			if err != nil {
+				return 0, 0, fmt.Errorf("invalid line range: %s", val)
+			}
+			return n, n, nil
+		}
+	}
+	return 0, 0, nil
+}
+
 func printUsage() {
 	fmt.Fprintln(os.Stderr, `swarm-index — a helpful index lookup for coding agents
 
@@ -290,6 +350,7 @@ Usage:
   swarm-index search <pattern> [--root <dir>] [--max N]   Regex search across file contents
   swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure
+  swarm-index show <path> [--lines M:N]   Read a file with line numbers
   swarm-index version             Print version info
 
 Examples:
@@ -297,5 +358,6 @@ Examples:
   swarm-index lookup "handleAuth"
   swarm-index search "func\s+\w+" --max 10
   swarm-index summary
-  swarm-index tree . --depth 3`)
+  swarm-index tree . --depth 3
+  swarm-index show main.go --lines 10:20`)
 }

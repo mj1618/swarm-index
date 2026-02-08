@@ -42,6 +42,12 @@ swarm-index summary
 # Print directory tree
 swarm-index tree . --depth 3
 
+# Read a file with line numbers
+swarm-index show main.go
+
+# Read specific lines
+swarm-index show main.go --lines 10:20
+
 # All commands support --json for structured output
 swarm-index lookup "handleAuth" --json
 ```
@@ -61,6 +67,7 @@ swarm-index lookup "handleAuth" --json
 | `search <pattern> [--root <dir>] [--max N]` | Regex search across indexed file contents. Returns matching lines with file paths and line numbers. Use `--max` to limit results (default 50). Binary files are skipped. |
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
+| `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
 | `version` | Print the current version |
 
 ## How it works
@@ -87,6 +94,8 @@ swarm-index/
 │   ├── search_test.go   # Tests for search functionality
 │   ├── summary.go       # Project summary: languages, LOC, entry points
 │   ├── summary_test.go  # Tests for summary logic
+│   ├── show.go          # File reading with line numbers
+│   ├── show_test.go     # Tests for show functionality
 │   ├── tree.go          # Directory tree building and rendering
 │   └── tree_test.go     # Tests for tree functionality
 ├── go.mod               # Go module definition
@@ -104,7 +113,7 @@ go test ./... -v
 ### Planned commands
 
 - [ ] `outline` — structural skeleton of a file (functions, classes, types)
-- [ ] `show` — read a file or line range with structural context
+- [x] `show` — read a file or line range with line numbers
 - [ ] `exports` — public API surface of a file or package
 - [ ] `config` — detect project toolchain (framework, build tool, test runner)
 - [ ] `deps` — parse dependency manifests and list libraries with versions

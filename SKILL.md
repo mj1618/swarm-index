@@ -26,6 +26,12 @@ swarm-index summary --root ~/code/my-project
 
 # Print directory tree (respects same skip rules as scan)
 swarm-index tree . --depth 3
+
+# Read a file with line numbers
+swarm-index show main.go
+
+# Read specific lines (1-indexed, inclusive)
+swarm-index show main.go --lines 10:20
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).
