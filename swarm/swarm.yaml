@@ -1,0 +1,14 @@
+version: "1"
+
+tasks:
+  planner:
+    prompt: planner
+
+  coder:
+    prompt: coder
+    depends_on: [planner]
+
+pipelines:
+  development:
+    iterations: 10
+    tasks: [planner, coder]
