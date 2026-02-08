@@ -32,13 +32,23 @@ type Index struct {
 	Entries []Entry
 }
 
+// FilePaths returns the unique file paths in the index, preserving first-seen order.
+func (idx *Index) FilePaths() []string {
+	seen := make(map[string]struct{})
+	var paths []string
+	for _, e := range idx.Entries {
+		if _, ok := seen[e.Path]; ok {
+			continue
+		}
+		seen[e.Path] = struct{}{}
+		paths = append(paths, e.Path)
+	}
+	return paths
+}
+
 // FileCount returns the number of unique files in the index.
 func (idx *Index) FileCount() int {
-	seen := make(map[string]struct{})
-	for _, e := range idx.Entries {
-		seen[e.Path] = struct{}{}
-	}
-	return len(seen)
+	return len(idx.FilePaths())
 }
 
 // PackageCount returns the number of unique packages in the index.
@@ -206,6 +216,34 @@ func (idx *Index) Match(query string) []Entry {
 		}
 	}
 	return results
+}
+
+// openTextFile opens a file and verifies it's not binary (no null bytes in
+// first 512 bytes). Returns the open file seeked back to the start, ready for
+// reading. Returns nil, nil for binary files. Caller must close the file.
+func openTextFile(path string) (*os.File, error) {
+	f, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	header := make([]byte, 512)
+	n, err := f.Read(header)
+	if err != nil && n == 0 {
+		f.Close()
+		return nil, err
+	}
+	for _, b := range header[:n] {
+		if b == 0 {
+			f.Close()
+			return nil, nil // binary file
+		}
+	}
+	if _, err := f.Seek(0, 0); err != nil {
+		f.Close()
+		return nil, err
+	}
+	return f, nil
 }
 
 func shouldSkipDir(name string) bool {

@@ -48,6 +48,9 @@ swarm-index show main.go
 # Read specific lines
 swarm-index show main.go --lines 10:20
 
+# Find all references to a symbol
+swarm-index refs "HandleAuth"
+
 # Show top-level symbols of a file (functions, types, etc.)
 swarm-index outline main.go
 
@@ -71,6 +74,7 @@ swarm-index lookup "handleAuth" --json
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
 | `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
+| `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
 | `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Currently supports Go files. |
 | `version` | Print the current version |
 
@@ -94,6 +98,8 @@ swarm-index/
 ├── index/
 │   ├── index.go         # Core library: scanning, indexing, matching
 │   ├── index_test.go    # Tests for scan, match, and directory filtering
+│   ├── refs.go          # Symbol reference finder (definition + usages)
+│   ├── refs_test.go     # Tests for refs functionality
 │   ├── search.go        # Regex search across indexed file contents
 │   ├── search_test.go   # Tests for search functionality
 │   ├── summary.go       # Project summary: languages, LOC, entry points
@@ -127,7 +133,7 @@ go test ./... -v
 - [ ] `deps` — parse dependency manifests and list libraries with versions
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
 - [ ] `context` — symbol definition with imports and doc comments
-- [ ] `refs` — find all usages of a symbol
+- [x] `refs` — find all usages of a symbol
 - [ ] `related` — files connected to a given file (imports, importers, tests)
 - [ ] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [ ] `diff-summary` — files changed since a git ref with affected symbols

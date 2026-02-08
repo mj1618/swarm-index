@@ -214,6 +214,48 @@ func main() {
 			}
 		}
 
+	case "refs":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index refs <symbol> [--root <dir>] [--max N]")
+		}
+		symbol := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 50)
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		refsResult, err := idx.Refs(symbol, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(refsResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			if refsResult.Definition != nil {
+				fmt.Println("Definition:")
+				fmt.Printf("  %s:%d  %s\n", refsResult.Definition.Path, refsResult.Definition.Line, refsResult.Definition.Content)
+				fmt.Println()
+			}
+			if len(refsResult.References) == 0 {
+				if refsResult.Definition == nil {
+					fmt.Println("no matches found")
+				} else {
+					fmt.Println("No references found")
+				}
+			} else {
+				fmt.Printf("References (%d matches):\n", refsResult.TotalRefs)
+				for _, r := range refsResult.References {
+					fmt.Printf("  %s:%d  %s\n", r.Path, r.Line, r.Content)
+				}
+			}
+		}
+
 	case "outline":
 		if len(args) < 3 {
 			fatal(jsonOutput, "usage: swarm-index outline <file>")
@@ -383,6 +425,7 @@ Usage:
   swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure
   swarm-index show <path> [--lines M:N]   Read a file with line numbers
+  swarm-index refs <symbol> [--root <dir>] [--max N]   Find all references to a symbol
   swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
   swarm-index version             Print version info
 

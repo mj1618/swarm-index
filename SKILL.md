@@ -33,6 +33,12 @@ swarm-index show main.go
 # Read specific lines (1-indexed, inclusive)
 swarm-index show main.go --lines 10:20
 
+# Find all references to a symbol (definition + usages)
+swarm-index refs "HandleAuth"
+
+# Limit refs results
+swarm-index refs "Config" --max 10
+
 # Show top-level symbols of a Go file (functions, types, methods, etc.)
 swarm-index outline main.go
 ```
