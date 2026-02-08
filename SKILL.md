@@ -94,6 +94,13 @@ swarm-index entry-points --kind route
 swarm-index entry-points --kind main --max 10
 swarm-index entry-points --root ~/code/my-project
 
+# Show project-wide import dependency graph
+swarm-index graph
+swarm-index graph --focus main.go
+swarm-index graph --focus main.go --depth 2
+swarm-index graph --format dot
+swarm-index graph --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

@@ -478,6 +478,37 @@ func main() {
 			fmt.Print(index.FormatEntryPoints(epResult))
 		}
 
+	case "graph":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		focus := parseStringFlag(extraArgs, "--focus", "")
+		depth := parseIntFlag(extraArgs, "--depth", 0)
+		format := parseStringFlag(extraArgs, "--format", "list")
+		var graphResult *index.GraphResult
+		if focus != "" {
+			graphResult, err = idx.GraphFocused(focus, depth)
+			if err != nil {
+				fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+			}
+		} else {
+			graphResult = idx.Graph()
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(graphResult, "", "  ")
+			fmt.Println(string(data))
+		} else if format == "dot" {
+			fmt.Print(index.FormatGraphDOT(graphResult))
+		} else {
+			fmt.Print(index.FormatGraph(graphResult))
+		}
+
 	case "config":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -697,6 +728,7 @@ Usage:
   swarm-index context <symbol> <file> [--root <dir>]   Show symbol definition with imports and doc comments
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
+  swarm-index graph [--root <dir>] [--format dot|list] [--focus <file>] [--depth N]   Show project-wide import dependency graph
   swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)
   swarm-index entry-points [--root <dir>] [--max N] [--kind KIND]   Find main functions, route handlers, CLI commands, init functions
   swarm-index config [--root <dir>]   Detect project toolchain (framework, build, test, lint, format)

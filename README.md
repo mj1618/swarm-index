@@ -113,6 +113,18 @@ swarm-index entry-points --kind route
 # Limit results
 swarm-index entry-points --max 10
 
+# Show project-wide import dependency graph
+swarm-index graph
+
+# Focus on a specific file's dependency neighborhood
+swarm-index graph --focus main.go
+
+# Limit traversal depth when focused
+swarm-index graph --focus main.go --depth 2
+
+# Output as Graphviz DOT format
+swarm-index graph --format dot
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -141,6 +153,7 @@ swarm-index lookup "handleAuth" --json
 | `exports <file\|directory> [--root <dir>]` | List exported/public symbols of a file or package directory. Uses language-aware parsers to identify exports (Go: uppercase names, JS/TS: `export` keyword, Python: names not starting with `_`). Supports `--json`. |
 | `context <symbol> <file> [--root <dir>]` | Show a symbol's full definition context: file imports, doc comments, and the complete definition body. Supports Go, Python, JS, and TS files. |
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
+| `graph [--root <dir>] [--format dot\|list] [--focus <file>] [--depth N]` | Show project-wide import dependency graph with fan-in/fan-out analysis. Use `--focus` to extract a subgraph around a specific file, `--depth` to limit traversal, and `--format dot` for Graphviz output. Requires a prior `scan`. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
 | `entry-points [--root <dir>] [--max N] [--kind KIND]` | Find executable entry points: main functions, HTTP route handlers, CLI command registrations, and init/bootstrap code. Supports Go, Python, JS/TS, Rust, and Java. Use `--kind` to filter (main, route, cli, init). Default max 100. Requires a prior `scan`. |
@@ -195,6 +208,8 @@ swarm-index/
 │   ├── entrypoints_test.go # Tests for entry points functionality
 │   ├── exports.go       # Exported/public symbol listing
 │   ├── exports_test.go  # Tests for exports functionality
+│   ├── graph.go         # Project-wide import dependency graph
+│   ├── graph_test.go    # Tests for graph functionality
 │   ├── history.go       # Git commit history for a file
 │   ├── history_test.go  # Tests for history functionality
 │   ├── hotspots.go      # Most frequently changed files ranking
@@ -239,6 +254,7 @@ go test ./... -v
 - [x] `stale` — report new, deleted, or modified files since last scan
 - [x] `history` — recent git commits that touched a file
 - [x] `hotspots` — most frequently changed files ranked by commit count
+- [x] `graph` — project-wide import dependency graph with fan-in/fan-out analysis
 
 ### Other improvements
 
