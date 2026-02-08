@@ -148,9 +148,10 @@ func lineIndent(line string) int {
 	return len(line)
 }
 
-// isUpperSnakeCase returns true if name matches [A-Z][A-Z0-9_]* pattern.
+// isUpperSnakeCase returns true if name matches [A-Z][A-Z0-9_]* pattern
+// with at least 2 characters (to avoid single-letter variables like X, I, T).
 func isUpperSnakeCase(name string) bool {
-	if len(name) == 0 {
+	if len(name) < 2 {
 		return false
 	}
 	for i, ch := range name {

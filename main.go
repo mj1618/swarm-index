@@ -287,6 +287,31 @@ func main() {
 			}
 		}
 
+	case "exports":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index exports <file|directory> [--root <dir>]")
+		}
+		scope := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		exportsResult, err := idx.Exports(scope)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(exportsResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatExports(exportsResult))
+		}
+
 	case "todos":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -482,6 +507,7 @@ Usage:
   swarm-index show <path> [--lines M:N]   Read a file with line numbers
   swarm-index refs <symbol> [--root <dir>] [--max N]   Find all references to a symbol
   swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
+  swarm-index exports <file|directory> [--root <dir>]   List exported/public symbols
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info

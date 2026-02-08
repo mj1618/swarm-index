@@ -24,3 +24,11 @@ In `parsers/pyparser.go`, update the `isUpperSnakeCase` function to require `len
 ## Testing
 
 Update `pyparser_test.go` to verify that single-letter uppercase names are not matched as constants.
+
+## Completion Notes
+
+Implemented by agent fabdecba:
+
+1. Updated `isUpperSnakeCase()` in `parsers/pyparser.go` to require `len(name) >= 2` instead of `len(name) == 0`. Single-letter uppercase names like `X`, `Y`, `T`, `I`, `N` are no longer matched as constants.
+2. Added `TestPythonParserSingleLetterNotConst` test in `parsers/pyparser_test.go` verifying that single-letter names are rejected and 2+ letter names (`OK`, `DB`, `MAX_SIZE`) are still matched.
+3. All existing tests continue to pass — no regressions.

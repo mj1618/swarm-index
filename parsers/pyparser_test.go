@@ -206,6 +206,37 @@ func TestPythonParserForExtension(t *testing.T) {
 	}
 }
 
+func TestPythonParserSingleLetterNotConst(t *testing.T) {
+	src := `X = 10
+Y = 20
+T = TypeVar("T")
+I = 0
+N = 100
+OK = True
+DB = connect()
+MAX_SIZE = 1024
+`
+	p := &PythonParser{}
+	symbols, err := p.Parse("vars.py", []byte(src))
+	if err != nil {
+		t.Fatalf("Parse() error: %v", err)
+	}
+
+	byName := symbolsByName(symbols)
+
+	// Single-letter uppercase names should NOT be matched as constants.
+	for _, name := range []string{"X", "Y", "T", "I", "N"} {
+		if _, ok := byName[name]; ok {
+			t.Errorf("single-letter %q should not be matched as a constant", name)
+		}
+	}
+
+	// Two or more letter UPPER_SNAKE_CASE names should still be matched.
+	assertSymbol(t, byName, "OK", "const", true, "")
+	assertSymbol(t, byName, "DB", "const", true, "")
+	assertSymbol(t, byName, "MAX_SIZE", "const", true, "")
+}
+
 func TestPythonParserMixedFile(t *testing.T) {
 	src := `"""A real-world-like module."""
 

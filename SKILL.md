@@ -45,6 +45,11 @@ swarm-index outline main.go
 swarm-index outline app.py
 swarm-index outline app.tsx
 
+# List exported/public symbols of a file or directory
+swarm-index exports index/index.go
+swarm-index exports parsers
+swarm-index exports src/utils --root ~/code/my-project
+
 # Find TODO/FIXME/HACK/XXX comments across the codebase
 swarm-index todos
 swarm-index todos --tag FIXME

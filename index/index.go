@@ -12,11 +12,12 @@ import (
 
 // Entry represents a single indexed item (file, symbol, package, etc.).
 type Entry struct {
-	Name    string `json:"name"`    // symbol or file name
-	Kind    string `json:"kind"`    // "file", "func", "type", "package", etc.
-	Path    string `json:"path"`    // file path relative to the scanned root
-	Line    int    `json:"line"`    // line number (0 if not applicable)
-	Package string `json:"package"` // package or module the entry belongs to
+	Name     string `json:"name"`               // symbol or file name
+	Kind     string `json:"kind"`               // "file", "func", "type", "package", etc.
+	Path     string `json:"path"`               // file path relative to the scanned root
+	Line     int    `json:"line"`               // line number (0 if not applicable)
+	Package  string `json:"package"`            // package or module the entry belongs to
+	Exported bool   `json:"exported,omitempty"` // true if the symbol is publicly exported
 }
 
 func (e Entry) String() string {
