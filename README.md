@@ -214,6 +214,38 @@ swarm-index lookup "handleAuth" --json
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
+## Custom ignore rules (`.swarmignore`)
+
+Place a `.swarmignore` file at your project root to exclude additional paths from scanning and tree output. The syntax follows `.gitignore` conventions:
+
+```
+# .swarmignore — paths to exclude from swarm-index scan
+
+# Generated protobuf code
+proto_out/
+
+# Large test fixtures
+testdata/fixtures/snapshots/
+
+# Specific file patterns
+*.generated.go
+*.min.js
+
+# Exact basename
+secrets.json
+
+# Rooted pattern (only matches at project root)
+/tmp
+```
+
+**Pattern types:**
+- `dirname/` — skip any directory with that name
+- `*.ext` — skip files matching the glob (matched against basename)
+- `name` — skip files or dirs matching the basename exactly
+- `/path` — match only at the project root
+
+The `.swarmignore` file is respected by both `scan` and `tree` commands.
+
 ## How it works
 
 1. **Scan** recursively walks the target directory, recording every file while automatically skipping noise directories (`.git`, `node_modules`, `vendor`, `__pycache__`, `dist`, `build`, hidden dirs, etc.). It also skips any `swarm/index/` directory to avoid indexing its own output. The index is persisted to disk so subsequent commands work without re-scanning.
@@ -321,7 +353,7 @@ go test ./... -v
 - [ ] AST parsing for symbol extraction (Rust, Java) — Go, Python, and JS/TS already supported
 - [ ] Fuzzy matching and relevance-ranked results for `lookup`
 - [ ] Watch mode to keep the index up to date as files change
-- [ ] Support for ignoring custom paths via config file
+- [x] Support for ignoring custom paths via `.swarmignore`
 - [ ] Language-aware symbol resolution for `context` and `refs`
 - [ ] MCP server mode for direct integration with coding agents
 

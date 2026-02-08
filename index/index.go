@@ -2,6 +2,7 @@
 package index
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -170,6 +171,7 @@ func Scan(root string) (*Index, error) {
 	}
 
 	idx := &Index{Root: root}
+	ignorePatterns := loadIgnorePatterns(root)
 
 	err = filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -178,14 +180,22 @@ func Scan(root string) (*Index, error) {
 
 		// Skip hidden directories and common noise
 		name := info.Name()
+		relPath, _ := filepath.Rel(root, path)
+
 		if info.IsDir() {
 			if shouldSkipDir(name) {
+				return filepath.SkipDir
+			}
+			if relPath != "." && shouldIgnore(relPath, true, ignorePatterns) {
 				return filepath.SkipDir
 			}
 			return nil
 		}
 
-		relPath, _ := filepath.Rel(root, path)
+		if shouldIgnore(relPath, false, ignorePatterns) {
+			return nil
+		}
+
 		pkg := filepath.Dir(relPath)
 		if pkg == "." {
 			pkg = "(root)"
@@ -246,6 +256,75 @@ func openTextFile(path string) (*os.File, error) {
 		return nil, err
 	}
 	return f, nil
+}
+
+// loadIgnorePatterns reads a .swarmignore file from root and returns the
+// patterns. Returns nil with no error if the file doesn't exist.
+func loadIgnorePatterns(root string) []string {
+	f, err := os.Open(filepath.Join(root, ".swarmignore"))
+	if err != nil {
+		return nil
+	}
+	defer f.Close()
+
+	var patterns []string
+	scanner := bufio.NewScanner(f)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		patterns = append(patterns, line)
+	}
+	return patterns
+}
+
+// shouldIgnore checks if a relative path matches any .swarmignore pattern.
+// For directories, pass the relative dir path. For files, pass the relative file path.
+// isDir should be true when checking a directory entry.
+func shouldIgnore(relPath string, isDir bool, patterns []string) bool {
+	basename := filepath.Base(relPath)
+	for _, pattern := range patterns {
+		// Directory-only pattern (trailing /)
+		if strings.HasSuffix(pattern, "/") {
+			if !isDir {
+				continue
+			}
+			dirPattern := strings.TrimSuffix(pattern, "/")
+			// Match against basename
+			if matched, _ := filepath.Match(dirPattern, basename); matched {
+				return true
+			}
+			// Match against full relative path
+			if matched, _ := filepath.Match(dirPattern, relPath); matched {
+				return true
+			}
+			continue
+		}
+
+		// Rooted pattern (leading /)
+		if strings.HasPrefix(pattern, "/") {
+			rooted := strings.TrimPrefix(pattern, "/")
+			if matched, _ := filepath.Match(rooted, relPath); matched {
+				return true
+			}
+			continue
+		}
+
+		// Basename glob pattern (no path separator in pattern)
+		if !strings.Contains(pattern, "/") {
+			if matched, _ := filepath.Match(pattern, basename); matched {
+				return true
+			}
+			continue
+		}
+
+		// Path pattern with separator — match against full relative path
+		if matched, _ := filepath.Match(pattern, relPath); matched {
+			return true
+		}
+	}
+	return false
 }
 
 func shouldSkipDir(name string) bool {

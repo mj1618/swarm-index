@@ -137,3 +137,5 @@ swarm-index stale --root ~/code/my-project
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).
+
+To exclude custom paths from scanning, create a `.swarmignore` file at the project root (one pattern per line, `#` comments). Supports directory patterns (`dirname/`), globs (`*.min.js`), basenames (`secrets.json`), and rooted patterns (`/tmp`).

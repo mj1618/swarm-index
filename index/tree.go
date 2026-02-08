@@ -31,19 +31,21 @@ func BuildTree(root string, maxDepth int) (*TreeNode, error) {
 		return nil, fmt.Errorf("%s is not a directory", root)
 	}
 
+	ignorePatterns := loadIgnorePatterns(root)
+
 	node := &TreeNode{
 		Name: filepath.Base(root),
 		Type: "dir",
 	}
 
-	if err := buildChildren(node, root, 1, maxDepth); err != nil {
+	if err := buildChildren(node, root, root, 1, maxDepth, ignorePatterns); err != nil {
 		return nil, err
 	}
 
 	return node, nil
 }
 
-func buildChildren(parent *TreeNode, dirPath string, currentDepth, maxDepth int) error {
+func buildChildren(parent *TreeNode, dirPath, root string, currentDepth, maxDepth int, ignorePatterns []string) error {
 	entries, err := os.ReadDir(dirPath)
 	if err != nil {
 		return nil // skip unreadable directories
@@ -61,19 +63,27 @@ func buildChildren(parent *TreeNode, dirPath string, currentDepth, maxDepth int)
 
 	for _, e := range entries {
 		name := e.Name()
+		childPath := filepath.Join(dirPath, name)
+		relPath, _ := filepath.Rel(root, childPath)
 
 		if e.IsDir() {
 			if shouldSkipDir(name) {
 				continue
 			}
+			if shouldIgnore(relPath, true, ignorePatterns) {
+				continue
+			}
 			child := &TreeNode{Name: name, Type: "dir"}
 			if maxDepth == 0 || currentDepth < maxDepth {
-				if err := buildChildren(child, filepath.Join(dirPath, name), currentDepth+1, maxDepth); err != nil {
+				if err := buildChildren(child, childPath, root, currentDepth+1, maxDepth, ignorePatterns); err != nil {
 					return err
 				}
 			}
 			parent.Children = append(parent.Children, child)
 		} else {
+			if shouldIgnore(relPath, false, ignorePatterns) {
+				continue
+			}
 			parent.Children = append(parent.Children, &TreeNode{Name: name, Type: "file"})
 		}
 	}

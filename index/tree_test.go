@@ -171,6 +171,35 @@ func TestBuildTreeNonexistent(t *testing.T) {
 	}
 }
 
+func TestBuildTreeRespectsSwarmignore(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, ".swarmignore", "generated/\n*.min.js\n")
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "generated/output.go", "package gen")
+	mkFile(t, tmp, "lib/app.min.js", "minified")
+	mkFile(t, tmp, "lib/app.js", "normal")
+
+	tree, err := BuildTree(tmp, 0)
+	if err != nil {
+		t.Fatalf("BuildTree() error: %v", err)
+	}
+
+	output := RenderTree(tree)
+
+	if strings.Contains(output, "generated") {
+		t.Errorf("tree contains ignored directory 'generated': %s", output)
+	}
+	if strings.Contains(output, "app.min.js") {
+		t.Errorf("tree contains ignored file 'app.min.js': %s", output)
+	}
+	if !strings.Contains(output, "app.js") {
+		t.Errorf("tree missing non-ignored file 'app.js': %s", output)
+	}
+	if !strings.Contains(output, "main.go") {
+		t.Errorf("tree missing non-ignored file 'main.go': %s", output)
+	}
+}
+
 func TestBuildTreeFile(t *testing.T) {
 	tmp := t.TempDir()
 	mkFile(t, tmp, "afile.txt", "hello")

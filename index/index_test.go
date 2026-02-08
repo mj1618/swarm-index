@@ -370,6 +370,118 @@ func TestExtensionCountsRoundTrip(t *testing.T) {
 	}
 }
 
+func TestLoadIgnorePatterns(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, ".swarmignore", "# comment\n\nproto_out/\n*.generated.go\nsecrets.json\n")
+
+	patterns := loadIgnorePatterns(tmp)
+	if len(patterns) != 3 {
+		t.Fatalf("loadIgnorePatterns() returned %d patterns, want 3: %v", len(patterns), patterns)
+	}
+
+	want := []string{"proto_out/", "*.generated.go", "secrets.json"}
+	for i, p := range patterns {
+		if p != want[i] {
+			t.Errorf("pattern[%d] = %q, want %q", i, p, want[i])
+		}
+	}
+}
+
+func TestLoadIgnorePatternsNoFile(t *testing.T) {
+	tmp := t.TempDir()
+	patterns := loadIgnorePatterns(tmp)
+	if patterns != nil {
+		t.Errorf("loadIgnorePatterns() = %v, want nil when no .swarmignore exists", patterns)
+	}
+}
+
+func TestShouldIgnore(t *testing.T) {
+	tests := []struct {
+		relPath  string
+		isDir    bool
+		patterns []string
+		want     bool
+	}{
+		// Directory pattern with trailing /
+		{"proto_out", true, []string{"proto_out/"}, true},
+		{"proto_out", false, []string{"proto_out/"}, false}, // trailing / only matches dirs
+		{"src/proto_out", true, []string{"proto_out/"}, true},
+
+		// Glob pattern matching basename
+		{"foo.generated.go", false, []string{"*.generated.go"}, true},
+		{"src/bar.generated.go", false, []string{"*.generated.go"}, true},
+		{"foo.go", false, []string{"*.generated.go"}, false},
+
+		// Exact basename match
+		{"secrets.json", false, []string{"secrets.json"}, true},
+		{"src/secrets.json", false, []string{"secrets.json"}, true},
+		{"secrets.txt", false, []string{"secrets.json"}, false},
+
+		// Rooted pattern
+		{"gen", true, []string{"/gen"}, true},
+		{"src/gen", true, []string{"/gen"}, false}, // rooted: only matches at root
+
+		// No patterns
+		{"anything", false, nil, false},
+		{"anything", false, []string{}, false},
+
+		// Glob wildcard on dirs
+		{"test_data", true, []string{"test_*/"}, true},
+		{"src/test_data", true, []string{"test_*/"}, true},
+	}
+
+	for _, tt := range tests {
+		got := shouldIgnore(tt.relPath, tt.isDir, tt.patterns)
+		if got != tt.want {
+			t.Errorf("shouldIgnore(%q, isDir=%v, %v) = %v, want %v",
+				tt.relPath, tt.isDir, tt.patterns, got, tt.want)
+		}
+	}
+}
+
+func TestScanRespectsSwarmignore(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, ".swarmignore", "generated/\n*.min.js\n")
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "generated/output.go", "package gen")
+	mkFile(t, tmp, "lib/app.min.js", "minified")
+	mkFile(t, tmp, "lib/app.js", "normal")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	if got := idx.FileCount(); got != 3 {
+		// .swarmignore + main.go + lib/app.js
+		t.Errorf("FileCount() = %d, want 3", got)
+	}
+
+	for _, e := range idx.Entries {
+		if strings.Contains(e.Path, "generated") {
+			t.Errorf("index contains ignored directory entry: %s", e.Path)
+		}
+		if strings.HasSuffix(e.Path, ".min.js") {
+			t.Errorf("index contains ignored file entry: %s", e.Path)
+		}
+	}
+}
+
+func TestScanNoSwarmignore(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "lib/util.go", "package lib")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	if got := idx.FileCount(); got != 2 {
+		t.Errorf("FileCount() = %d, want 2", got)
+	}
+}
+
 func mkFile(t *testing.T, base, relPath, content string) {
 	t.Helper()
 	full := filepath.Join(base, relPath)
