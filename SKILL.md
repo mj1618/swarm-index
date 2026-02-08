@@ -72,6 +72,11 @@ swarm-index diff-summary
 swarm-index diff-summary HEAD~3
 swarm-index diff-summary main --root ~/code/my-project
 
+# Show git blame for a file (line-level attribution)
+swarm-index blame main.go
+swarm-index blame main.go --lines 10:20
+swarm-index blame src/utils.ts --root ~/code/my-project
+
 # Show recent git commits for a file
 swarm-index history main.go
 swarm-index history main.go --max 3

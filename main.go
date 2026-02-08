@@ -636,6 +636,32 @@ func main() {
 			fmt.Print(index.FormatStale(staleResult))
 		}
 
+	case "blame":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index blame <file> [--lines M:N] [--root <dir>]")
+		}
+		filePath := args[2]
+		extraArgs := args[3:]
+		root := parseStringFlag(extraArgs, "--root", ".")
+		root, err := filepath.Abs(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		startLine, endLine, err := parseLineRange(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		blameResult, err := index.Blame(root, filePath, startLine, endLine)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(blameResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatBlame(blameResult))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -800,6 +826,7 @@ Usage:
   swarm-index hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]   Show most frequently changed files
   swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]   Search all symbols by name across the project
   swarm-index complexity [file] [--root <dir>] [--max N] [--min N]   Analyze code complexity per function
+  swarm-index blame <file> [--lines M:N] [--root <dir>]   Show git blame for a file (line-level attribution)
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

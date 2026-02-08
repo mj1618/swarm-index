@@ -83,6 +83,12 @@ swarm-index diff-summary
 # Show what changed since a specific ref
 swarm-index diff-summary main
 
+# Show git blame for a file (line-level attribution)
+swarm-index blame main.go
+
+# Blame specific lines
+swarm-index blame main.go --lines 10:20
+
 # Show recent commits for a file
 swarm-index history main.go
 
@@ -180,6 +186,7 @@ swarm-index lookup "handleAuth" --json
 | `entry-points [--root <dir>] [--max N] [--kind KIND]` | Find executable entry points: main functions, HTTP route handlers, CLI command registrations, and init/bootstrap code. Supports Go, Python, JS/TS, Rust, and Java. Use `--kind` to filter (main, route, cli, init). Default max 100. Requires a prior `scan`. |
 | `config [--root <dir>]` | Detect the project toolchain: primary language, framework, build/test/lint/format tools, package manager, and package.json scripts. Requires a prior `scan`. |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
+| `blame <file> [--lines M:N] [--root <dir>]` | Show git blame for a file with line-level attribution: commit hash, date, author, and line content. Use `--lines M:N` to blame a specific range. Does not require a prior `scan`. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
 | `symbols <query> [--root <dir>] [--max N] [--kind KIND]` | Search all parseable files for symbols (functions, types, classes, etc.) matching the query by name. Case-insensitive substring match. Use `--kind` to filter by symbol kind and `--max` to limit results (default 50). Requires a prior `scan`. |
@@ -237,6 +244,8 @@ swarm-index/
 │   ├── exports_test.go  # Tests for exports functionality
 │   ├── graph.go         # Project-wide import dependency graph
 │   ├── graph_test.go    # Tests for graph functionality
+│   ├── blame.go         # Git blame (line-level attribution)
+│   ├── blame_test.go    # Tests for blame functionality
 │   ├── history.go       # Git commit history for a file
 │   ├── history_test.go  # Tests for history functionality
 │   ├── hotspots.go      # Most frequently changed files ranking
