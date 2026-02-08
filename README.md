@@ -209,7 +209,7 @@ swarm-index lookup "handleAuth" --json
 | Command | Description |
 |---|---|
 | `scan <directory>` | Walk a directory tree, index all source files, and persist the index to disk. Prints file counts and language breakdown. |
-| `lookup <query> [--root <dir>] [--max N]` | Search the index for files matching a query by case-insensitive substring match. Use `--root` to specify the project root and `--max` to limit results (default 20). |
+| `lookup <query> [--root <dir>] [--max N] [--exact]` | Search the index for files matching a query. By default, results are fuzzy-matched and ranked by relevance (exact name > prefix > substring > path > typo-tolerant). Use `--exact` for unranked substring-only matching (old behavior). With `--json`, results include a `score` field. Use `--root` to specify the project root and `--max` to limit results (default 20). |
 | `search <pattern> [--root <dir>] [--max N]` | Regex search across indexed file contents. Returns matching lines with file paths and line numbers. Use `--max` to limit results (default 50). Binary files are skipped. |
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
@@ -279,7 +279,7 @@ The `.swarmignore` file is respected by both `scan` and `tree` commands.
    - `Path` — path relative to the scanned root
    - `Package` — the parent directory
 
-3. **Lookup** performs case-insensitive substring matching across all entries and returns results formatted for quick consumption (or `--json` for structured agent consumption).
+3. **Lookup** performs fuzzy matching and relevance-ranked scoring across all entries. Exact name matches rank highest, followed by prefix, substring, path, and typo-tolerant (Levenshtein distance ≤ 2) matches. Use `--exact` for simple substring matching. Results are formatted for quick consumption (or `--json` for structured agent consumption with scores).
 
 ## Project structure
 
@@ -289,6 +289,8 @@ swarm-index/
 ├── index/
 │   ├── index.go         # Core library: scanning, indexing, matching
 │   ├── index_test.go    # Tests for scan, match, and directory filtering
+│   ├── fuzzy.go         # Fuzzy matching: Levenshtein distance + relevance scoring
+│   ├── fuzzy_test.go    # Tests for fuzzy matching and scoring
 │   ├── refs.go          # Symbol reference finder (definition + usages)
 │   ├── refs_test.go     # Tests for refs functionality
 │   ├── related.go       # File dependency neighborhood (imports, importers, tests)
@@ -378,7 +380,7 @@ go test ./... -v
 ### Other improvements
 
 - [ ] AST parsing for symbol extraction (Rust, Java) — Go, Python, and JS/TS already supported
-- [ ] Fuzzy matching and relevance-ranked results for `lookup`
+- [x] Fuzzy matching and relevance-ranked results for `lookup`
 - [ ] Watch mode to keep the index up to date as files change
 - [x] Support for ignoring custom paths via `.swarmignore`
 - [ ] Language-aware symbol resolution for `context` and `refs`

@@ -6,11 +6,17 @@ Scan a project to build an index, then look up files instantly.
 # First-time setup: scan the project
 swarm-index scan .
 
-# Look up files by name or path
+# Look up files by name or path (fuzzy-ranked by default)
 swarm-index lookup "handleAuth"
 
 # Limit results
 swarm-index lookup "test" --max 5
+
+# Typo-tolerant: finds "handler" even with misspelling
+swarm-index lookup "hadnler"
+
+# Use exact substring matching (no fuzzy, no ranking)
+swarm-index lookup "config" --exact
 
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project

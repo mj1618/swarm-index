@@ -81,7 +81,7 @@ func main() {
 
 	case "lookup":
 		if len(args) < 3 {
-			fatal(jsonOutput, "usage: swarm-index lookup <query> [--root <dir>] [--max N]")
+			fatal(jsonOutput, "usage: swarm-index lookup <query> [--root <dir>] [--max N] [--exact]")
 		}
 		query := args[2]
 		if err := validateQuery(query); err != nil {
@@ -93,30 +93,50 @@ func main() {
 			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
 		max := parseIntFlag(extraArgs, "--max", 20)
+		exact := hasBoolFlag(extraArgs, "--exact")
 		idx, err := index.Load(root)
 		if err != nil {
 			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
-		results := idx.Match(query)
-		if jsonOutput {
-			limited := results
+		var entries []index.Entry
+		var jsonData any // []Entry for exact, []ScoredEntry for fuzzy
+		if exact {
+			entries = idx.MatchExact(query)
+			limited := entries
 			if len(limited) > max {
 				limited = limited[:max]
 			}
 			if limited == nil {
 				limited = []index.Entry{}
 			}
-			data, _ := json.Marshal(limited)
+			jsonData = limited
+		} else {
+			scored := idx.MatchScored(query)
+			limited := scored
+			if len(limited) > max {
+				limited = limited[:max]
+			}
+			if limited == nil {
+				limited = []index.ScoredEntry{}
+			}
+			jsonData = limited
+			entries = make([]index.Entry, len(scored))
+			for i, s := range scored {
+				entries[i] = s.Entry
+			}
+		}
+		if jsonOutput {
+			data, _ := json.Marshal(jsonData)
 			fmt.Println(string(data))
 		} else {
-			if len(results) == 0 {
+			if len(entries) == 0 {
 				fmt.Println("no matches found")
 			} else {
-				for _, r := range results[:min(max, len(results))] {
+				for _, r := range entries[:min(max, len(entries))] {
 					fmt.Println(r)
 				}
-				if len(results) > max {
-					fmt.Printf("... and %d more matches (use --max to see more)\n", len(results)-max)
+				if len(entries) > max {
+					fmt.Printf("... and %d more matches (use --max to see more)\n", len(entries)-max)
 				}
 			}
 		}
@@ -920,7 +940,7 @@ func printUsage() {
 
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
-  swarm-index lookup <query> [--root <dir>] [--max N]   Look up symbols, files, or concepts
+  swarm-index lookup <query> [--root <dir>] [--max N] [--exact]   Look up symbols, files, or concepts (fuzzy-ranked by default)
   swarm-index search <pattern> [--root <dir>] [--max N]   Regex search across file contents
   swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure

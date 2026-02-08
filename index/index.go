@@ -217,8 +217,25 @@ func Scan(root string) (*Index, error) {
 	return idx, nil
 }
 
-// Match returns all entries whose name or path contains the query (case-insensitive).
+// Match returns entries ranked by relevance using fuzzy matching and scoring.
+// Results are sorted by score descending, with shorter paths as tie-breaker.
 func (idx *Index) Match(query string) []Entry {
+	scored := idx.matchFuzzy(query)
+	results := make([]Entry, len(scored))
+	for i, s := range scored {
+		results[i] = s.Entry
+	}
+	return results
+}
+
+// MatchScored returns entries with their relevance scores for JSON output.
+func (idx *Index) MatchScored(query string) []ScoredEntry {
+	return idx.matchFuzzy(query)
+}
+
+// MatchExact returns all entries whose name or path contains the query
+// (case-insensitive substring match, unranked).
+func (idx *Index) MatchExact(query string) []Entry {
 	q := strings.ToLower(query)
 	var results []Entry
 	for _, e := range idx.Entries {
