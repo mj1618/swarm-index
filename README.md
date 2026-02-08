@@ -104,6 +104,15 @@ swarm-index hotspots --path src/
 # Detect project toolchain (framework, build, test, lint, format)
 swarm-index config
 
+# Find entry points (main functions, route handlers, CLI commands, init functions)
+swarm-index entry-points
+
+# Filter by kind
+swarm-index entry-points --kind route
+
+# Limit results
+swarm-index entry-points --max 10
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -134,6 +143,7 @@ swarm-index lookup "handleAuth" --json
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
+| `entry-points [--root <dir>] [--max N] [--kind KIND]` | Find executable entry points: main functions, HTTP route handlers, CLI command registrations, and init/bootstrap code. Supports Go, Python, JS/TS, Rust, and Java. Use `--kind` to filter (main, route, cli, init). Default max 100. Requires a prior `scan`. |
 | `config [--root <dir>]` | Detect the project toolchain: primary language, framework, build/test/lint/format tools, package manager, and package.json scripts. Requires a prior `scan`. |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
@@ -181,6 +191,8 @@ swarm-index/
 │   ├── config_test.go   # Tests for config functionality
 │   ├── context.go       # Symbol definition context (imports, doc comments, body)
 │   ├── context_test.go  # Tests for context functionality
+│   ├── entrypoints.go   # Entry point detection (main, routes, CLI, init)
+│   ├── entrypoints_test.go # Tests for entry points functionality
 │   ├── exports.go       # Exported/public symbol listing
 │   ├── exports_test.go  # Tests for exports functionality
 │   ├── history.go       # Git commit history for a file
@@ -218,7 +230,7 @@ go test ./... -v
 - [x] `exports` — public API surface of a file or package
 - [x] `config` — detect project toolchain (framework, build tool, test runner)
 - [x] `deps` — parse dependency manifests and list libraries with versions
-- [ ] `entry-points` — find main functions, route handlers, CLI commands
+- [x] `entry-points` — find main functions, route handlers, CLI commands
 - [x] `context` — symbol definition with imports and doc comments
 - [x] `refs` — find all usages of a symbol
 - [x] `related` — files connected to a given file (imports, importers, tests)

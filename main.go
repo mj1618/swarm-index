@@ -455,6 +455,29 @@ func main() {
 			fmt.Print(index.FormatDeps(depsResult))
 		}
 
+	case "entry-points":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 100)
+		kind := parseStringFlag(extraArgs, "--kind", "")
+		epResult, err := idx.EntryPoints(kind, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(epResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatEntryPoints(epResult))
+		}
+
 	case "config":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -675,6 +698,7 @@ Usage:
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
   swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)
+  swarm-index entry-points [--root <dir>] [--max N] [--kind KIND]   Find main functions, route handlers, CLI commands, init functions
   swarm-index config [--root <dir>]   Detect project toolchain (framework, build, test, lint, format)
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file

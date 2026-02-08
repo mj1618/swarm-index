@@ -88,6 +88,12 @@ swarm-index hotspots --root ~/code/my-project
 swarm-index config
 swarm-index config --root ~/code/my-project
 
+# Find entry points (main functions, route handlers, CLI commands, init functions)
+swarm-index entry-points
+swarm-index entry-points --kind route
+swarm-index entry-points --kind main --max 10
+swarm-index entry-points --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project
