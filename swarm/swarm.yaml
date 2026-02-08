@@ -14,7 +14,6 @@ tasks:
 
       If you fail to find an improvement, or if you've successfully written a single feature - exit immediately.
 
-
   coder:
     prompt-string: |
       # Find unfinished tasks
