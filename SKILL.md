@@ -119,6 +119,11 @@ swarm-index complexity --min 5
 swarm-index complexity --max 10
 swarm-index complexity --root ~/code/my-project
 
+# Unified smart search across files, symbols, and content (one command instead of three)
+swarm-index locate "handleAuth"
+swarm-index locate "config" --max 10
+swarm-index locate "UserService" --root ~/code/my-project
+
 # Detect potentially unused exports (dead code candidates)
 swarm-index dead-code
 swarm-index dead-code --kind func

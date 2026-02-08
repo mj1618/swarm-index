@@ -662,6 +662,35 @@ func main() {
 			fmt.Print(index.FormatBlame(blameResult))
 		}
 
+	case "locate":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index locate <query> [--root <dir>] [--max N]")
+		}
+		query := args[2]
+		if err := validateQuery(query); err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 20)
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		locateResult, err := idx.Locate(query, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(locateResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatLocate(locateResult))
+		}
+
 	case "dead-code":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -851,6 +880,7 @@ Usage:
   swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]   Search all symbols by name across the project
   swarm-index complexity [file] [--root <dir>] [--max N] [--min N]   Analyze code complexity per function
   swarm-index blame <file> [--lines M:N] [--root <dir>]   Show git blame for a file (line-level attribution)
+  swarm-index locate <query> [--root <dir>] [--max N]   Unified smart search across files, symbols, and content
   swarm-index dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]   Detect potentially unused exports
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
