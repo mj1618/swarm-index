@@ -176,6 +176,21 @@ swarm-index dead-code --path src/utils
 # Limit results
 swarm-index dead-code --max 10
 
+# Show project-wide source-to-test-file mapping
+swarm-index test-map
+
+# Show only untested source files
+swarm-index test-map --untested
+
+# Show only tested source files
+swarm-index test-map --tested
+
+# Filter to a specific directory
+swarm-index test-map --path src/
+
+# Limit results
+swarm-index test-map --max 50
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -219,6 +234,7 @@ swarm-index lookup "handleAuth" --json
 | `scope <directory> [--root <dir>] [--recursive]` | Summarize a directory: file list, symbol counts (exported vs internal), LOC, import dependencies, and dependents. Non-recursive by default. Use `--recursive` to include subdirectories. Requires a prior `scan`. |
 | `dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]` | Detect potentially unused exported symbols. Parses all files to collect exported symbols, then searches the entire codebase for references. Symbols with zero external references are reported as dead code candidates. Excludes main/init, Test*/Benchmark*/Example* functions, and test files. Use `--kind` to filter by symbol kind and `--path` to scope analysis to a directory prefix. Default max 50. Requires a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
+| `test-map [--root <dir>] [--path PREFIX] [--untested] [--tested] [--max N]` | Show source-to-test-file mapping across the project. Detects test files using language-specific naming conventions (Go: `_test.go`, JS/TS: `.test.*`/`.spec.*`, Python: `test_*`/`*_test.py`). Use `--untested` to show only files without tests, `--tested` for files with tests, and `--path` to filter by directory. Default max 100. Requires a prior `scan`. |
 | `version` | Print the current version |
 
 ## Custom ignore rules (`.swarmignore`)
@@ -291,6 +307,8 @@ swarm-index/
 │   ├── symbols_test.go  # Tests for symbols functionality
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
+│   ├── testmap.go       # Source-to-test-file mapping (project-wide)
+│   ├── testmap_test.go  # Tests for test-map functionality
 │   ├── complexity.go    # Code complexity analysis per function
 │   ├── complexity_test.go # Tests for complexity functionality
 │   ├── config.go        # Project toolchain detection (framework, build, test, lint)

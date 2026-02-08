@@ -42,6 +42,34 @@
     "package": "(root)"
   },
   {
+    "name": "blame.go",
+    "kind": "file",
+    "path": "index/blame.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "blame_test.go",
+    "kind": "file",
+    "path": "index/blame_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "complexity.go",
+    "kind": "file",
+    "path": "index/complexity.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "complexity_test.go",
+    "kind": "file",
+    "path": "index/complexity_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "config.go",
     "kind": "file",
     "path": "index/config.go",
@@ -66,6 +94,20 @@
     "name": "context_test.go",
     "kind": "file",
     "path": "index/context_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "deadcode.go",
+    "kind": "file",
+    "path": "index/deadcode.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "deadcode_test.go",
+    "kind": "file",
+    "path": "index/deadcode_test.go",
     "line": 0,
     "package": "index"
   },
@@ -182,6 +224,20 @@
     "package": "index"
   },
   {
+    "name": "locate.go",
+    "kind": "file",
+    "path": "index/locate.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "locate_test.go",
+    "kind": "file",
+    "path": "index/locate_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "refs.go",
     "kind": "file",
     "path": "index/refs.go",
@@ -206,6 +262,20 @@
     "name": "related_test.go",
     "kind": "file",
     "path": "index/related_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "scope.go",
+    "kind": "file",
+    "path": "index/scope.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "scope_test.go",
+    "kind": "file",
+    "path": "index/scope_test.go",
     "line": 0,
     "package": "index"
   },

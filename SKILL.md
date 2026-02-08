@@ -136,6 +136,14 @@ swarm-index dead-code --path src/utils
 swarm-index dead-code --max 10
 swarm-index dead-code --root ~/code/my-project
 
+# Show source-to-test-file mapping (find untested files)
+swarm-index test-map
+swarm-index test-map --untested
+swarm-index test-map --tested
+swarm-index test-map --path src/
+swarm-index test-map --max 50
+swarm-index test-map --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

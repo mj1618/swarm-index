@@ -741,6 +741,31 @@ func main() {
 			fmt.Print(index.FormatDeadCode(dcResult))
 		}
 
+	case "test-map":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 100)
+		pathPrefix := parseStringFlag(extraArgs, "--path", "")
+		untested := hasBoolFlag(extraArgs, "--untested")
+		tested := hasBoolFlag(extraArgs, "--tested")
+		tmResult, err := idx.TestMap(pathPrefix, untested, tested, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(tmResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatTestMap(tmResult))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -920,6 +945,7 @@ Usage:
   swarm-index scope <directory> [--root <dir>] [--recursive]   Summarize a directory: files, symbols, LOC, dependencies
   swarm-index dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]   Detect potentially unused exports
   swarm-index stale [--root <dir>]   Check if index is out of date
+  swarm-index test-map [--root <dir>] [--path PREFIX] [--untested] [--tested] [--max N]   Show source-to-test-file mapping
   swarm-index version             Print version info
 
 Examples:
