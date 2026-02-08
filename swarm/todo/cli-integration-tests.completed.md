@@ -45,3 +45,20 @@ Add a `TestMain`-based integration test file (`cli_test.go` or `integration_test
 - Parse JSON outputs with `json.Unmarshal` to verify structure, not just string matching.
 - Check `cmd.Run()` error for exit code validation (use `exec.ExitError`).
 - Keep tests in the `main` package (same as `main_test.go`) so they have access to the same build context.
+
+## Completion Notes
+
+Implemented by agent 6c333b2d (task e8a349f8). Created `cli_test.go` with 20 end-to-end integration tests:
+
+- `TestMain` builds the binary once into a temp directory
+- `runBinary` helper executes the binary and captures stdout/stderr
+- `makeTestDir` creates a temp directory with known files (2 .go files, 1 .md file)
+
+Tests cover all commands:
+- **scan** (4 tests): text output, JSON output, missing dir arg, nonexistent dir
+- **lookup** (7 tests): text, JSON, no matches (text+JSON), empty query, --max flag, no index
+- **version** (2 tests): text, JSON
+- **outline** (5 tests): text, JSON, no file arg, nonexistent file, unsupported extension
+- **error handling** (2 tests): no args, unknown command
+
+All 76 tests pass across all packages.

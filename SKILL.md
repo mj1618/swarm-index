@@ -32,6 +32,9 @@ swarm-index show main.go
 
 # Read specific lines (1-indexed, inclusive)
 swarm-index show main.go --lines 10:20
+
+# Show top-level symbols of a Go file (functions, types, methods, etc.)
+swarm-index outline main.go
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).

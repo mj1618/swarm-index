@@ -48,6 +48,9 @@ swarm-index show main.go
 # Read specific lines
 swarm-index show main.go --lines 10:20
 
+# Show top-level symbols of a file (functions, types, etc.)
+swarm-index outline main.go
+
 # All commands support --json for structured output
 swarm-index lookup "handleAuth" --json
 ```
@@ -68,6 +71,7 @@ swarm-index lookup "handleAuth" --json
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
 | `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
+| `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Currently supports Go files. |
 | `version` | Print the current version |
 
 ## How it works
@@ -98,6 +102,10 @@ swarm-index/
 │   ├── show_test.go     # Tests for show functionality
 │   ├── tree.go          # Directory tree building and rendering
 │   └── tree_test.go     # Tests for tree functionality
+├── parsers/
+│   ├── parsers.go       # Symbol type, Parser interface, and registry
+│   ├── goparser.go      # Go AST parser implementation
+│   └── goparser_test.go # Tests for Go parser
 ├── go.mod               # Go module definition
 └── README.md
 ```
@@ -112,7 +120,7 @@ go test ./... -v
 
 ### Planned commands
 
-- [ ] `outline` — structural skeleton of a file (functions, classes, types)
+- [x] `outline` — structural skeleton of a file (functions, classes, types)
 - [x] `show` — read a file or line range with line numbers
 - [ ] `exports` — public API surface of a file or package
 - [ ] `config` — detect project toolchain (framework, build tool, test runner)

@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/matt/swarm-index/index"
+	"github.com/matt/swarm-index/parsers"
 )
 
 // extractJSONFlag strips --json from args and returns whether it was present.
@@ -213,6 +214,37 @@ func main() {
 			}
 		}
 
+	case "outline":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index outline <file>")
+		}
+		filePath := args[2]
+		content, err := os.ReadFile(filePath)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		ext := filepath.Ext(filePath)
+		p := parsers.ForExtension(ext)
+		if p == nil {
+			fatal(jsonOutput, fmt.Sprintf("no parser available for %s files", ext))
+		}
+		symbols, err := p.Parse(filePath, content)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			if symbols == nil {
+				symbols = []parsers.Symbol{}
+			}
+			data, _ := json.MarshalIndent(symbols, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Printf("%s:\n", filePath)
+			for _, s := range symbols {
+				fmt.Printf("  %-60s :%d\n", s.Signature, s.Line)
+			}
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -351,6 +383,7 @@ Usage:
   swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure
   swarm-index show <path> [--lines M:N]   Read a file with line numbers
+  swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
   swarm-index version             Print version info
 
 Examples:
@@ -359,5 +392,6 @@ Examples:
   swarm-index search "func\s+\w+" --max 10
   swarm-index summary
   swarm-index tree . --depth 3
-  swarm-index show main.go --lines 10:20`)
+  swarm-index show main.go --lines 10:20
+  swarm-index outline main.go`)
 }
