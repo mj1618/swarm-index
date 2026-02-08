@@ -185,6 +185,7 @@ func shouldSkipDir(name string) bool {
 		"node_modules", "vendor", "__pycache__",
 		".idea", ".vscode", ".cursor",
 		"dist", "build", ".next",
+		"swarm",
 	}
 	for _, s := range skip {
 		if name == s {

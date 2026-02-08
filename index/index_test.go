@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 )
@@ -80,6 +81,29 @@ func TestScanSkipsHiddenDirs(t *testing.T) {
 
 	if got := idx.FileCount(); got != 1 {
 		t.Errorf("FileCount() = %d, want 1 (only visible.go)", got)
+	}
+}
+
+func TestScanSkipsSwarmDir(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "swarm/index/index.json", `[]`)
+	mkFile(t, tmp, "swarm/index/meta.json", `{}`)
+	mkFile(t, tmp, "swarm/todo/task.md", "# Task")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	if got := idx.FileCount(); got != 1 {
+		t.Errorf("FileCount() = %d, want 1 (only main.go)", got)
+	}
+
+	for _, e := range idx.Entries {
+		if strings.Contains(e.Path, "swarm") {
+			t.Errorf("index contains swarm entry: %s", e.Path)
+		}
 	}
 }
 
