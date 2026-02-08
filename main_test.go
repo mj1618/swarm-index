@@ -6,6 +6,48 @@ import (
 	"testing"
 )
 
+func TestParseMaxDefault(t *testing.T) {
+	got := parseMax([]string{})
+	if got != 20 {
+		t.Errorf("parseMax([]) = %d, want 20", got)
+	}
+}
+
+func TestParseMaxWithFlag(t *testing.T) {
+	got := parseMax([]string{"--max", "5"})
+	if got != 5 {
+		t.Errorf("parseMax([--max 5]) = %d, want 5", got)
+	}
+}
+
+func TestParseMaxWithOtherFlags(t *testing.T) {
+	got := parseMax([]string{"--root", "/tmp", "--max", "10"})
+	if got != 10 {
+		t.Errorf("parseMax([--root /tmp --max 10]) = %d, want 10", got)
+	}
+}
+
+func TestParseMaxInvalidValue(t *testing.T) {
+	got := parseMax([]string{"--max", "abc"})
+	if got != 20 {
+		t.Errorf("parseMax([--max abc]) = %d, want 20 (default)", got)
+	}
+}
+
+func TestParseMaxZero(t *testing.T) {
+	got := parseMax([]string{"--max", "0"})
+	if got != 20 {
+		t.Errorf("parseMax([--max 0]) = %d, want 20 (default, 0 is not positive)", got)
+	}
+}
+
+func TestParseMaxNoValue(t *testing.T) {
+	got := parseMax([]string{"--max"})
+	if got != 20 {
+		t.Errorf("parseMax([--max]) = %d, want 20 (default)", got)
+	}
+}
+
 func TestResolveRootWithFlag(t *testing.T) {
 	tmp := t.TempDir()
 	args := []string{"--root", tmp}

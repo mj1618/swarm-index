@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 
 	"github.com/matt/swarm-index/index"
 )
@@ -34,15 +35,17 @@ func main() {
 
 	case "lookup":
 		if len(os.Args) < 3 {
-			fmt.Fprintln(os.Stderr, "usage: swarm-index lookup <query> [--root <dir>]")
+			fmt.Fprintln(os.Stderr, "usage: swarm-index lookup <query> [--root <dir>] [--max N]")
 			os.Exit(1)
 		}
 		query := os.Args[2]
-		root, err := resolveRoot(os.Args[3:])
+		extraArgs := os.Args[3:]
+		root, err := resolveRoot(extraArgs)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
 		}
+		max := parseMax(extraArgs)
 		idx, err := index.Load(root)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
@@ -52,8 +55,11 @@ func main() {
 		if len(results) == 0 {
 			fmt.Println("no matches found")
 		} else {
-			for _, r := range results {
+			for _, r := range results[:min(max, len(results))] {
 				fmt.Println(r)
+			}
+			if len(results) > max {
+				fmt.Printf("... and %d more matches (use --max to see more)\n", len(results)-max)
 			}
 		}
 
@@ -64,6 +70,19 @@ func main() {
 		printUsage()
 		os.Exit(1)
 	}
+}
+
+// parseMax checks args for --max N. Returns 20 as the default.
+func parseMax(args []string) int {
+	for i, arg := range args {
+		if arg == "--max" && i+1 < len(args) {
+			n, err := strconv.Atoi(args[i+1])
+			if err == nil && n > 0 {
+				return n
+			}
+		}
+	}
+	return 20
 }
 
 // resolveRoot checks args for --root <dir>. If not found, walks up from CWD.
@@ -100,7 +119,7 @@ func printUsage() {
 
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
-  swarm-index lookup <query> [--root <dir>]   Look up symbols, files, or concepts
+  swarm-index lookup <query> [--root <dir>] [--max N]   Look up symbols, files, or concepts
   swarm-index version             Print version info
 
 Examples:
