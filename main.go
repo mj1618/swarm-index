@@ -410,6 +410,30 @@ func main() {
 			fmt.Print(index.FormatHistory(historyResult))
 		}
 
+	case "hotspots":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 20)
+		since := parseStringFlag(extraArgs, "--since", "")
+		pathPrefix := parseStringFlag(extraArgs, "--path", "")
+		hotspotsResult, err := idx.Hotspots(root, max, since, pathPrefix)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(hotspotsResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatHotspots(hotspotsResult))
+		}
+
 	case "deps":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -632,6 +656,7 @@ Usage:
   swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
+  swarm-index hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]   Show most frequently changed files
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

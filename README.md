@@ -89,6 +89,18 @@ swarm-index history main.go
 # Limit to last 3 commits
 swarm-index history main.go --max 3
 
+# Show most frequently changed files (hotspots)
+swarm-index hotspots
+
+# Limit to top 10
+swarm-index hotspots --max 10
+
+# Only changes in the last 6 months
+swarm-index hotspots --since "6 months ago"
+
+# Filter to a specific directory
+swarm-index hotspots --path src/
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -121,6 +133,7 @@ swarm-index lookup "handleAuth" --json
 | `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
+| `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -166,6 +179,8 @@ swarm-index/
 │   ├── exports_test.go  # Tests for exports functionality
 │   ├── history.go       # Git commit history for a file
 │   ├── history_test.go  # Tests for history functionality
+│   ├── hotspots.go      # Most frequently changed files ranking
+│   ├── hotspots_test.go # Tests for hotspots functionality
 │   ├── todos.go         # TODO/FIXME/HACK/XXX comment collection
 │   ├── todos_test.go    # Tests for todos functionality
 │   ├── tree.go          # Directory tree building and rendering
@@ -205,6 +220,7 @@ go test ./... -v
 - [x] `diff-summary` — files changed since a git ref with affected symbols
 - [x] `stale` — report new, deleted, or modified files since last scan
 - [x] `history` — recent git commits that touched a file
+- [x] `hotspots` — most frequently changed files ranked by commit count
 
 ### Other improvements
 

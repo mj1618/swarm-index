@@ -77,6 +77,13 @@ swarm-index history main.go
 swarm-index history main.go --max 3
 swarm-index history src/utils.ts --root ~/code/my-project
 
+# Show most frequently changed files (find hotspots)
+swarm-index hotspots
+swarm-index hotspots --max 10
+swarm-index hotspots --since "6 months ago"
+swarm-index hotspots --path src/
+swarm-index hotspots --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project
