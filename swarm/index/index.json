@@ -84,6 +84,20 @@
     "package": "index"
   },
   {
+    "name": "related.go",
+    "kind": "file",
+    "path": "index/related.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "related_test.go",
+    "kind": "file",
+    "path": "index/related_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "search.go",
     "kind": "file",
     "path": "index/search.go",

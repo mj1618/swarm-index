@@ -50,6 +50,10 @@ swarm-index exports index/index.go
 swarm-index exports parsers
 swarm-index exports src/utils --root ~/code/my-project
 
+# Find imports, importers, and test files for a file
+swarm-index related main.go
+swarm-index related src/utils.ts --root ~/code/my-project
+
 # Find TODO/FIXME/HACK/XXX comments across the codebase
 swarm-index todos
 swarm-index todos --tag FIXME

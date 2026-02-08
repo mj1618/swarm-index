@@ -58,6 +58,9 @@ swarm-index outline main.go
 swarm-index exports index/index.go
 swarm-index exports parsers
 
+# Find imports, importers, and test files for a file
+swarm-index related main.go
+
 # Find TODO/FIXME/HACK/XXX comments
 swarm-index todos
 
@@ -90,6 +93,7 @@ swarm-index lookup "handleAuth" --json
 | `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
 | `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go, Python, JavaScript, and TypeScript files. |
 | `exports <file\|directory> [--root <dir>]` | List exported/public symbols of a file or package directory. Uses language-aware parsers to identify exports (Go: uppercase names, JS/TS: `export` keyword, Python: names not starting with `_`). Supports `--json`. |
+| `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
@@ -116,6 +120,8 @@ swarm-index/
 │   ├── index_test.go    # Tests for scan, match, and directory filtering
 │   ├── refs.go          # Symbol reference finder (definition + usages)
 │   ├── refs_test.go     # Tests for refs functionality
+│   ├── related.go       # File dependency neighborhood (imports, importers, tests)
+│   ├── related_test.go  # Tests for related functionality
 │   ├── search.go        # Regex search across indexed file contents
 │   ├── search_test.go   # Tests for search functionality
 │   ├── summary.go       # Project summary: languages, LOC, entry points
@@ -160,7 +166,7 @@ go test ./... -v
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
 - [ ] `context` — symbol definition with imports and doc comments
 - [x] `refs` — find all usages of a symbol
-- [ ] `related` — files connected to a given file (imports, importers, tests)
+- [x] `related` — files connected to a given file (imports, importers, tests)
 - [x] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [ ] `diff-summary` — files changed since a git ref with affected symbols
 - [x] `stale` — report new, deleted, or modified files since last scan
