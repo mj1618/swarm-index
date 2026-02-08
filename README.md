@@ -75,7 +75,7 @@ swarm-index lookup "handleAuth" --json
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
 | `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
 | `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
-| `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go and Python files. |
+| `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go, Python, JavaScript, and TypeScript files. |
 | `version` | Print the current version |
 
 ## How it works
@@ -113,7 +113,9 @@ swarm-index/
 │   ├── goparser.go      # Go AST parser implementation
 │   ├── goparser_test.go # Tests for Go parser
 │   ├── pyparser.go      # Python heuristic parser (regex-based)
-│   └── pyparser_test.go # Tests for Python parser
+│   ├── pyparser_test.go # Tests for Python parser
+│   ├── jsparser.go      # JS/TS heuristic parser (regex + brace tracking)
+│   └── jsparser_test.go # Tests for JS/TS parser
 ├── go.mod               # Go module definition
 └── README.md
 ```
@@ -144,7 +146,7 @@ go test ./... -v
 
 ### Other improvements
 
-- [ ] AST parsing for symbol extraction (JS/TS, Rust, Java) — Go and Python already supported
+- [ ] AST parsing for symbol extraction (Rust, Java) — Go, Python, and JS/TS already supported
 - [ ] Fuzzy matching and relevance-ranked results for `lookup`
 - [ ] Watch mode to keep the index up to date as files change
 - [ ] Support for ignoring custom paths via config file
