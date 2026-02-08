@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -11,73 +12,127 @@ import (
 	"github.com/matt/swarm-index/index"
 )
 
+// extractJSONFlag strips --json from args and returns whether it was present.
+func extractJSONFlag(args []string) ([]string, bool) {
+	var filtered []string
+	found := false
+	for _, a := range args {
+		if a == "--json" {
+			found = true
+		} else {
+			filtered = append(filtered, a)
+		}
+	}
+	return filtered, found
+}
+
+// fatal writes an error message to stderr and exits. When useJSON is true the
+// message is emitted as a JSON object; otherwise it is printed as plain text.
+func fatal(useJSON bool, msg string) {
+	if useJSON {
+		obj := map[string]string{"error": msg}
+		data, _ := json.Marshal(obj)
+		fmt.Fprintln(os.Stderr, string(data))
+	} else {
+		fmt.Fprintln(os.Stderr, msg)
+	}
+	os.Exit(1)
+}
+
 func main() {
-	if len(os.Args) < 2 {
-		printUsage()
-		os.Exit(1)
+	args, jsonOutput := extractJSONFlag(os.Args)
+
+	if len(args) < 2 {
+		if !jsonOutput {
+			printUsage()
+		}
+		fatal(jsonOutput, "usage: swarm-index <command> [args]")
 	}
 
-	switch os.Args[1] {
+	switch args[1] {
 	case "scan":
-		if len(os.Args) < 3 {
-			fmt.Fprintln(os.Stderr, "usage: swarm-index scan <directory>")
-			os.Exit(1)
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index scan <directory>")
 		}
-		dir := os.Args[2]
+		dir := args[2]
 		idx, err := index.Scan(dir)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
 		if err := idx.Save(dir); err != nil {
-			fmt.Fprintf(os.Stderr, "error saving index: %v\n", err)
-			os.Exit(1)
+			fatal(jsonOutput, fmt.Sprintf("error saving index: %v", err))
 		}
-		fmt.Printf("Index saved to %s/swarm/index/ (%d files, %d packages)\n", dir, idx.FileCount(), idx.PackageCount())
-		if summary := extensionSummary(idx.ExtensionCounts()); summary != "" {
-			fmt.Printf("  %s\n", summary)
+		if jsonOutput {
+			result := map[string]interface{}{
+				"filesIndexed": idx.FileCount(),
+				"packages":     idx.PackageCount(),
+				"indexPath":    dir + "/swarm/index/",
+				"extensions":   idx.ExtensionCounts(),
+			}
+			data, _ := json.Marshal(result)
+			fmt.Println(string(data))
+		} else {
+			fmt.Printf("Index saved to %s/swarm/index/ (%d files, %d packages)\n", dir, idx.FileCount(), idx.PackageCount())
+			if summary := extensionSummary(idx.ExtensionCounts()); summary != "" {
+				fmt.Printf("  %s\n", summary)
+			}
 		}
 
 	case "lookup":
-		if len(os.Args) < 3 {
-			fmt.Fprintln(os.Stderr, "usage: swarm-index lookup <query> [--root <dir>] [--max N]")
-			os.Exit(1)
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index lookup <query> [--root <dir>] [--max N]")
 		}
-		query := os.Args[2]
+		query := args[2]
 		if err := validateQuery(query); err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
-		extraArgs := os.Args[3:]
+		extraArgs := args[3:]
 		root, err := resolveRoot(extraArgs)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
 		max := parseMax(extraArgs)
 		idx, err := index.Load(root)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
-			os.Exit(1)
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
 		results := idx.Match(query)
-		if len(results) == 0 {
-			fmt.Println("no matches found")
-		} else {
-			for _, r := range results[:min(max, len(results))] {
-				fmt.Println(r)
+		if jsonOutput {
+			limited := results
+			if len(limited) > max {
+				limited = limited[:max]
 			}
-			if len(results) > max {
-				fmt.Printf("... and %d more matches (use --max to see more)\n", len(results)-max)
+			if limited == nil {
+				limited = []index.Entry{}
+			}
+			data, _ := json.Marshal(limited)
+			fmt.Println(string(data))
+		} else {
+			if len(results) == 0 {
+				fmt.Println("no matches found")
+			} else {
+				for _, r := range results[:min(max, len(results))] {
+					fmt.Println(r)
+				}
+				if len(results) > max {
+					fmt.Printf("... and %d more matches (use --max to see more)\n", len(results)-max)
+				}
 			}
 		}
 
 	case "version":
-		fmt.Println("swarm-index v0.1.0")
+		if jsonOutput {
+			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
+			fmt.Println(string(data))
+		} else {
+			fmt.Println("swarm-index v0.1.0")
+		}
 
 	default:
-		printUsage()
-		os.Exit(1)
+		if !jsonOutput {
+			printUsage()
+		}
+		fatal(jsonOutput, "unknown command: "+args[1])
 	}
 }
 

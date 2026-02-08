@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"reflect"
 	"testing"
 )
 
@@ -138,5 +139,59 @@ func TestResolveRootFlagWithoutValue(t *testing.T) {
 	want, _ := filepath.Abs(tmp)
 	if got != want {
 		t.Errorf("resolveRoot() = %q, want %q", got, want)
+	}
+}
+
+func TestExtractJSONFlagNotPresent(t *testing.T) {
+	args, found := extractJSONFlag([]string{"swarm-index", "scan", "."})
+	if found {
+		t.Error("expected found=false when --json is absent")
+	}
+	want := []string{"swarm-index", "scan", "."}
+	if !reflect.DeepEqual(args, want) {
+		t.Errorf("args = %v, want %v", args, want)
+	}
+}
+
+func TestExtractJSONFlagAtEnd(t *testing.T) {
+	args, found := extractJSONFlag([]string{"swarm-index", "scan", ".", "--json"})
+	if !found {
+		t.Error("expected found=true when --json is present")
+	}
+	want := []string{"swarm-index", "scan", "."}
+	if !reflect.DeepEqual(args, want) {
+		t.Errorf("args = %v, want %v", args, want)
+	}
+}
+
+func TestExtractJSONFlagBeforeCommand(t *testing.T) {
+	args, found := extractJSONFlag([]string{"swarm-index", "--json", "version"})
+	if !found {
+		t.Error("expected found=true when --json is before command")
+	}
+	want := []string{"swarm-index", "version"}
+	if !reflect.DeepEqual(args, want) {
+		t.Errorf("args = %v, want %v", args, want)
+	}
+}
+
+func TestExtractJSONFlagBetweenArgs(t *testing.T) {
+	args, found := extractJSONFlag([]string{"swarm-index", "lookup", "--json", "query", "--root", "/tmp"})
+	if !found {
+		t.Error("expected found=true when --json is between args")
+	}
+	want := []string{"swarm-index", "lookup", "query", "--root", "/tmp"}
+	if !reflect.DeepEqual(args, want) {
+		t.Errorf("args = %v, want %v", args, want)
+	}
+}
+
+func TestExtractJSONFlagEmpty(t *testing.T) {
+	args, found := extractJSONFlag([]string{})
+	if found {
+		t.Error("expected found=false for empty args")
+	}
+	if len(args) != 0 {
+		t.Errorf("args = %v, want empty", args)
 	}
 }
