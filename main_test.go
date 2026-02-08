@@ -7,45 +7,45 @@ import (
 	"testing"
 )
 
-func TestParseMaxDefault(t *testing.T) {
-	got := parseMax([]string{})
+func TestParseIntFlagDefault(t *testing.T) {
+	got := parseIntFlag([]string{}, "--max", 20)
 	if got != 20 {
-		t.Errorf("parseMax([]) = %d, want 20", got)
+		t.Errorf("parseIntFlag([], --max, 20) = %d, want 20", got)
 	}
 }
 
-func TestParseMaxWithFlag(t *testing.T) {
-	got := parseMax([]string{"--max", "5"})
+func TestParseIntFlagWithFlag(t *testing.T) {
+	got := parseIntFlag([]string{"--max", "5"}, "--max", 20)
 	if got != 5 {
-		t.Errorf("parseMax([--max 5]) = %d, want 5", got)
+		t.Errorf("parseIntFlag([--max 5]) = %d, want 5", got)
 	}
 }
 
-func TestParseMaxWithOtherFlags(t *testing.T) {
-	got := parseMax([]string{"--root", "/tmp", "--max", "10"})
+func TestParseIntFlagWithOtherFlags(t *testing.T) {
+	got := parseIntFlag([]string{"--root", "/tmp", "--max", "10"}, "--max", 20)
 	if got != 10 {
-		t.Errorf("parseMax([--root /tmp --max 10]) = %d, want 10", got)
+		t.Errorf("parseIntFlag([--root /tmp --max 10]) = %d, want 10", got)
 	}
 }
 
-func TestParseMaxInvalidValue(t *testing.T) {
-	got := parseMax([]string{"--max", "abc"})
+func TestParseIntFlagInvalidValue(t *testing.T) {
+	got := parseIntFlag([]string{"--max", "abc"}, "--max", 20)
 	if got != 20 {
-		t.Errorf("parseMax([--max abc]) = %d, want 20 (default)", got)
+		t.Errorf("parseIntFlag([--max abc]) = %d, want 20 (default)", got)
 	}
 }
 
-func TestParseMaxZero(t *testing.T) {
-	got := parseMax([]string{"--max", "0"})
+func TestParseIntFlagZero(t *testing.T) {
+	got := parseIntFlag([]string{"--max", "0"}, "--max", 20)
 	if got != 20 {
-		t.Errorf("parseMax([--max 0]) = %d, want 20 (default, 0 is not positive)", got)
+		t.Errorf("parseIntFlag([--max 0]) = %d, want 20 (default, 0 is not positive)", got)
 	}
 }
 
-func TestParseMaxNoValue(t *testing.T) {
-	got := parseMax([]string{"--max"})
+func TestParseIntFlagNoValue(t *testing.T) {
+	got := parseIntFlag([]string{"--max"}, "--max", 20)
 	if got != 20 {
-		t.Errorf("parseMax([--max]) = %d, want 20 (default)", got)
+		t.Errorf("parseIntFlag([--max]) = %d, want 20 (default)", got)
 	}
 }
 

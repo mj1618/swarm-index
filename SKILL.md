@@ -14,6 +14,9 @@ swarm-index lookup "test" --max 5
 
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project
+
+# Print directory tree (respects same skip rules as scan)
+swarm-index tree . --depth 3
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).

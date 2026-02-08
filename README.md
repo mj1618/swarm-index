@@ -33,6 +33,9 @@ swarm-index lookup "test" --max 5
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project
 
+# Print directory tree
+swarm-index tree . --depth 3
+
 # All commands support --json for structured output
 swarm-index lookup "handleAuth" --json
 ```
@@ -49,6 +52,7 @@ swarm-index lookup "handleAuth" --json
 |---|---|
 | `scan <directory>` | Walk a directory tree, index all source files, and persist the index to disk. Prints file counts and language breakdown. |
 | `lookup <query> [--root <dir>] [--max N]` | Search the index for files matching a query by case-insensitive substring match. Use `--root` to specify the project root and `--max` to limit results (default 20). |
+| `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
 | `version` | Print the current version |
 
 ## How it works
@@ -70,7 +74,9 @@ swarm-index/
 ├── main.go              # CLI entrypoint and command routing
 ├── index/
 │   ├── index.go         # Core library: scanning, indexing, matching
-│   └── index_test.go    # Tests for scan, match, and directory filtering
+│   ├── index_test.go    # Tests for scan, match, and directory filtering
+│   ├── tree.go          # Directory tree building and rendering
+│   └── tree_test.go     # Tests for tree functionality
 ├── go.mod               # Go module definition
 └── README.md
 ```
@@ -85,7 +91,6 @@ go test ./... -v
 
 ### Planned commands
 
-- [ ] `tree` — print directory structure with depth control
 - [ ] `summary` — language stats, entry points, dependency manifests, LOC
 - [ ] `outline` — structural skeleton of a file (functions, classes, types)
 - [ ] `show` — read a file or line range with structural context

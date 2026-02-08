@@ -91,7 +91,7 @@ func main() {
 		if err != nil {
 			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
-		max := parseMax(extraArgs)
+		max := parseIntFlag(extraArgs, "--max", 20)
 		idx, err := index.Load(root)
 		if err != nil {
 			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
@@ -120,6 +120,23 @@ func main() {
 			}
 		}
 
+	case "tree":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index tree <directory> [--depth N]")
+		}
+		dir := args[2]
+		depth := parseIntFlag(args[3:], "--depth", 0)
+		tree, err := index.BuildTree(dir, depth)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(tree, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.RenderTree(tree))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -136,17 +153,18 @@ func main() {
 	}
 }
 
-// parseMax checks args for --max N. Returns 20 as the default.
-func parseMax(args []string) int {
+// parseIntFlag scans args for --flag N and returns its value, or defaultVal if
+// the flag is absent or invalid.
+func parseIntFlag(args []string, flag string, defaultVal int) int {
 	for i, arg := range args {
-		if arg == "--max" && i+1 < len(args) {
+		if arg == flag && i+1 < len(args) {
 			n, err := strconv.Atoi(args[i+1])
 			if err == nil && n > 0 {
 				return n
 			}
 		}
 	}
-	return 20
+	return defaultVal
 }
 
 // resolveRoot checks args for --root <dir>. If not found, walks up from CWD.
@@ -215,9 +233,11 @@ func printUsage() {
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
   swarm-index lookup <query> [--root <dir>] [--max N]   Look up symbols, files, or concepts
+  swarm-index tree <directory> [--depth N]   Print directory structure
   swarm-index version             Print version info
 
 Examples:
   swarm-index scan .
-  swarm-index lookup "handleAuth"`)
+  swarm-index lookup "handleAuth"
+  swarm-index tree . --depth 3`)
 }
