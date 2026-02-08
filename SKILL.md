@@ -54,6 +54,10 @@ swarm-index exports src/utils --root ~/code/my-project
 swarm-index related main.go
 swarm-index related src/utils.ts --root ~/code/my-project
 
+# List dependencies from manifest files (go.mod, package.json, etc.)
+swarm-index deps
+swarm-index deps --root ~/code/my-project
+
 # Find TODO/FIXME/HACK/XXX comments across the codebase
 swarm-index todos
 swarm-index todos --tag FIXME

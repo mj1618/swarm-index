@@ -67,6 +67,12 @@ swarm-index todos
 # Filter by tag
 swarm-index todos --tag FIXME
 
+# List dependencies from manifest files
+swarm-index deps
+
+# List dependencies as JSON
+swarm-index deps --json
+
 # Show what changed since the last commit
 swarm-index diff-summary
 
@@ -107,6 +113,7 @@ swarm-index lookup "handleAuth" --json
 | `exports <file\|directory> [--root <dir>]` | List exported/public symbols of a file or package directory. Uses language-aware parsers to identify exports (Go: uppercase names, JS/TS: `export` keyword, Python: names not starting with `_`). Supports `--json`. |
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
+| `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
@@ -142,6 +149,8 @@ swarm-index/
 │   ├── summary_test.go  # Tests for summary logic
 │   ├── show.go          # File reading with line numbers
 │   ├── show_test.go     # Tests for show functionality
+│   ├── deps.go          # Dependency manifest parsing (go.mod, package.json, etc.)
+│   ├── deps_test.go     # Tests for deps functionality
 │   ├── diffsummary.go   # Git diff summary with affected symbols
 │   ├── diffsummary_test.go # Tests for diff summary
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
@@ -180,7 +189,7 @@ go test ./... -v
 - [x] `show` — read a file or line range with line numbers
 - [x] `exports` — public API surface of a file or package
 - [ ] `config` — detect project toolchain (framework, build tool, test runner)
-- [ ] `deps` — parse dependency manifests and list libraries with versions
+- [x] `deps` — parse dependency manifests and list libraries with versions
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
 - [ ] `context` — symbol definition with imports and doc comments
 - [x] `refs` — find all usages of a symbol

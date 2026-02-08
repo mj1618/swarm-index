@@ -410,6 +410,27 @@ func main() {
 			fmt.Print(index.FormatHistory(historyResult))
 		}
 
+	case "deps":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		depsResult, err := idx.Deps()
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(depsResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatDeps(depsResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -585,6 +606,7 @@ Usage:
   swarm-index exports <file|directory> [--root <dir>]   List exported/public symbols
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
+  swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
   swarm-index stale [--root <dir>]   Check if index is out of date
