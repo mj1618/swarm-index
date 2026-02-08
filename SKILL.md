@@ -15,6 +15,9 @@ swarm-index lookup "test" --max 5
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project
 
+# Regex search across file contents
+swarm-index search "func\s+\w+" --max 10
+
 # Project overview (languages, LOC, entry points, manifests)
 swarm-index summary
 

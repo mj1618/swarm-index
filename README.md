@@ -33,6 +33,9 @@ swarm-index lookup "test" --max 5
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project
 
+# Regex search across file contents
+swarm-index search "func\s+\w+" --max 10
+
 # Project overview (languages, LOC, entry points, manifests)
 swarm-index summary
 
@@ -55,6 +58,7 @@ swarm-index lookup "handleAuth" --json
 |---|---|
 | `scan <directory>` | Walk a directory tree, index all source files, and persist the index to disk. Prints file counts and language breakdown. |
 | `lookup <query> [--root <dir>] [--max N]` | Search the index for files matching a query by case-insensitive substring match. Use `--root` to specify the project root and `--max` to limit results (default 20). |
+| `search <pattern> [--root <dir>] [--max N]` | Regex search across indexed file contents. Returns matching lines with file paths and line numbers. Use `--max` to limit results (default 50). Binary files are skipped. |
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
 | `version` | Print the current version |
@@ -79,6 +83,8 @@ swarm-index/
 ├── index/
 │   ├── index.go         # Core library: scanning, indexing, matching
 │   ├── index_test.go    # Tests for scan, match, and directory filtering
+│   ├── search.go        # Regex search across indexed file contents
+│   ├── search_test.go   # Tests for search functionality
 │   ├── summary.go       # Project summary: languages, LOC, entry points
 │   ├── summary_test.go  # Tests for summary logic
 │   ├── tree.go          # Directory tree building and rendering
@@ -105,7 +111,6 @@ go test ./... -v
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
 - [ ] `context` — symbol definition with imports and doc comments
 - [ ] `refs` — find all usages of a symbol
-- [ ] `search` — regex search across file contents
 - [ ] `related` — files connected to a given file (imports, importers, tests)
 - [ ] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [ ] `diff-summary` — files changed since a git ref with affected symbols

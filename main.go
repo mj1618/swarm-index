@@ -120,6 +120,42 @@ func main() {
 			}
 		}
 
+	case "search":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index search <pattern> [--root <dir>] [--max N]")
+		}
+		pattern := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 50)
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		matches, err := idx.Search(pattern, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: invalid pattern: %v", err))
+		}
+		if jsonOutput {
+			if matches == nil {
+				matches = []index.SearchMatch{}
+			}
+			data, _ := json.Marshal(matches)
+			fmt.Println(string(data))
+		} else {
+			if len(matches) == 0 {
+				fmt.Println("no matches found")
+			} else {
+				for _, m := range matches {
+					fmt.Printf("%s:%d: %s\n", m.Path, m.Line, m.Content)
+				}
+				fmt.Printf("\n%d matches\n", len(matches))
+			}
+		}
+
 	case "summary":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -251,6 +287,7 @@ func printUsage() {
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
   swarm-index lookup <query> [--root <dir>] [--max N]   Look up symbols, files, or concepts
+  swarm-index search <pattern> [--root <dir>] [--max N]   Regex search across file contents
   swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure
   swarm-index version             Print version info
@@ -258,6 +295,7 @@ Usage:
 Examples:
   swarm-index scan .
   swarm-index lookup "handleAuth"
+  swarm-index search "func\s+\w+" --max 10
   swarm-index summary
   swarm-index tree . --depth 3`)
 }
