@@ -15,6 +15,12 @@ swarm-index lookup "test" --max 5
 # Point lookup at a specific project root
 swarm-index lookup "config" --root ~/code/my-project
 
+# Project overview (languages, LOC, entry points, manifests)
+swarm-index summary
+
+# Point summary at a specific project root
+swarm-index summary --root ~/code/my-project
+
 # Print directory tree (respects same skip rules as scan)
 swarm-index tree . --depth 3
 ```

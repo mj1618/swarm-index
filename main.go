@@ -120,6 +120,24 @@ func main() {
 			}
 		}
 
+	case "summary":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		summary := idx.Summary()
+		if jsonOutput {
+			data, _ := json.MarshalIndent(summary, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatSummary(summary))
+		}
+
 	case "tree":
 		if len(args) < 3 {
 			fatal(jsonOutput, "usage: swarm-index tree <directory> [--depth N]")
@@ -233,11 +251,13 @@ func printUsage() {
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
   swarm-index lookup <query> [--root <dir>] [--max N]   Look up symbols, files, or concepts
+  swarm-index summary [--root <dir>]   Show project overview (languages, LOC, entry points)
   swarm-index tree <directory> [--depth N]   Print directory structure
   swarm-index version             Print version info
 
 Examples:
   swarm-index scan .
   swarm-index lookup "handleAuth"
+  swarm-index summary
   swarm-index tree . --depth 3`)
 }
