@@ -124,6 +124,11 @@ swarm-index locate "handleAuth"
 swarm-index locate "config" --max 10
 swarm-index locate "UserService" --root ~/code/my-project
 
+# Summarize a directory: files, symbols, LOC, dependencies, dependents
+swarm-index scope index/
+swarm-index scope src/ --recursive
+swarm-index scope parsers --root ~/code/my-project
+
 # Detect potentially unused exports (dead code candidates)
 swarm-index dead-code
 swarm-index dead-code --kind func

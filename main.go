@@ -691,6 +691,32 @@ func main() {
 			fmt.Print(index.FormatLocate(locateResult))
 		}
 
+	case "scope":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index scope <directory> [--root <dir>] [--recursive]")
+		}
+		dir := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		recursive := hasBoolFlag(extraArgs, "--recursive")
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		scopeResult, err := idx.Scope(dir, recursive)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(scopeResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatScope(scopeResult))
+		}
+
 	case "dead-code":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -743,6 +769,16 @@ func parseIntFlag(args []string, flag string, defaultVal int) int {
 		}
 	}
 	return defaultVal
+}
+
+// hasBoolFlag returns true if the given flag is present in args.
+func hasBoolFlag(args []string, flag string) bool {
+	for _, arg := range args {
+		if arg == flag {
+			return true
+		}
+	}
+	return false
 }
 
 // parseStringFlag scans args for --flag value and returns its value, or
@@ -881,6 +917,7 @@ Usage:
   swarm-index complexity [file] [--root <dir>] [--max N] [--min N]   Analyze code complexity per function
   swarm-index blame <file> [--lines M:N] [--root <dir>]   Show git blame for a file (line-level attribution)
   swarm-index locate <query> [--root <dir>] [--max N]   Unified smart search across files, symbols, and content
+  swarm-index scope <directory> [--root <dir>] [--recursive]   Summarize a directory: files, symbols, LOC, dependencies
   swarm-index dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]   Detect potentially unused exports
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
