@@ -6,11 +6,37 @@ A fast codebase index and lookup tool designed for coding agents. Scan a project
 
 Coding agents (LLM-powered or otherwise) waste significant context windows and API calls exploring unfamiliar codebases. **swarm-index** gives them a pre-built map: scan once, look up anything by name, and get back precise file paths and locations.
 
+## Installation
+
+### Go install (recommended)
+
+```bash
+go install github.com/matt/swarm-index@latest
+```
+
+This puts the `swarm-index` binary in your `$GOPATH/bin` (or `$HOME/go/bin` by default). Make sure that directory is in your `PATH`.
+
+### Download a prebuilt binary
+
+Grab the latest release for your platform from [GitHub Releases](https://github.com/matt/swarm-index/releases/latest), extract it, and move the binary somewhere on your `PATH`:
+
+```bash
+# Example for macOS (Apple Silicon)
+curl -sL https://github.com/matt/swarm-index/releases/latest/download/swarm-index_darwin_arm64.tar.gz | tar xz
+sudo mv swarm-index /usr/local/bin/
+```
+
+### Build from source
+
+```bash
+git clone https://github.com/matt/swarm-index.git
+cd swarm-index
+go build -o swarm-index .
+```
+
 ## Quick start
 
 ```bash
-# Build the binary
-go build -o swarm-index .
 
 # Scan a project and persist the index
 ./swarm-index scan ~/code/my-project
