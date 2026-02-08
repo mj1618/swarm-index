@@ -107,6 +107,13 @@ swarm-index symbols "Handle" --kind func
 swarm-index symbols "Config" --max 10
 swarm-index symbols "auth" --root ~/code/my-project
 
+# Analyze code complexity per function (find high-risk, hard-to-maintain code)
+swarm-index complexity
+swarm-index complexity main.go
+swarm-index complexity --min 5
+swarm-index complexity --max 10
+swarm-index complexity --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

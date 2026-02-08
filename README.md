@@ -134,6 +134,18 @@ swarm-index symbols "Handle" --kind func
 # Limit results
 swarm-index symbols "Config" --max 10
 
+# Analyze code complexity per function (top N most complex)
+swarm-index complexity
+
+# Complexity for a specific file
+swarm-index complexity main.go
+
+# Filter by minimum complexity threshold
+swarm-index complexity --min 5
+
+# Limit results
+swarm-index complexity --max 10
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -171,6 +183,7 @@ swarm-index lookup "handleAuth" --json
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
 | `symbols <query> [--root <dir>] [--max N] [--kind KIND]` | Search all parseable files for symbols (functions, types, classes, etc.) matching the query by name. Case-insensitive substring match. Use `--kind` to filter by symbol kind and `--max` to limit results (default 50). Requires a prior `scan`. |
+| `complexity [file] [--root <dir>] [--max N] [--min N]` | Analyze code complexity per function/method. Shows cyclomatic complexity, line count, nesting depth, and parameter count. Sorted by complexity descending. Use `--min` to filter by threshold and `--max` to limit results (default 20). Supports Go, Python, JS/TS. Single-file mode does not require a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -212,6 +225,8 @@ swarm-index/
 │   ├── symbols_test.go  # Tests for symbols functionality
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
+│   ├── complexity.go    # Code complexity analysis per function
+│   ├── complexity_test.go # Tests for complexity functionality
 │   ├── config.go        # Project toolchain detection (framework, build, test, lint)
 │   ├── config_test.go   # Tests for config functionality
 │   ├── context.go       # Symbol definition context (imports, doc comments, body)

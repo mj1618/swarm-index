@@ -579,6 +579,42 @@ func main() {
 			fmt.Print(index.FormatSymbols(symbolsResult))
 		}
 
+	case "complexity":
+		extraArgs := args[2:]
+		// Check if first non-flag arg is a file path.
+		file := ""
+		if len(extraArgs) > 0 && !strings.HasPrefix(extraArgs[0], "--") {
+			file = extraArgs[0]
+			extraArgs = extraArgs[1:]
+		}
+		maxResults := parseIntFlag(extraArgs, "--max", 20)
+		minComplexity := parseIntFlag(extraArgs, "--min", 0)
+		var result *index.ComplexityResult
+		var err error
+		if file != "" {
+			// Single-file mode: analyze directly without loading index.
+			result, err = index.ComplexityFile(file, maxResults, minComplexity)
+		} else {
+			root, rootErr := resolveRoot(extraArgs)
+			if rootErr != nil {
+				fatal(jsonOutput, fmt.Sprintf("error: %v", rootErr))
+			}
+			idx, loadErr := index.Load(root)
+			if loadErr != nil {
+				fatal(jsonOutput, fmt.Sprintf("error: %v", loadErr))
+			}
+			result, err = idx.Complexity("", maxResults, minComplexity)
+		}
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(result, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatComplexity(result))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -763,6 +799,7 @@ Usage:
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
   swarm-index hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]   Show most frequently changed files
   swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]   Search all symbols by name across the project
+  swarm-index complexity [file] [--root <dir>] [--max N] [--min N]   Analyze code complexity per function
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 
