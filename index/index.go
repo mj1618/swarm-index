@@ -2,19 +2,21 @@
 package index
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 // Entry represents a single indexed item (file, symbol, package, etc.).
 type Entry struct {
-	Name    string // symbol or file name
-	Kind    string // "file", "func", "type", "package", etc.
-	Path    string // file path relative to the scanned root
-	Line    int    // line number (0 if not applicable)
-	Package string // package or module the entry belongs to
+	Name    string `json:"name"`    // symbol or file name
+	Kind    string `json:"kind"`    // "file", "func", "type", "package", etc.
+	Path    string `json:"path"`    // file path relative to the scanned root
+	Line    int    `json:"line"`    // line number (0 if not applicable)
+	Package string `json:"package"` // package or module the entry belongs to
 }
 
 func (e Entry) String() string {
@@ -48,6 +50,75 @@ func (idx *Index) PackageCount() int {
 		}
 	}
 	return len(seen)
+}
+
+// indexMeta holds metadata about a saved index.
+type indexMeta struct {
+	Root         string `json:"root"`
+	ScannedAt    string `json:"scannedAt"`
+	Version      string `json:"version"`
+	FileCount    int    `json:"fileCount"`
+	PackageCount int    `json:"packageCount"`
+}
+
+// Save writes the index to disk under <dir>/swarm/index/.
+func (idx *Index) Save(dir string) error {
+	indexDir := filepath.Join(dir, "swarm", "index")
+	if err := os.MkdirAll(indexDir, 0o755); err != nil {
+		return fmt.Errorf("creating index directory: %w", err)
+	}
+
+	if err := writeJSON(filepath.Join(indexDir, "index.json"), idx.Entries); err != nil {
+		return err
+	}
+
+	meta := indexMeta{
+		Root:         idx.Root,
+		ScannedAt:    time.Now().UTC().Format(time.RFC3339),
+		Version:      "0.1.0",
+		FileCount:    idx.FileCount(),
+		PackageCount: idx.PackageCount(),
+	}
+	return writeJSON(filepath.Join(indexDir, "meta.json"), meta)
+}
+
+// writeJSON marshals v as indented JSON and writes it to path.
+func writeJSON(path string, v any) error {
+	data, err := json.MarshalIndent(v, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshaling %s: %w", filepath.Base(path), err)
+	}
+	if err := os.WriteFile(path, data, 0o644); err != nil {
+		return fmt.Errorf("writing %s: %w", filepath.Base(path), err)
+	}
+	return nil
+}
+
+// Load reads a persisted index from <dir>/swarm/index/.
+func Load(dir string) (*Index, error) {
+	indexDir := filepath.Join(dir, "swarm", "index")
+
+	data, err := os.ReadFile(filepath.Join(indexDir, "index.json"))
+	if err != nil {
+		return nil, fmt.Errorf("reading index.json: %w", err)
+	}
+
+	var entries []Entry
+	if err := json.Unmarshal(data, &entries); err != nil {
+		return nil, fmt.Errorf("parsing index.json: %w", err)
+	}
+
+	metaData, err := os.ReadFile(filepath.Join(indexDir, "meta.json"))
+	if err != nil {
+		return nil, fmt.Errorf("reading meta.json: %w", err)
+	}
+
+	var meta indexMeta
+	if err := json.Unmarshal(metaData, &meta); err != nil {
+		return nil, fmt.Errorf("parsing meta.json: %w", err)
+	}
+
+	return &Index{Root: meta.Root, Entries: entries}, nil
 }
 
 // Scan walks a directory tree and builds an index of files and packages.
@@ -93,13 +164,6 @@ func Scan(root string) (*Index, error) {
 	}
 
 	return idx, nil
-}
-
-// Lookup searches the most recently scanned index for entries matching the query.
-// For now this is a simple substring match; future versions will support fuzzy and semantic search.
-func Lookup(query string) ([]Entry, error) {
-	// TODO: persist and load index from disk
-	return nil, fmt.Errorf("no index loaded — run 'swarm-index scan <dir>' first")
 }
 
 // Match returns all entries whose name contains the query (case-insensitive).
