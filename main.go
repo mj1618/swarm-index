@@ -552,6 +552,33 @@ func main() {
 			fmt.Print(index.FormatContext(contextResult))
 		}
 
+	case "symbols":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]")
+		}
+		query := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 50)
+		kind := parseStringFlag(extraArgs, "--kind", "")
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		symbolsResult, err := idx.Symbols(query, kind, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(symbolsResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatSymbols(symbolsResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -735,6 +762,7 @@ Usage:
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
   swarm-index hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]   Show most frequently changed files
+  swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]   Search all symbols by name across the project
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

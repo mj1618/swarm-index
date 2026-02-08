@@ -42,6 +42,76 @@
     "package": "(root)"
   },
   {
+    "name": "config.go",
+    "kind": "file",
+    "path": "index/config.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "config_test.go",
+    "kind": "file",
+    "path": "index/config_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "context.go",
+    "kind": "file",
+    "path": "index/context.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "context_test.go",
+    "kind": "file",
+    "path": "index/context_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "deps.go",
+    "kind": "file",
+    "path": "index/deps.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "deps_test.go",
+    "kind": "file",
+    "path": "index/deps_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "diffsummary.go",
+    "kind": "file",
+    "path": "index/diffsummary.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "diffsummary_test.go",
+    "kind": "file",
+    "path": "index/diffsummary_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "entrypoints.go",
+    "kind": "file",
+    "path": "index/entrypoints.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "entrypoints_test.go",
+    "kind": "file",
+    "path": "index/entrypoints_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "exports.go",
     "kind": "file",
     "path": "index/exports.go",
@@ -52,6 +122,48 @@
     "name": "exports_test.go",
     "kind": "file",
     "path": "index/exports_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "graph.go",
+    "kind": "file",
+    "path": "index/graph.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "graph_test.go",
+    "kind": "file",
+    "path": "index/graph_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "history.go",
+    "kind": "file",
+    "path": "index/history.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "history_test.go",
+    "kind": "file",
+    "path": "index/history_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "hotspots.go",
+    "kind": "file",
+    "path": "index/hotspots.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "hotspots_test.go",
+    "kind": "file",
+    "path": "index/hotspots_test.go",
     "line": 0,
     "package": "index"
   },
@@ -154,6 +266,20 @@
     "package": "index"
   },
   {
+    "name": "symbols.go",
+    "kind": "file",
+    "path": "index/symbols.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "symbols_test.go",
+    "kind": "file",
+    "path": "index/symbols_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
     "name": "todos.go",
     "kind": "file",
     "path": "index/todos.go",
@@ -243,5 +369,12 @@
     "path": "parsers/pyparser_test.go",
     "line": 0,
     "package": "parsers"
+  },
+  {
+    "name": "swarm-index",
+    "kind": "file",
+    "path": "swarm-index",
+    "line": 0,
+    "package": "(root)"
   }
 ]

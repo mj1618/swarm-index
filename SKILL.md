@@ -101,6 +101,12 @@ swarm-index graph --focus main.go --depth 2
 swarm-index graph --format dot
 swarm-index graph --root ~/code/my-project
 
+# Search for symbols by name across the entire project
+swarm-index symbols "auth"
+swarm-index symbols "Handle" --kind func
+swarm-index symbols "Config" --max 10
+swarm-index symbols "auth" --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

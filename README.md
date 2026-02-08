@@ -125,6 +125,15 @@ swarm-index graph --focus main.go --depth 2
 # Output as Graphviz DOT format
 swarm-index graph --format dot
 
+# Search for symbols by name across the entire project
+swarm-index symbols "auth"
+
+# Filter by symbol kind (func, type, class, interface, method, const, var)
+swarm-index symbols "Handle" --kind func
+
+# Limit results
+swarm-index symbols "Config" --max 10
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -161,6 +170,7 @@ swarm-index lookup "handleAuth" --json
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
+| `symbols <query> [--root <dir>] [--max N] [--kind KIND]` | Search all parseable files for symbols (functions, types, classes, etc.) matching the query by name. Case-insensitive substring match. Use `--kind` to filter by symbol kind and `--max` to limit results (default 50). Requires a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -198,6 +208,8 @@ swarm-index/
 │   ├── deps_test.go     # Tests for deps functionality
 │   ├── diffsummary.go   # Git diff summary with affected symbols
 │   ├── diffsummary_test.go # Tests for diff summary
+│   ├── symbols.go       # Project-wide symbol search by name
+│   ├── symbols_test.go  # Tests for symbols functionality
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
 │   ├── config.go        # Project toolchain detection (framework, build, test, lint)

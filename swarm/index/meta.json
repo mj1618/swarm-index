@@ -1,11 +1,12 @@
 {
   "root": "/Users/matt/code/swarm-index",
-  "scannedAt": "2026-02-08T17:21:01Z",
+  "scannedAt": "2026-02-08T18:38:00Z",
   "version": "0.1.0",
-  "fileCount": 35,
+  "fileCount": 54,
   "packageCount": 3,
   "extensions": {
-    ".go": 30,
+    "(none)": 1,
+    ".go": 48,
     ".md": 4,
     ".mod": 1
   }
