@@ -387,6 +387,29 @@ func main() {
 			fmt.Print(index.FormatDiffSummary(diffResult))
 		}
 
+	case "history":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index history <file> [--root <dir>] [--max N]")
+		}
+		filePath := args[2]
+		extraArgs := args[3:]
+		root := parseStringFlag(extraArgs, "--root", ".")
+		root, err := filepath.Abs(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 10)
+		historyResult, err := index.History(root, filePath, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(historyResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatHistory(historyResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -563,6 +586,7 @@ Usage:
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
+  swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

@@ -73,6 +73,12 @@ swarm-index diff-summary
 # Show what changed since a specific ref
 swarm-index diff-summary main
 
+# Show recent commits for a file
+swarm-index history main.go
+
+# Limit to last 3 commits
+swarm-index history main.go --max 3
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -102,6 +108,7 @@ swarm-index lookup "handleAuth" --json
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
+| `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -141,6 +148,8 @@ swarm-index/
 │   ├── stale_test.go    # Tests for stale detection
 │   ├── exports.go       # Exported/public symbol listing
 │   ├── exports_test.go  # Tests for exports functionality
+│   ├── history.go       # Git commit history for a file
+│   ├── history_test.go  # Tests for history functionality
 │   ├── todos.go         # TODO/FIXME/HACK/XXX comment collection
 │   ├── todos_test.go    # Tests for todos functionality
 │   ├── tree.go          # Directory tree building and rendering
@@ -179,7 +188,7 @@ go test ./... -v
 - [x] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [x] `diff-summary` — files changed since a git ref with affected symbols
 - [x] `stale` — report new, deleted, or modified files since last scan
-- [ ] `history` — recent git commits that touched a file
+- [x] `history` — recent git commits that touched a file
 
 ### Other improvements
 

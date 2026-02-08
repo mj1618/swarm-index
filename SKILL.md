@@ -64,6 +64,11 @@ swarm-index diff-summary
 swarm-index diff-summary HEAD~3
 swarm-index diff-summary main --root ~/code/my-project
 
+# Show recent git commits for a file
+swarm-index history main.go
+swarm-index history main.go --max 3
+swarm-index history src/utils.ts --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project
