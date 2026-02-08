@@ -7,6 +7,13 @@
     "package": "(root)"
   },
   {
+    "name": "CLAUDE.md",
+    "kind": "file",
+    "path": "CLAUDE.md",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
     "name": "README.md",
     "kind": "file",
     "path": "README.md",
