@@ -150,6 +150,13 @@ swarm-index test-map --path src/
 swarm-index test-map --max 50
 swarm-index test-map --root ~/code/my-project
 
+# Analyze blast radius of a symbol or file (transitive references/importers)
+swarm-index impact Load
+swarm-index impact index/index.go
+swarm-index impact Load --depth 2
+swarm-index impact Load --max 50
+swarm-index impact handleAuth --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

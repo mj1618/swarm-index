@@ -786,6 +786,33 @@ func main() {
 			fmt.Print(index.FormatTestMap(tmResult))
 		}
 
+	case "impact":
+		if len(args) < 3 {
+			fatal(jsonOutput, "usage: swarm-index impact <symbol-or-file> [--root <dir>] [--depth N] [--max N]")
+		}
+		target := args[2]
+		extraArgs := args[3:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		depth := parseIntFlag(extraArgs, "--depth", 3)
+		max := parseIntFlag(extraArgs, "--max", 100)
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		impactResult, err := idx.Impact(target, depth, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(impactResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatImpact(impactResult))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -966,6 +993,7 @@ Usage:
   swarm-index dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]   Detect potentially unused exports
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index test-map [--root <dir>] [--path PREFIX] [--untested] [--tested] [--max N]   Show source-to-test-file mapping
+  swarm-index impact <symbol-or-file> [--root <dir>] [--depth N] [--max N]   Analyze blast radius of a symbol or file
   swarm-index version             Print version info
 
 Examples:

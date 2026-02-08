@@ -191,6 +191,18 @@ swarm-index test-map --path src/
 # Limit results
 swarm-index test-map --max 50
 
+# Analyze blast radius of a symbol (transitive references)
+swarm-index impact Load
+
+# Analyze blast radius of a file (transitive importers)
+swarm-index impact index/index.go
+
+# Limit traversal depth (default 3)
+swarm-index impact Load --depth 2
+
+# Limit total results (default 100)
+swarm-index impact Load --max 50
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -235,6 +247,7 @@ swarm-index lookup "handleAuth" --json
 | `dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]` | Detect potentially unused exported symbols. Parses all files to collect exported symbols, then searches the entire codebase for references. Symbols with zero external references are reported as dead code candidates. Excludes main/init, Test*/Benchmark*/Example* functions, and test files. Use `--kind` to filter by symbol kind and `--path` to scope analysis to a directory prefix. Default max 50. Requires a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `test-map [--root <dir>] [--path PREFIX] [--untested] [--tested] [--max N]` | Show source-to-test-file mapping across the project. Detects test files using language-specific naming conventions (Go: `_test.go`, JS/TS: `.test.*`/`.spec.*`, Python: `test_*`/`*_test.py`). Use `--untested` to show only files without tests, `--tested` for files with tests, and `--path` to filter by directory. Default max 100. Requires a prior `scan`. |
+| `impact <symbol-or-file> [--root <dir>] [--depth N] [--max N]` | Analyze the blast radius of a symbol or file by tracing transitive references/importers. Symbol mode finds direct references, then references to enclosing functions, recursively. File mode traces the chain of importers. Use `--depth` to limit traversal (default 3, where 1 = direct refs only). Use `--max` to cap total results (default 100). Requires a prior `scan`. |
 | `version` | Print the current version |
 
 ## Custom ignore rules (`.swarmignore`)
@@ -331,6 +344,8 @@ swarm-index/
 │   ├── history_test.go  # Tests for history functionality
 │   ├── hotspots.go      # Most frequently changed files ranking
 │   ├── hotspots_test.go # Tests for hotspots functionality
+│   ├── impact.go        # Blast radius analysis (transitive refs/importers)
+│   ├── impact_test.go   # Tests for impact functionality
 │   ├── locate.go        # Unified smart search (files + symbols + content)
 │   ├── locate_test.go   # Tests for locate functionality
 │   ├── scope.go         # Directory/package-level summary (files, symbols, LOC, deps)
