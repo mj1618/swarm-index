@@ -119,6 +119,13 @@ swarm-index complexity --min 5
 swarm-index complexity --max 10
 swarm-index complexity --root ~/code/my-project
 
+# Detect potentially unused exports (dead code candidates)
+swarm-index dead-code
+swarm-index dead-code --kind func
+swarm-index dead-code --path src/utils
+swarm-index dead-code --max 10
+swarm-index dead-code --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

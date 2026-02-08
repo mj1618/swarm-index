@@ -662,6 +662,30 @@ func main() {
 			fmt.Print(index.FormatBlame(blameResult))
 		}
 
+	case "dead-code":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		max := parseIntFlag(extraArgs, "--max", 50)
+		kind := parseStringFlag(extraArgs, "--kind", "")
+		pathPrefix := parseStringFlag(extraArgs, "--path", "")
+		dcResult, err := idx.DeadCode(kind, pathPrefix, max)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(dcResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatDeadCode(dcResult))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -827,6 +851,7 @@ Usage:
   swarm-index symbols <query> [--root <dir>] [--max N] [--kind KIND]   Search all symbols by name across the project
   swarm-index complexity [file] [--root <dir>] [--max N] [--min N]   Analyze code complexity per function
   swarm-index blame <file> [--lines M:N] [--root <dir>]   Show git blame for a file (line-level attribution)
+  swarm-index dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]   Detect potentially unused exports
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

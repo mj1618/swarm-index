@@ -152,6 +152,18 @@ swarm-index complexity --min 5
 # Limit results
 swarm-index complexity --max 10
 
+# Detect potentially unused exports (dead code candidates)
+swarm-index dead-code
+
+# Filter by symbol kind
+swarm-index dead-code --kind func
+
+# Limit analysis to a specific directory
+swarm-index dead-code --path src/utils
+
+# Limit results
+swarm-index dead-code --max 10
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -191,6 +203,7 @@ swarm-index lookup "handleAuth" --json
 | `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
 | `symbols <query> [--root <dir>] [--max N] [--kind KIND]` | Search all parseable files for symbols (functions, types, classes, etc.) matching the query by name. Case-insensitive substring match. Use `--kind` to filter by symbol kind and `--max` to limit results (default 50). Requires a prior `scan`. |
 | `complexity [file] [--root <dir>] [--max N] [--min N]` | Analyze code complexity per function/method. Shows cyclomatic complexity, line count, nesting depth, and parameter count. Sorted by complexity descending. Use `--min` to filter by threshold and `--max` to limit results (default 20). Supports Go, Python, JS/TS. Single-file mode does not require a prior `scan`. |
+| `dead-code [--root <dir>] [--max N] [--kind KIND] [--path PREFIX]` | Detect potentially unused exported symbols. Parses all files to collect exported symbols, then searches the entire codebase for references. Symbols with zero external references are reported as dead code candidates. Excludes main/init, Test*/Benchmark*/Example* functions, and test files. Use `--kind` to filter by symbol kind and `--path` to scope analysis to a directory prefix. Default max 50. Requires a prior `scan`. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -238,6 +251,8 @@ swarm-index/
 │   ├── config_test.go   # Tests for config functionality
 │   ├── context.go       # Symbol definition context (imports, doc comments, body)
 │   ├── context_test.go  # Tests for context functionality
+│   ├── deadcode.go      # Dead code detection (unused exported symbols)
+│   ├── deadcode_test.go # Tests for dead code functionality
 │   ├── entrypoints.go   # Entry point detection (main, routes, CLI, init)
 │   ├── entrypoints_test.go # Tests for entry points functionality
 │   ├── exports.go       # Exported/public symbol listing
