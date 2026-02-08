@@ -1,0 +1,58 @@
+[
+  {
+    "name": "AGENTS.md",
+    "kind": "file",
+    "path": "AGENTS.md",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "README.md",
+    "kind": "file",
+    "path": "README.md",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "SAMPLE_AGENTS.md",
+    "kind": "file",
+    "path": "SAMPLE_AGENTS.md",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "go.mod",
+    "kind": "file",
+    "path": "go.mod",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "index.go",
+    "kind": "file",
+    "path": "index/index.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "index_test.go",
+    "kind": "file",
+    "path": "index/index_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "main.go",
+    "kind": "file",
+    "path": "main.go",
+    "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "swarm-index",
+    "kind": "file",
+    "path": "swarm-index",
+    "line": 0,
+    "package": "(root)"
+  }
+]

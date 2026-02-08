@@ -34,11 +34,11 @@ func main() {
 
 	case "lookup":
 		if len(os.Args) < 3 {
-			fmt.Fprintln(os.Stderr, "usage: swarm-index lookup <query>")
+			fmt.Fprintln(os.Stderr, "usage: swarm-index lookup <query> [--root <dir>]")
 			os.Exit(1)
 		}
 		query := os.Args[2]
-		root, err := findIndexRoot(".")
+		root, err := resolveRoot(os.Args[3:])
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
@@ -66,6 +66,16 @@ func main() {
 	}
 }
 
+// resolveRoot checks args for --root <dir>. If not found, walks up from CWD.
+func resolveRoot(args []string) (string, error) {
+	for i, arg := range args {
+		if arg == "--root" && i+1 < len(args) {
+			return filepath.Abs(args[i+1])
+		}
+	}
+	return findIndexRoot(".")
+}
+
 // findIndexRoot walks up from dir looking for swarm/index/meta.json.
 func findIndexRoot(dir string) (string, error) {
 	dir, err := filepath.Abs(dir)
@@ -90,7 +100,7 @@ func printUsage() {
 
 Usage:
   swarm-index scan <directory>    Scan and index a codebase
-  swarm-index lookup <query>      Look up symbols, files, or concepts
+  swarm-index lookup <query> [--root <dir>]   Look up symbols, files, or concepts
   swarm-index version             Print version info
 
 Examples:
