@@ -84,6 +84,10 @@ swarm-index hotspots --since "6 months ago"
 swarm-index hotspots --path src/
 swarm-index hotspots --root ~/code/my-project
 
+# Detect project toolchain (framework, build, test, lint, format, scripts)
+swarm-index config
+swarm-index config --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project

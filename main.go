@@ -455,6 +455,27 @@ func main() {
 			fmt.Print(index.FormatDeps(depsResult))
 		}
 
+	case "config":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		configResult, err := idx.Config()
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(configResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatConfig(configResult))
+		}
+
 	case "context":
 		if len(args) < 4 {
 			fatal(jsonOutput, "usage: swarm-index context <symbol> <file> [--root <dir>]")
@@ -654,6 +675,7 @@ Usage:
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
   swarm-index deps [--root <dir>]   List dependencies from manifest files (go.mod, package.json, etc.)
+  swarm-index config [--root <dir>]   Detect project toolchain (framework, build, test, lint, format)
   swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index history <file> [--root <dir>] [--max N]   Show recent git commits for a file
   swarm-index hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]   Show most frequently changed files

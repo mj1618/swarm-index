@@ -101,6 +101,9 @@ swarm-index hotspots --since "6 months ago"
 # Filter to a specific directory
 swarm-index hotspots --path src/
 
+# Detect project toolchain (framework, build, test, lint, format)
+swarm-index config
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -131,6 +134,7 @@ swarm-index lookup "handleAuth" --json
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
 | `deps [--root <dir>]` | Parse dependency manifests (go.mod, package.json, requirements.txt, Cargo.toml, pyproject.toml) and list all declared dependencies with version constraints. Requires a prior `scan`. |
+| `config [--root <dir>]` | Detect the project toolchain: primary language, framework, build/test/lint/format tools, package manager, and package.json scripts. Requires a prior `scan`. |
 | `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `history <file> [--root <dir>] [--max N]` | Show recent git commits that touched a file. Displays hash, date, author, and subject. Default max 10. Does not require a prior `scan`. |
 | `hotspots [--root <dir>] [--max N] [--since <time>] [--path <prefix>]` | Rank files by git commit frequency to find the most actively changed files. Use `--since` to limit to recent history (e.g. "6 months ago") and `--path` to filter by directory prefix. Default max 20. Requires `git` and a prior `scan`. |
@@ -173,6 +177,8 @@ swarm-index/
 │   ├── diffsummary_test.go # Tests for diff summary
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
+│   ├── config.go        # Project toolchain detection (framework, build, test, lint)
+│   ├── config_test.go   # Tests for config functionality
 │   ├── context.go       # Symbol definition context (imports, doc comments, body)
 │   ├── context_test.go  # Tests for context functionality
 │   ├── exports.go       # Exported/public symbol listing
@@ -210,7 +216,7 @@ go test ./... -v
 - [x] `outline` — structural skeleton of a file (functions, classes, types)
 - [x] `show` — read a file or line range with line numbers
 - [x] `exports` — public API surface of a file or package
-- [ ] `config` — detect project toolchain (framework, build tool, test runner)
+- [x] `config` — detect project toolchain (framework, build tool, test runner)
 - [x] `deps` — parse dependency manifests and list libraries with versions
 - [ ] `entry-points` — find main functions, route handlers, CLI commands
 - [x] `context` — symbol definition with imports and doc comments
