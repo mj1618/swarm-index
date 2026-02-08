@@ -39,8 +39,10 @@ swarm-index refs "HandleAuth"
 # Limit refs results
 swarm-index refs "Config" --max 10
 
-# Show top-level symbols of a Go file (functions, types, methods, etc.)
+# Show top-level symbols of a file (functions, types, methods, classes, etc.)
+# Supports Go (.go) and Python (.py) files
 swarm-index outline main.go
+swarm-index outline app.py
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).

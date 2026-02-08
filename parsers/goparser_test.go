@@ -53,11 +53,7 @@ func TestGoParserBasic(t *testing.T) {
 		t.Fatalf("Parse() error: %v", err)
 	}
 
-	// Build a map by name for easier assertions.
-	byName := map[string]Symbol{}
-	for _, s := range symbols {
-		byName[s.Name] = s
-	}
+	byName := symbolsByName(symbols)
 
 	// Check constants
 	assertSymbol(t, byName, "MaxRetries", "const", true, "")
@@ -85,10 +81,7 @@ func TestGoParserSignatures(t *testing.T) {
 		t.Fatalf("Parse() error: %v", err)
 	}
 
-	byName := map[string]Symbol{}
-	for _, s := range symbols {
-		byName[s.Name] = s
-	}
+	byName := symbolsByName(symbols)
 
 	tests := []struct {
 		name string
@@ -186,6 +179,14 @@ func TestForExtension(t *testing.T) {
 	if p != nil {
 		t.Error("ForExtension(\".xyz\") should return nil")
 	}
+}
+
+func symbolsByName(symbols []Symbol) map[string]Symbol {
+	m := map[string]Symbol{}
+	for _, s := range symbols {
+		m[s.Name] = s
+	}
+	return m
 }
 
 func assertSymbol(t *testing.T, byName map[string]Symbol, name, kind string, exported bool, parent string) {
