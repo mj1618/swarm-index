@@ -67,6 +67,12 @@ swarm-index todos
 # Filter by tag
 swarm-index todos --tag FIXME
 
+# Show what changed since the last commit
+swarm-index diff-summary
+
+# Show what changed since a specific ref
+swarm-index diff-summary main
+
 # Check if the index is out of date
 swarm-index stale
 
@@ -95,6 +101,7 @@ swarm-index lookup "handleAuth" --json
 | `exports <file\|directory> [--root <dir>]` | List exported/public symbols of a file or package directory. Uses language-aware parsers to identify exports (Go: uppercase names, JS/TS: `export` keyword, Python: names not starting with `_`). Supports `--json`. |
 | `related <file> [--root <dir>]` | Show files connected to a given file: imports (files it depends on), importers (files that depend on it), and associated test files. Supports Go, JS/TS, and Python import resolution. |
 | `todos [--root <dir>] [--max N] [--tag TAG]` | Find TODO, FIXME, HACK, and XXX comments across indexed files. Use `--tag` to filter by tag type and `--max` to limit results (default 100). |
+| `diff-summary [git-ref] [--root <dir>]` | Show files changed since a git ref (default `HEAD~1`) and list affected symbols in added/modified files. Requires `git` and a prior `scan`. Renames are treated as deleted + added. |
 | `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
@@ -128,6 +135,8 @@ swarm-index/
 │   ├── summary_test.go  # Tests for summary logic
 │   ├── show.go          # File reading with line numbers
 │   ├── show_test.go     # Tests for show functionality
+│   ├── diffsummary.go   # Git diff summary with affected symbols
+│   ├── diffsummary_test.go # Tests for diff summary
 │   ├── stale.go         # Stale index detection (new/deleted/modified files)
 │   ├── stale_test.go    # Tests for stale detection
 │   ├── exports.go       # Exported/public symbol listing
@@ -168,7 +177,7 @@ go test ./... -v
 - [x] `refs` — find all usages of a symbol
 - [x] `related` — files connected to a given file (imports, importers, tests)
 - [x] `todos` — collect TODO/FIXME/HACK/XXX comments
-- [ ] `diff-summary` — files changed since a git ref with affected symbols
+- [x] `diff-summary` — files changed since a git ref with affected symbols
 - [x] `stale` — report new, deleted, or modified files since last scan
 - [ ] `history` — recent git commits that touched a file
 

@@ -360,6 +360,33 @@ func main() {
 			fmt.Print(index.FormatRelated(relatedResult))
 		}
 
+	case "diff-summary":
+		extraArgs := args[2:]
+		ref := "HEAD~1"
+		// If first extra arg doesn't start with --, treat it as the git ref
+		if len(extraArgs) > 0 && !strings.HasPrefix(extraArgs[0], "--") {
+			ref = extraArgs[0]
+			extraArgs = extraArgs[1:]
+		}
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		diffResult, err := idx.DiffSummary(root, ref)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(diffResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatDiffSummary(diffResult))
+		}
+
 	case "stale":
 		extraArgs := args[2:]
 		root, err := resolveRoot(extraArgs)
@@ -535,6 +562,7 @@ Usage:
   swarm-index exports <file|directory> [--root <dir>]   List exported/public symbols
   swarm-index todos [--root <dir>] [--max N] [--tag TAG]   Find TODO/FIXME/HACK/XXX comments
   swarm-index related <file> [--root <dir>]   Show imports, importers, and test files for a file
+  swarm-index diff-summary [git-ref] [--root <dir>]   Show changed files and affected symbols since a git ref
   swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 

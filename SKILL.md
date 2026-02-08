@@ -59,6 +59,11 @@ swarm-index todos
 swarm-index todos --tag FIXME
 swarm-index todos --max 20
 
+# Show files changed since a git ref with affected symbols
+swarm-index diff-summary
+swarm-index diff-summary HEAD~3
+swarm-index diff-summary main --root ~/code/my-project
+
 # Check if the index is out of date (new/deleted/modified files since last scan)
 swarm-index stale
 swarm-index stale --root ~/code/my-project
