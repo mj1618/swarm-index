@@ -287,6 +287,27 @@ func main() {
 			}
 		}
 
+	case "stale":
+		extraArgs := args[2:]
+		root, err := resolveRoot(extraArgs)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		idx, err := index.Load(root)
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		staleResult, err := idx.Stale()
+		if err != nil {
+			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
+		}
+		if jsonOutput {
+			data, _ := json.MarshalIndent(staleResult, "", "  ")
+			fmt.Println(string(data))
+		} else {
+			fmt.Print(index.FormatStale(staleResult))
+		}
+
 	case "version":
 		if jsonOutput {
 			data, _ := json.Marshal(map[string]string{"version": "v0.1.0"})
@@ -427,6 +448,7 @@ Usage:
   swarm-index show <path> [--lines M:N]   Read a file with line numbers
   swarm-index refs <symbol> [--root <dir>] [--max N]   Find all references to a symbol
   swarm-index outline <file>      Show top-level symbols (functions, types, etc.)
+  swarm-index stale [--root <dir>]   Check if index is out of date
   swarm-index version             Print version info
 
 Examples:

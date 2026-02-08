@@ -44,6 +44,10 @@ swarm-index refs "Config" --max 10
 swarm-index outline main.go
 swarm-index outline app.py
 swarm-index outline app.tsx
+
+# Check if the index is out of date (new/deleted/modified files since last scan)
+swarm-index stale
+swarm-index stale --root ~/code/my-project
 ```
 
 Use `--json` on any command for structured output. Use `--max N` to limit `lookup` results (default 20).

@@ -54,6 +54,9 @@ swarm-index refs "HandleAuth"
 # Show top-level symbols of a file (functions, types, etc.)
 swarm-index outline main.go
 
+# Check if the index is out of date
+swarm-index stale
+
 # All commands support --json for structured output
 swarm-index lookup "handleAuth" --json
 ```
@@ -76,6 +79,7 @@ swarm-index lookup "handleAuth" --json
 | `show <path> [--lines M:N]` | Read a file with line numbers. Use `--lines M:N` to show a specific range (1-indexed, inclusive). Supports formats: `M:N`, `M:`, `:N`, `M`. Binary files are rejected. |
 | `refs <symbol> [--root <dir>] [--max N]` | Find all references to a symbol across indexed files. Shows the definition and all usage sites, grouped by file. Uses word-boundary matching and heuristic definition detection. Default max 50. |
 | `outline <file>` | Show top-level symbols (functions, types, structs, interfaces, methods, constants, variables) with line numbers and signatures. Supports Go, Python, JavaScript, and TypeScript files. |
+| `stale [--root <dir>]` | Check if the index is out of date by comparing against the filesystem. Reports new, deleted, and modified files since the last scan. |
 | `version` | Print the current version |
 
 ## How it works
@@ -106,6 +110,8 @@ swarm-index/
 │   ├── summary_test.go  # Tests for summary logic
 │   ├── show.go          # File reading with line numbers
 │   ├── show_test.go     # Tests for show functionality
+│   ├── stale.go         # Stale index detection (new/deleted/modified files)
+│   ├── stale_test.go    # Tests for stale detection
 │   ├── tree.go          # Directory tree building and rendering
 │   └── tree_test.go     # Tests for tree functionality
 ├── parsers/
@@ -141,7 +147,7 @@ go test ./... -v
 - [ ] `related` — files connected to a given file (imports, importers, tests)
 - [ ] `todos` — collect TODO/FIXME/HACK/XXX comments
 - [ ] `diff-summary` — files changed since a git ref with affected symbols
-- [ ] `stale` — report new, deleted, or modified files since last scan
+- [x] `stale` — report new, deleted, or modified files since last scan
 - [ ] `history` — recent git commits that touched a file
 
 ### Other improvements

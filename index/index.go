@@ -28,8 +28,9 @@ func (e Entry) String() string {
 
 // Index holds the scanned codebase data.
 type Index struct {
-	Root    string
-	Entries []Entry
+	Root      string
+	Entries   []Entry
+	ScannedAt string
 }
 
 // FilePaths returns the unique file paths in the index, preserving first-seen order.
@@ -149,7 +150,7 @@ func Load(dir string) (*Index, error) {
 		return nil, fmt.Errorf("parsing meta.json: %w", err)
 	}
 
-	return &Index{Root: meta.Root, Entries: entries}, nil
+	return &Index{Root: meta.Root, Entries: entries, ScannedAt: meta.ScannedAt}, nil
 }
 
 // Scan walks a directory tree and builds an index of files and packages.
