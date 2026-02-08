@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/matt/swarm-index/index"
 )
@@ -32,6 +34,9 @@ func main() {
 			os.Exit(1)
 		}
 		fmt.Printf("Index saved to %s/swarm/index/ (%d files, %d packages)\n", dir, idx.FileCount(), idx.PackageCount())
+		if summary := extensionSummary(idx.ExtensionCounts()); summary != "" {
+			fmt.Printf("  %s\n", summary)
+		}
 
 	case "lookup":
 		if len(os.Args) < 3 {
@@ -112,6 +117,30 @@ func findIndexRoot(dir string) (string, error) {
 		}
 		dir = parent
 	}
+}
+
+// extensionSummary returns a one-line summary of extension counts, sorted by
+// count descending. Example: ".go: 28, .md: 8, .json: 4"
+func extensionSummary(counts map[string]int) string {
+	type extCount struct {
+		ext   string
+		count int
+	}
+	sorted := make([]extCount, 0, len(counts))
+	for ext, n := range counts {
+		sorted = append(sorted, extCount{ext, n})
+	}
+	sort.Slice(sorted, func(i, j int) bool {
+		if sorted[i].count != sorted[j].count {
+			return sorted[i].count > sorted[j].count
+		}
+		return sorted[i].ext < sorted[j].ext
+	})
+	parts := make([]string, len(sorted))
+	for i, ec := range sorted {
+		parts[i] = fmt.Sprintf("%s: %d", ec.ext, ec.count)
+	}
+	return strings.Join(parts, ", ")
 }
 
 func printUsage() {

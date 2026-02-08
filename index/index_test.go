@@ -269,6 +269,107 @@ func TestScanFileNotDir(t *testing.T) {
 	}
 }
 
+func TestExtensionCounts(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "lib/util.go", "package lib")
+	mkFile(t, tmp, "lib/helper.go", "package lib")
+	mkFile(t, tmp, "README.md", "# README")
+	mkFile(t, tmp, "config.json", "{}")
+	mkFile(t, tmp, "Makefile", "all:")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	counts := idx.ExtensionCounts()
+
+	want := map[string]int{
+		".go":    3,
+		".md":    1,
+		".json":  1,
+		"(none)": 1,
+	}
+
+	if len(counts) != len(want) {
+		t.Errorf("ExtensionCounts() has %d entries, want %d: %v", len(counts), len(want), counts)
+	}
+	for ext, wantN := range want {
+		if counts[ext] != wantN {
+			t.Errorf("ExtensionCounts()[%q] = %d, want %d", ext, counts[ext], wantN)
+		}
+	}
+}
+
+func TestSaveMetaExtensions(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "a.go", "package a")
+	mkFile(t, tmp, "b.go", "package a")
+	mkFile(t, tmp, "README.md", "# hi")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+	if err := idx.Save(tmp); err != nil {
+		t.Fatalf("Save() error: %v", err)
+	}
+
+	data, err := os.ReadFile(filepath.Join(tmp, "swarm", "index", "meta.json"))
+	if err != nil {
+		t.Fatalf("reading meta.json: %v", err)
+	}
+
+	var meta indexMeta
+	if err := json.Unmarshal(data, &meta); err != nil {
+		t.Fatalf("parsing meta.json: %v", err)
+	}
+
+	if meta.Extensions == nil {
+		t.Fatal("meta.Extensions is nil")
+	}
+	if meta.Extensions[".go"] != 2 {
+		t.Errorf("meta.Extensions[.go] = %d, want 2", meta.Extensions[".go"])
+	}
+	if meta.Extensions[".md"] != 1 {
+		t.Errorf("meta.Extensions[.md] = %d, want 1", meta.Extensions[".md"])
+	}
+}
+
+func TestExtensionCountsRoundTrip(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "doc.md", "# doc")
+	mkFile(t, tmp, "data.json", "{}")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+	if err := idx.Save(tmp); err != nil {
+		t.Fatalf("Save() error: %v", err)
+	}
+
+	// Read meta.json directly to verify extensions survived the round-trip.
+	data, err := os.ReadFile(filepath.Join(tmp, "swarm", "index", "meta.json"))
+	if err != nil {
+		t.Fatalf("reading meta.json: %v", err)
+	}
+
+	var meta indexMeta
+	if err := json.Unmarshal(data, &meta); err != nil {
+		t.Fatalf("parsing meta.json: %v", err)
+	}
+
+	want := map[string]int{".go": 1, ".md": 1, ".json": 1}
+	for ext, wantN := range want {
+		if meta.Extensions[ext] != wantN {
+			t.Errorf("round-trip meta.Extensions[%q] = %d, want %d", ext, meta.Extensions[ext], wantN)
+		}
+	}
+}
+
 func mkFile(t *testing.T, base, relPath, content string) {
 	t.Helper()
 	full := filepath.Join(base, relPath)

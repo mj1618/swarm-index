@@ -52,13 +52,33 @@ func (idx *Index) PackageCount() int {
 	return len(seen)
 }
 
+// ExtensionCounts returns a map of file extension to count across unique file paths.
+// Files with no extension are counted under "(none)".
+func (idx *Index) ExtensionCounts() map[string]int {
+	seen := make(map[string]struct{})
+	counts := make(map[string]int)
+	for _, e := range idx.Entries {
+		if _, ok := seen[e.Path]; ok {
+			continue
+		}
+		seen[e.Path] = struct{}{}
+		ext := filepath.Ext(e.Path)
+		if ext == "" {
+			ext = "(none)"
+		}
+		counts[ext]++
+	}
+	return counts
+}
+
 // indexMeta holds metadata about a saved index.
 type indexMeta struct {
-	Root         string `json:"root"`
-	ScannedAt    string `json:"scannedAt"`
-	Version      string `json:"version"`
-	FileCount    int    `json:"fileCount"`
-	PackageCount int    `json:"packageCount"`
+	Root         string         `json:"root"`
+	ScannedAt    string         `json:"scannedAt"`
+	Version      string         `json:"version"`
+	FileCount    int            `json:"fileCount"`
+	PackageCount int            `json:"packageCount"`
+	Extensions   map[string]int `json:"extensions"`
 }
 
 // Save writes the index to disk under <dir>/swarm/index/.
@@ -78,6 +98,7 @@ func (idx *Index) Save(dir string) error {
 		Version:      "0.1.0",
 		FileCount:    idx.FileCount(),
 		PackageCount: idx.PackageCount(),
+		Extensions:   idx.ExtensionCounts(),
 	}
 	return writeJSON(filepath.Join(indexDir, "meta.json"), meta)
 }
