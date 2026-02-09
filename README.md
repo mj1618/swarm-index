@@ -12,21 +12,18 @@ Coding agents (LLM-powered or otherwise) waste significant context windows and A
 
 Pre-built binaries for macOS, Linux, and Windows are published on every push to main.
 
-Download the latest release from **[GitHub Releases](https://github.com/mj1618/swarm-index/releases/latest)**, extract the archive, and move the binary to somewhere on your `PATH`:
-
 ```bash
-# macOS (Apple Silicon)
-tar xzf swarm-index_*_darwin_arm64.tar.gz
-sudo mv swarm-index /usr/local/bin/
-
-# macOS (Intel)
-tar xzf swarm-index_*_darwin_amd64.tar.gz
-sudo mv swarm-index /usr/local/bin/
-
-# Linux (x86_64)
-tar xzf swarm-index_*_linux_amd64.tar.gz
+# Auto-detect OS/arch, download, and install
+REPO="mj1618/swarm-index"
+OS=$(uname -s | tr '[:upper:]' '[:lower:]')
+ARCH=$(uname -m); case "$ARCH" in x86_64) ARCH="amd64";; aarch64) ARCH="arm64";; esac
+URL=$(curl -s "https://api.github.com/repos/$REPO/releases/tags/latest" \
+  | grep "browser_download_url.*${OS}_${ARCH}.*tar.gz" | cut -d '"' -f 4)
+curl -fsSL "$URL" | tar xz
 sudo mv swarm-index /usr/local/bin/
 ```
+
+Or download manually from **[GitHub Releases](https://github.com/mj1618/swarm-index/releases/latest)**.
 
 ### go install
 
