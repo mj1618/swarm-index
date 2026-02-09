@@ -57,7 +57,12 @@ func (idx *Index) Locate(query string, max int) (*LocateResult, error) {
 	}
 
 	// 2. Symbol matches — use idx.Symbols() to find matching symbols.
-	symbolsResult, err := idx.Symbols(query, "", max)
+	// Use a higher internal limit to avoid missing relevant symbols.
+	symbolLimit := max * 5
+	if symbolLimit < 100 {
+		symbolLimit = 100
+	}
+	symbolsResult, err := idx.Symbols(query, "", symbolLimit)
 	if err == nil {
 		for _, sym := range symbolsResult.Matches {
 			symNameLower := strings.ToLower(sym.Name)
@@ -79,7 +84,13 @@ func (idx *Index) Locate(query string, max int) (*LocateResult, error) {
 	}
 
 	// 3. Content matches — use idx.Search() for literal text matches.
-	contentMatches, err := idx.Search(query, max)
+	// Use a higher internal limit so broad queries don't miss relevant files
+	// that happen to appear later in the file list.
+	contentLimit := max * 10
+	if contentLimit < 200 {
+		contentLimit = 200
+	}
+	contentMatches, err := idx.Search(query, contentLimit)
 	if err == nil {
 		for _, m := range contentMatches {
 			matches = append(matches, LocateMatch{
