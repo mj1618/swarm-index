@@ -8,40 +8,50 @@ Coding agents (LLM-powered or otherwise) waste significant context windows and A
 
 ## Installation
 
-### Download pre-built binary (recommended)
+### Download Binary (Recommended)
 
-Pre-built binaries for macOS, Linux, and Windows are published on every push to main.
+Download the latest binary for your platform from the [releases page](https://github.com/mj1618/swarm-index/releases/latest).
 
+**macOS (Apple Silicon):**
 ```bash
-# Auto-detect OS/arch, download, and install
-REPO="mj1618/swarm-index"
-OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-ARCH=$(uname -m); case "$ARCH" in x86_64) ARCH="amd64";; aarch64) ARCH="arm64";; esac
-URL=$(curl -s "https://api.github.com/repos/$REPO/releases/tags/latest" \
-  | grep "browser_download_url.*${OS}_${ARCH}.*tar.gz" | cut -d '"' -f 4)
-curl -fsSL "$URL" | tar xz
+curl -L https://github.com/mj1618/swarm-index/releases/download/latest/swarm-index_darwin_arm64.tar.gz | tar xz
 sudo mv swarm-index /usr/local/bin/
 ```
 
-Or download manually from **[GitHub Releases](https://github.com/mj1618/swarm-index/releases/latest)**.
+**macOS (Intel):**
+```bash
+curl -L https://github.com/mj1618/swarm-index/releases/download/latest/swarm-index_darwin_amd64.tar.gz | tar xz
+sudo mv swarm-index /usr/local/bin/
+```
 
-### go install
+**Linux (x64):**
+```bash
+curl -L https://github.com/mj1618/swarm-index/releases/download/latest/swarm-index_linux_amd64.tar.gz | tar xz
+sudo mv swarm-index /usr/local/bin/
+```
 
-If you have Go 1.22+ installed:
+**Linux (ARM64):**
+```bash
+curl -L https://github.com/mj1618/swarm-index/releases/download/latest/swarm-index_linux_arm64.tar.gz | tar xz
+sudo mv swarm-index /usr/local/bin/
+```
+
+### Install with Go
+
+If you have Go installed:
 
 ```bash
 go install github.com/mj1618/swarm-index@latest
 ```
 
-### Build from source
+### Build from Source
 
 ```bash
 git clone https://github.com/mj1618/swarm-index.git
 cd swarm-index
 go build -o swarm-index .
+sudo mv swarm-index /usr/local/bin/
 ```
-
-This produces a `swarm-index` binary in the current directory. Move it somewhere on your `PATH` to use it globally.
 
 ## Quick start
 

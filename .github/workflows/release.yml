@@ -68,30 +68,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete existing latest tag
+      - name: Update latest release
         run: |
-          git tag -d latest || true
-          git push origin :refs/tags/latest || true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Delete existing latest release and tag
+          gh release delete latest --yes --cleanup-tag || true
 
-      - name: Delete existing latest release
-        run: gh release delete latest --yes || true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Create latest tag pointing to current commit
+          git tag -f latest
+          git push origin latest --force
 
-      - name: Create latest tag
-        run: |
-          git tag latest
-          git push origin latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Download all assets from the versioned release
+          mkdir -p /tmp/release-assets
+          gh release download ${{ steps.version.outputs.version }} --dir /tmp/release-assets
 
-      - name: Create latest release
-        run: |
+          # Create latest release with same assets
           gh release create latest \
             --title "Latest Release (${{ steps.version.outputs.version }})" \
             --notes "This release always points to the latest version. Current: ${{ steps.version.outputs.version }}" \
-            dist/*.tar.gz dist/*.zip dist/checksums.txt
+            /tmp/release-assets/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
