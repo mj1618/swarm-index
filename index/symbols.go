@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // SymbolMatch represents a single symbol found across the project.

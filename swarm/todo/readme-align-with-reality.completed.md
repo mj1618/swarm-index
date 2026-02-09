@@ -14,7 +14,7 @@ This is the first thing anyone sees when they encounter the project — it needs
 
 3. **"How it works" section overclaims** — says entries are "parsed" with symbol extraction and that lookup supports "fuzzy matching and relevance-ranked results." In reality, scan only records file entries (no parsing), and lookup does simple case-insensitive substring matching.
 
-4. **Installation section references non-existent releases** — `go install github.com/matt/swarm-index@latest` and GitHub Releases links won't work until the module is published.
+4. **Installation section references non-existent releases** — `go install github.com/mj1618/swarm-index@latest` and GitHub Releases links won't work until the module is published.
 
 5. **lookup command description says "fuzzy and ranked results"** — it's actually a simple substring match with no ranking.
 

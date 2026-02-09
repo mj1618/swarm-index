@@ -11,7 +11,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // FunctionComplexity holds complexity metrics for a single function/method.

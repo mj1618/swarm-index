@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // ImpactTarget describes the symbol or file being analyzed.

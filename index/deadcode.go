@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // DeadCodeCandidate represents a symbol with zero external references.

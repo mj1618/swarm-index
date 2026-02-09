@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // ExportedSymbol represents a single exported symbol from a file.

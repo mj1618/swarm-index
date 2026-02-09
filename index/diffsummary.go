@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // DiffFile represents a single file in a diff summary.

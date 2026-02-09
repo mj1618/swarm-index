@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	_ "github.com/matt/swarm-index/parsers" // register parsers
+	_ "github.com/mj1618/swarm-index/parsers" // register parsers
 )
 
 func TestContextGoFunction(t *testing.T) {

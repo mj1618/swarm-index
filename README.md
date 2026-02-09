@@ -8,10 +8,38 @@ Coding agents (LLM-powered or otherwise) waste significant context windows and A
 
 ## Installation
 
+### Download pre-built binary (recommended)
+
+Pre-built binaries for macOS, Linux, and Windows are published on every push to main.
+
+Download the latest release from **[GitHub Releases](https://github.com/mj1618/swarm-index/releases/latest)**, extract the archive, and move the binary to somewhere on your `PATH`:
+
+```bash
+# macOS (Apple Silicon)
+tar xzf swarm-index_*_darwin_arm64.tar.gz
+sudo mv swarm-index /usr/local/bin/
+
+# macOS (Intel)
+tar xzf swarm-index_*_darwin_amd64.tar.gz
+sudo mv swarm-index /usr/local/bin/
+
+# Linux (x86_64)
+tar xzf swarm-index_*_linux_amd64.tar.gz
+sudo mv swarm-index /usr/local/bin/
+```
+
+### go install
+
+If you have Go 1.22+ installed:
+
+```bash
+go install github.com/mj1618/swarm-index@latest
+```
+
 ### Build from source
 
 ```bash
-git clone https://github.com/matt/swarm-index.git
+git clone https://github.com/mj1618/swarm-index.git
 cd swarm-index
 go build -o swarm-index .
 ```
@@ -308,6 +336,8 @@ Both files are respected by `scan`, `tree`, and `stale` commands.
 ```
 swarm-index/
 ├── main.go              # CLI entrypoint and command routing
+├── main_test.go         # Tests for CLI helper functions
+├── cli_test.go          # Integration tests for CLI commands
 ├── index/
 │   ├── index.go         # Core library: scanning, indexing, matching
 │   ├── index_test.go    # Tests for scan, match, and directory filtering
@@ -400,6 +430,14 @@ go test ./... -v
 - [x] `history` — recent git commits that touched a file
 - [x] `hotspots` — most frequently changed files ranked by commit count
 - [x] `graph` — project-wide import dependency graph with fan-in/fan-out analysis
+- [x] `symbols` — search for symbols by name across the project
+- [x] `complexity` — code complexity analysis per function
+- [x] `blame` — git blame for a file (line-level attribution)
+- [x] `locate` — unified smart search across files, symbols, and content
+- [x] `scope` — directory/package-level summary (files, symbols, LOC, deps)
+- [x] `dead-code` — detect potentially unused exported symbols
+- [x] `test-map` — source-to-test-file mapping
+- [x] `impact` — blast radius analysis (transitive refs/importers)
 
 ### Other improvements
 

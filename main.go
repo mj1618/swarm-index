@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/matt/swarm-index/index"
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/index"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // extractJSONFlag strips --json from args and returns whether it was present.

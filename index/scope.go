@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // SymbolCount tracks exported vs internal counts for a symbol kind.

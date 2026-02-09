@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/matt/swarm-index/parsers"
+	"github.com/mj1618/swarm-index/parsers"
 )
 
 // Entry represents a single indexed item (file, symbol, package, etc.).
