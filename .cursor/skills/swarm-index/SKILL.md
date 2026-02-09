@@ -5,7 +5,7 @@ description: Navigate and search codebases using swarm-index, a fast CLI tool th
 
 # swarm-index
 
-A CLI tool that scans a project directory, builds a lightweight index of files and symbols, and lets you query it instantly. Scan once, look up anything by name.
+A CLI tool that scans a project directory, builds a lightweight index of files and symbols (functions, types, structs, etc.), and lets you query it instantly. Scan once, look up any file or symbol by name.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ Before any lookups, scan the project root to build the index:
 swarm-index scan /path/to/project
 ```
 
-This persists the index to `<project>/swarm/index/`. You only need to re-scan when files change significantly.
+This persists the index to `./swarm/index/` relative to the current working directory. You only need to re-scan when files change significantly.
 
 ### 2. Look up symbols or files
 
@@ -37,7 +37,7 @@ swarm-index lookup "config.yaml"
 swarm-index lookup "UserService"
 ```
 
-Lookup performs case-insensitive substring matching with fuzzy and ranked results. It matches against file names, symbol names, and paths.
+Lookup performs case-insensitive fuzzy matching with ranked results. It matches against file names, symbol names (functions, types, structs, etc.), and paths. Symbol entries include the file path and line number of the definition.
 
 ### 3. Check for stale index
 

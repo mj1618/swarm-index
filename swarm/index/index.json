@@ -35,6 +35,202 @@
     "package": "(root)"
   },
   {
+    "name": "binaryPath",
+    "kind": "var",
+    "path": "cli_test.go",
+    "line": 13,
+    "package": "(root)"
+  },
+  {
+    "name": "TestMain",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 15,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "runBinary",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 35,
+    "package": "(root)"
+  },
+  {
+    "name": "runBinaryInDir",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 45,
+    "package": "(root)"
+  },
+  {
+    "name": "makeTestDir",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 56,
+    "package": "(root)"
+  },
+  {
+    "name": "TestCLIScanText",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 80,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIScanJSON",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 94,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIScanMissingDir",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 111,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIScanNonexistentDir",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 121,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupText",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 133,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupJSON",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 148,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupNoMatches",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 166,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupNoMatchesJSON",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 180,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupEmptyQuery",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 198,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupMaxFlag",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 212,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLILookupNoIndex",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 235,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIVersionText",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 248,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIVersionJSON",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 258,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLINoArgs",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 274,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIUnknownCommand",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 284,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIOutlineText",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 296,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIOutlineJSON",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 308,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIOutlineNoFile",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 324,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIOutlineNonexistentFile",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 334,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestCLIOutlineUnsupportedExt",
+    "kind": "func",
+    "path": "cli_test.go",
+    "line": 344,
+    "package": "(root)",
+    "exported": true
+  },
+  {
     "name": "go.mod",
     "kind": "file",
     "path": "go.mod",
@@ -49,11 +245,114 @@
     "package": "index"
   },
   {
+    "name": "BlameLine",
+    "kind": "struct",
+    "path": "index/blame.go",
+    "line": 12,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "BlameResult",
+    "kind": "struct",
+    "path": "index/blame.go",
+    "line": 21,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Blame",
+    "kind": "func",
+    "path": "index/blame.go",
+    "line": 29,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "parsePorcelain",
+    "kind": "func",
+    "path": "index/blame.go",
+    "line": 70,
+    "package": "index"
+  },
+  {
+    "name": "FormatBlame",
+    "kind": "func",
+    "path": "index/blame.go",
+    "line": 119,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "blame_test.go",
     "kind": "file",
     "path": "index/blame_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestBlameWithCommits",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBlameLineRange",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 60,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBlameMultipleAuthors",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 89,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBlameNotAGitRepo",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 121,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBlameNonexistentFile",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 132,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParsePorcelain",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 140,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatBlameEmpty",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 186,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatBlameWithLines",
+    "kind": "func",
+    "path": "index/blame_test.go",
+    "line": 198,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "complexity.go",
@@ -63,11 +362,232 @@
     "package": "index"
   },
   {
+    "name": "FunctionComplexity",
+    "kind": "struct",
+    "path": "index/complexity.go",
+    "line": 18,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ComplexityResult",
+    "kind": "struct",
+    "path": "index/complexity.go",
+    "line": 31,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Complexity",
+    "kind": "method",
+    "path": "index/complexity.go",
+    "line": 41,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "analyzeFileComplexity",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 122,
+    "package": "index"
+  },
+  {
+    "name": "analyzeGoComplexity",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 142,
+    "package": "index"
+  },
+  {
+    "name": "countGoComplexity",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 198,
+    "package": "index"
+  },
+  {
+    "name": "goReceiverName",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 251,
+    "package": "index"
+  },
+  {
+    "name": "goFuncSignature",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 266,
+    "package": "index"
+  },
+  {
+    "name": "pythonBranchPatterns",
+    "kind": "var",
+    "path": "index/complexity.go",
+    "line": 282,
+    "package": "index"
+  },
+  {
+    "name": "jsBranchPatterns",
+    "kind": "var",
+    "path": "index/complexity.go",
+    "line": 292,
+    "package": "index"
+  },
+  {
+    "name": "analyzeHeuristicComplexity",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 307,
+    "package": "index"
+  },
+  {
+    "name": "lineIndentCount",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 391,
+    "package": "index"
+  },
+  {
+    "name": "countBraceDepthInRange",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 407,
+    "package": "index"
+  },
+  {
+    "name": "countSignatureParams",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 426,
+    "package": "index"
+  },
+  {
+    "name": "ComplexityFile",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 454,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatComplexity",
+    "kind": "func",
+    "path": "index/complexity.go",
+    "line": 460,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "complexity_test.go",
     "kind": "file",
     "path": "index/complexity_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestComplexityGoBasic",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexitySortingDescending",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 63,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityMinThreshold",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 110,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexitySingleFile",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 144,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityMaxResults",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 174,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityGoMethods",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 202,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityPythonBasic",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 238,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityJSBasic",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 280,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityJSONStructure",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 324,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatComplexityEmpty",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 373,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatComplexityWithResults",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 383,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityGoParams",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 409,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestComplexityHighComplexityCount",
+    "kind": "func",
+    "path": "index/complexity_test.go",
+    "line": 443,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "config.go",
@@ -77,11 +597,297 @@
     "package": "index"
   },
   {
+    "name": "ConfigResult",
+    "kind": "struct",
+    "path": "index/config.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Config",
+    "kind": "method",
+    "path": "index/config.go",
+    "line": 27,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "detectLanguage",
+    "kind": "method",
+    "path": "index/config.go",
+    "line": 71,
+    "package": "index"
+  },
+  {
+    "name": "frameworkSignal",
+    "kind": "struct",
+    "path": "index/config.go",
+    "line": 108,
+    "package": "index"
+  },
+  {
+    "name": "frameworkSignals",
+    "kind": "var",
+    "path": "index/config.go",
+    "line": 114,
+    "package": "index"
+  },
+  {
+    "name": "detectFramework",
+    "kind": "method",
+    "path": "index/config.go",
+    "line": 136,
+    "package": "index"
+  },
+  {
+    "name": "toolDetector",
+    "kind": "struct",
+    "path": "index/config.go",
+    "line": 192,
+    "package": "index"
+  },
+  {
+    "name": "toolDetectors",
+    "kind": "var",
+    "path": "index/config.go",
+    "line": 199,
+    "package": "index"
+  },
+  {
+    "name": "detectTools",
+    "kind": "method",
+    "path": "index/config.go",
+    "line": 219,
+    "package": "index"
+  },
+  {
+    "name": "detectPackageManager",
+    "kind": "func",
+    "path": "index/config.go",
+    "line": 336,
+    "package": "index"
+  },
+  {
+    "name": "extractScripts",
+    "kind": "method",
+    "path": "index/config.go",
+    "line": 376,
+    "package": "index"
+  },
+  {
+    "name": "appendUnique",
+    "kind": "func",
+    "path": "index/config.go",
+    "line": 392,
+    "package": "index"
+  },
+  {
+    "name": "FormatConfig",
+    "kind": "func",
+    "path": "index/config.go",
+    "line": 402,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "config_test.go",
     "kind": "file",
     "path": "index/config_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestDetectLanguageGo",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectLanguagePython",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 28,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkNextJS",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkReact",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 70,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkDjango",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 93,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkFlaskFromPyproject",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 111,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkGin",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 132,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectFrameworkAxum",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 157,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsEslintPrettier",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 182,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsGolangciLint",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 205,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsJest",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 224,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsVitest",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 243,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsPytest",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 262,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsPytestFromPyproject",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 280,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectToolsJestFromPackageJSON",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 304,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectGoDefaults",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 327,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectPackageManagerNPM",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 352,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectPackageManagerYarn",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 371,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDetectPackageManagerPnpm",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 390,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtractScripts",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 409,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestConfigNoManifests",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 445,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatConfigBasic",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 468,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatConfigWithScripts",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 499,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestConfigFullIntegration",
+    "kind": "func",
+    "path": "index/config_test.go",
+    "line": 528,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "context.go",
@@ -91,11 +897,136 @@
     "package": "index"
   },
   {
+    "name": "extractFileImports",
+    "kind": "func",
+    "path": "index/context.go",
+    "line": 16,
+    "package": "index"
+  },
+  {
+    "name": "ContextResult",
+    "kind": "struct",
+    "path": "index/context.go",
+    "line": 36,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Context",
+    "kind": "func",
+    "path": "index/context.go",
+    "line": 50,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "extractDocComment",
+    "kind": "func",
+    "path": "index/context.go",
+    "line": 118,
+    "package": "index"
+  },
+  {
+    "name": "isCommentLine",
+    "kind": "func",
+    "path": "index/context.go",
+    "line": 146,
+    "package": "index"
+  },
+  {
+    "name": "FormatContext",
+    "kind": "func",
+    "path": "index/context.go",
+    "line": 164,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "context_test.go",
     "kind": "file",
     "path": "index/context_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestContextGoFunction",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextPythonFunction",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 67,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextJSFunction",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 107,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextUnknownSymbol",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 145,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextUnsupportedExtension",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 161,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextNoDocComment",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 176,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextGoImports",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 195,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestContextFileNotFound",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 214,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatContextFull",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 221,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatContextNoImportsNoDoc",
+    "kind": "func",
+    "path": "index/context_test.go",
+    "line": 252,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "deadcode.go",
@@ -105,11 +1036,160 @@
     "package": "index"
   },
   {
+    "name": "DeadCodeCandidate",
+    "kind": "struct",
+    "path": "index/deadcode.go",
+    "line": 16,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "DeadCodeResult",
+    "kind": "struct",
+    "path": "index/deadcode.go",
+    "line": 27,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "isExcludedSymbol",
+    "kind": "func",
+    "path": "index/deadcode.go",
+    "line": 33,
+    "package": "index"
+  },
+  {
+    "name": "DeadCode",
+    "kind": "method",
+    "path": "index/deadcode.go",
+    "line": 49,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "countExternalRefs",
+    "kind": "func",
+    "path": "index/deadcode.go",
+    "line": 155,
+    "package": "index"
+  },
+  {
+    "name": "hasRefInFile",
+    "kind": "func",
+    "path": "index/deadcode.go",
+    "line": 166,
+    "package": "index"
+  },
+  {
+    "name": "FormatDeadCode",
+    "kind": "func",
+    "path": "index/deadcode.go",
+    "line": 189,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "deadcode_test.go",
     "kind": "file",
     "path": "index/deadcode_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestDeadCodeUnusedFunction",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeMainExcluded",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeTestFunctionsExcluded",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 73,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeTestFilesSkipped",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 100,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeKindFilter",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 131,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodePathFilter",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 157,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeMaxLimit",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 197,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeNoCandidates",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 226,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDeadCodeEmpty",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 264,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDeadCodeWithResults",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 275,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDeadCodeTruncated",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 301,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDeadCodeMultiLanguage",
+    "kind": "func",
+    "path": "index/deadcode_test.go",
+    "line": 314,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "deps.go",
@@ -119,11 +1199,243 @@
     "package": "index"
   },
   {
+    "name": "Dependency",
+    "kind": "struct",
+    "path": "index/deps.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ManifestDeps",
+    "kind": "struct",
+    "path": "index/deps.go",
+    "line": 20,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "DepsResult",
+    "kind": "struct",
+    "path": "index/deps.go",
+    "line": 28,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "knownManifests",
+    "kind": "var",
+    "path": "index/deps.go",
+    "line": 35,
+    "package": "index"
+  },
+  {
+    "name": "Deps",
+    "kind": "method",
+    "path": "index/deps.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "parseGoMod",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 99,
+    "package": "index"
+  },
+  {
+    "name": "parsePackageJSON",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 153,
+    "package": "index"
+  },
+  {
+    "name": "splitPySpec",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 196,
+    "package": "index"
+  },
+  {
+    "name": "parseRequirementsTxt",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 215,
+    "package": "index"
+  },
+  {
+    "name": "parseCargoToml",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 247,
+    "package": "index"
+  },
+  {
+    "name": "parsePyprojectToml",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 311,
+    "package": "index"
+  },
+  {
+    "name": "parsePyDependencyList",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 386,
+    "package": "index"
+  },
+  {
+    "name": "FormatDeps",
+    "kind": "func",
+    "path": "index/deps.go",
+    "line": 414,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "deps_test.go",
     "kind": "file",
     "path": "index/deps_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestParseGoMod",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseGoModEmpty",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 44,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseGoModComments",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 58,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParsePackageJSON",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 81,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParsePackageJSONNoDeps",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 120,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseRequirementsTxt",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 131,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseRequirementsTxtInlineComments",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 175,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseRequirementsTxtExtras",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 193,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseCargoToml",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 212,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseCargoTomlEmpty",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 246,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParsePyprojectToml",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 260,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParsePyprojectTomlInline",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 301,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDepsIntegration",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 320,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDepsNoManifests",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 367,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestDepsSubdirectoryManifest",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 392,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDepsEmpty",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 419,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDepsWithResults",
+    "kind": "func",
+    "path": "index/deps_test.go",
+    "line": 431,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "diffsummary.go",
@@ -133,11 +1445,183 @@
     "package": "index"
   },
   {
+    "name": "DiffFile",
+    "kind": "struct",
+    "path": "index/diffsummary.go",
+    "line": 15,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "DiffSummaryResult",
+    "kind": "struct",
+    "path": "index/diffsummary.go",
+    "line": 22,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "DiffSummary",
+    "kind": "method",
+    "path": "index/diffsummary.go",
+    "line": 32,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "diffLineInfo",
+    "kind": "struct",
+    "path": "index/diffsummary.go",
+    "line": 107,
+    "package": "index"
+  },
+  {
+    "name": "parseDiffLine",
+    "kind": "func",
+    "path": "index/diffsummary.go",
+    "line": 114,
+    "package": "index"
+  },
+  {
+    "name": "extractSymbols",
+    "kind": "func",
+    "path": "index/diffsummary.go",
+    "line": 154,
+    "package": "index"
+  },
+  {
+    "name": "shouldSkipDiffPath",
+    "kind": "func",
+    "path": "index/diffsummary.go",
+    "line": 181,
+    "package": "index"
+  },
+  {
+    "name": "FormatDiffSummary",
+    "kind": "func",
+    "path": "index/diffsummary.go",
+    "line": 192,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "diffsummary_test.go",
     "kind": "file",
     "path": "index/diffsummary_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestParseDiffLineAdded",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineModified",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 21,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineDeleted",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 34,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineRenamed",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineCopy",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 63,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineEmpty",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 76,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestParseDiffLineUnknownStatus",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 83,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShouldSkipDiffPath",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 90,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDiffSummaryNoChanges",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 111,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDiffSummaryWithChanges",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 131,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatDiffSummaryModifiedNoSymbols",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 167,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtractSymbolsNonexistentFile",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 186,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtractSymbolsUnsupportedExtension",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 193,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtractSymbolsGoFile",
+    "kind": "func",
+    "path": "index/diffsummary_test.go",
+    "line": 202,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "entrypoints.go",
@@ -147,11 +1631,206 @@
     "package": "index"
   },
   {
+    "name": "EntryPoint",
+    "kind": "struct",
+    "path": "index/entrypoints.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "EntryPointsResult",
+    "kind": "struct",
+    "path": "index/entrypoints.go",
+    "line": 21,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "entryPointPattern",
+    "kind": "struct",
+    "path": "index/entrypoints.go",
+    "line": 27,
+    "package": "index"
+  },
+  {
+    "name": "testFilePattern",
+    "kind": "var",
+    "path": "index/entrypoints.go",
+    "line": 33,
+    "package": "index"
+  },
+  {
+    "name": "entryPointPatterns",
+    "kind": "var",
+    "path": "index/entrypoints.go",
+    "line": 36,
+    "package": "index"
+  },
+  {
+    "name": "init",
+    "kind": "func",
+    "path": "index/entrypoints.go",
+    "line": 96,
+    "package": "index"
+  },
+  {
+    "name": "EntryPoints",
+    "kind": "method",
+    "path": "index/entrypoints.go",
+    "line": 106,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "entryPointsInFile",
+    "kind": "func",
+    "path": "index/entrypoints.go",
+    "line": 176,
+    "package": "index"
+  },
+  {
+    "name": "FormatEntryPoints",
+    "kind": "func",
+    "path": "index/entrypoints.go",
+    "line": 205,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "entrypoints_test.go",
     "kind": "file",
     "path": "index/entrypoints_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestEntryPointsGoMain",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsGoInit",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 43,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsHTTPRoutes",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 70,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsPythonMain",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 104,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsKindFilter",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 135,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsMaxLimit",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 172,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsTestFilesSkipped",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 205,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsJSRoutes",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 236,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsJSONStructure",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 263,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsEmptyIndex",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 297,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsSortOrder",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 313,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatEntryPointsEmpty",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 364,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatEntryPointsWithEntries",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 375,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsBinaryFileSkipped",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 402,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsPythonFlask",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 426,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointsCobraCommands",
+    "kind": "func",
+    "path": "index/entrypoints_test.go",
+    "line": 471,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "exports.go",
@@ -161,11 +1840,285 @@
     "package": "index"
   },
   {
+    "name": "ExportedSymbol",
+    "kind": "struct",
+    "path": "index/exports.go",
+    "line": 14,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ExportsResult",
+    "kind": "struct",
+    "path": "index/exports.go",
+    "line": 23,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Exports",
+    "kind": "method",
+    "path": "index/exports.go",
+    "line": 33,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatExports",
+    "kind": "func",
+    "path": "index/exports.go",
+    "line": 109,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "exports_test.go",
     "kind": "file",
     "path": "index/exports_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestExportsGoFile",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsGoDirectory",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 62,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsNoExports",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 102,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsNonExistentScope",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 128,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsUnsupportedExtension",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 150,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsSymbolFields",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 171,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsJavaScriptFile",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 210,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsPythonFile",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 247,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatExportsEmpty",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 302,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatExportsSingleFile",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 314,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatExportsMultiFile",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 335,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExportsJSONOutput",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 353,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "symbolNames",
+    "kind": "func",
+    "path": "index/exports_test.go",
+    "line": 371,
+    "package": "index"
+  },
+  {
+    "name": "fuzzy.go",
+    "kind": "file",
+    "path": "index/fuzzy.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "ScoredEntry",
+    "kind": "struct",
+    "path": "index/fuzzy.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "levenshtein",
+    "kind": "func",
+    "path": "index/fuzzy.go",
+    "line": 17,
+    "package": "index"
+  },
+  {
+    "name": "scoreName",
+    "kind": "func",
+    "path": "index/fuzzy.go",
+    "line": 74,
+    "package": "index"
+  },
+  {
+    "name": "matchFuzzy",
+    "kind": "method",
+    "path": "index/fuzzy.go",
+    "line": 123,
+    "package": "index"
+  },
+  {
+    "name": "fuzzy_test.go",
+    "kind": "file",
+    "path": "index/fuzzy_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "TestLevenshtein",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 7,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLevenshteinMaxDist",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 32,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScoreName",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 46,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScoreNamePriority",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 89,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchFuzzy",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 103,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchFuzzyTypo",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 142,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchRankedResults",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 159,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchExactFallback",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 179,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchEmptyQuery",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 203,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchScoredJSON",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 223,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchFuzzyDistanceThreshold",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 239,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatchTieBreakingShorterPath",
+    "kind": "func",
+    "path": "index/fuzzy_test.go",
+    "line": 253,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "graph.go",
@@ -175,11 +2128,169 @@
     "package": "index"
   },
   {
+    "name": "GraphEdge",
+    "kind": "struct",
+    "path": "index/graph.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "GraphNode",
+    "kind": "struct",
+    "path": "index/graph.go",
+    "line": 16,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "GraphStats",
+    "kind": "struct",
+    "path": "index/graph.go",
+    "line": 23,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "GraphResult",
+    "kind": "struct",
+    "path": "index/graph.go",
+    "line": 31,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "buildAdjacency",
+    "kind": "method",
+    "path": "index/graph.go",
+    "line": 38,
+    "package": "index"
+  },
+  {
+    "name": "buildGraphResult",
+    "kind": "func",
+    "path": "index/graph.go",
+    "line": 50,
+    "package": "index"
+  },
+  {
+    "name": "Graph",
+    "kind": "method",
+    "path": "index/graph.go",
+    "line": 108,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "GraphFocused",
+    "kind": "method",
+    "path": "index/graph.go",
+    "line": 129,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatGraph",
+    "kind": "func",
+    "path": "index/graph.go",
+    "line": 193,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatGraphDOT",
+    "kind": "func",
+    "path": "index/graph.go",
+    "line": 250,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "graph_test.go",
     "kind": "file",
     "path": "index/graph_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TestGraphGoProject",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphJSProject",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 66,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphEmptyProject",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 102,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphFocused",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 128,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphFocusedWithDepth",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 165,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphFocusedFileNotFound",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 201,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatGraphEmpty",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 216,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatGraphWithData",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 231,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatGraphDOT",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 268,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestGraphJSONOutput",
+    "kind": "func",
+    "path": "index/graph_test.go",
+    "line": 293,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "history.go",
@@ -189,11 +2300,98 @@
     "package": "index"
   },
   {
+    "name": "HistoryCommit",
+    "kind": "struct",
+    "path": "index/history.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "HistoryResult",
+    "kind": "struct",
+    "path": "index/history.go",
+    "line": 18,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "History",
+    "kind": "func",
+    "path": "index/history.go",
+    "line": 25,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatHistory",
+    "kind": "func",
+    "path": "index/history.go",
+    "line": 73,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "history_test.go",
     "kind": "file",
     "path": "index/history_test.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "initGitRepo",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 13,
+    "package": "index"
+  },
+  {
+    "name": "TestHistoryWithCommits",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHistoryNonexistentFile",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 101,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHistoryMaxLimit",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 116,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHistoryNotAGitRepo",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 141,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatHistoryNoCommits",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 152,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatHistoryWithCommits",
+    "kind": "func",
+    "path": "index/history_test.go",
+    "line": 164,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "hotspots.go",
@@ -203,6 +2401,45 @@
     "package": "index"
   },
   {
+    "name": "HotspotEntry",
+    "kind": "struct",
+    "path": "index/hotspots.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "HotspotsResult",
+    "kind": "struct",
+    "path": "index/hotspots.go",
+    "line": 18,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Hotspots",
+    "kind": "method",
+    "path": "index/hotspots.go",
+    "line": 26,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "getLastModified",
+    "kind": "func",
+    "path": "index/hotspots.go",
+    "line": 114,
+    "package": "index"
+  },
+  {
+    "name": "FormatHotspots",
+    "kind": "func",
+    "path": "index/hotspots.go",
+    "line": 125,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "hotspots_test.go",
     "kind": "file",
     "path": "index/hotspots_test.go",
@@ -210,10 +2447,429 @@
     "package": "index"
   },
   {
+    "name": "TestHotspotsBasic",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsMaxLimit",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 58,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsPathFilter",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 93,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsDeletedFilesExcluded",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 133,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsSinceFilter",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 168,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsJSONStructure",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 208,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestHotspotsNotAGitRepo",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 249,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatHotspotsEmpty",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 261,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatHotspotsWithEntries",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 272,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatHotspotsWithSince",
+    "kind": "func",
+    "path": "index/hotspots_test.go",
+    "line": 299,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "impact.go",
+    "kind": "file",
+    "path": "index/impact.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "ImpactTarget",
+    "kind": "struct",
+    "path": "index/impact.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ImpactRef",
+    "kind": "struct",
+    "path": "index/impact.go",
+    "line": 21,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ImpactLayer",
+    "kind": "struct",
+    "path": "index/impact.go",
+    "line": 29,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ImpactSummary",
+    "kind": "struct",
+    "path": "index/impact.go",
+    "line": 36,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ImpactResult",
+    "kind": "struct",
+    "path": "index/impact.go",
+    "line": 43,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Impact",
+    "kind": "method",
+    "path": "index/impact.go",
+    "line": 51,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "impactSymbol",
+    "kind": "method",
+    "path": "index/impact.go",
+    "line": 60,
+    "package": "index"
+  },
+  {
+    "name": "impactFile",
+    "kind": "method",
+    "path": "index/impact.go",
+    "line": 164,
+    "package": "index"
+  },
+  {
+    "name": "computeImpactSummary",
+    "kind": "func",
+    "path": "index/impact.go",
+    "line": 271,
+    "package": "index"
+  },
+  {
+    "name": "findEnclosingSymbol",
+    "kind": "method",
+    "path": "index/impact.go",
+    "line": 292,
+    "package": "index"
+  },
+  {
+    "name": "FormatImpact",
+    "kind": "func",
+    "path": "index/impact.go",
+    "line": 325,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "impact_test.go",
+    "kind": "file",
+    "path": "index/impact_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "TestImpactSymbolDirectRefs",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 9,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactSymbolTransitive",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 58,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactFileMode",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 127,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactCycleDetection",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 162,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactDepthLimiting",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 198,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactMaxResults",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 235,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactJSONOutput",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 258,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactSymbolNotFound",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 298,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestImpactFileNotFound",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 317,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatImpact",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 332,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatImpactEmpty",
+    "kind": "func",
+    "path": "index/impact_test.go",
+    "line": 376,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "index.go",
     "kind": "file",
     "path": "index/index.go",
     "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "Entry",
+    "kind": "struct",
+    "path": "index/index.go",
+    "line": 17,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "String",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 26,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Index",
+    "kind": "struct",
+    "path": "index/index.go",
+    "line": 34,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FilePaths",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 41,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FileCount",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 55,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "PackageCount",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 60,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ExtensionCounts",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 72,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "indexMeta",
+    "kind": "struct",
+    "path": "index/index.go",
+    "line": 90,
+    "package": "index"
+  },
+  {
+    "name": "Save",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 100,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "writeJSON",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 122,
+    "package": "index"
+  },
+  {
+    "name": "Load",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 134,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Scan",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 161,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Match",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 245,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "MatchScored",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 255,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "MatchExact",
+    "kind": "method",
+    "path": "index/index.go",
+    "line": 261,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "openTextFile",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 276,
+    "package": "index"
+  },
+  {
+    "name": "loadIgnorePatterns",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 303,
+    "package": "index"
+  },
+  {
+    "name": "readIgnoreFile",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 316,
+    "package": "index"
+  },
+  {
+    "name": "shouldIgnore",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 338,
+    "package": "index"
+  },
+  {
+    "name": "shouldSkipDir",
+    "kind": "func",
+    "path": "index/index.go",
+    "line": 383,
     "package": "index"
   },
   {
@@ -224,11 +2880,264 @@
     "package": "index"
   },
   {
+    "name": "TestScan",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 12,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMatch",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 33,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanSkipsHiddenDirs",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 71,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanSkipsSwarmDir",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 87,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSaveLoad",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 110,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSaveMeta",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 146,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSaveCreatesDirectory",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 193,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLoadNonexistent",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 210,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLookupIntegration",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 218,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanNonexistentDir",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 246,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanFileNotDir",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 256,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtensionCounts",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 272,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSaveMetaExtensions",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 305,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestExtensionCountsRoundTrip",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 340,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLoadIgnorePatterns",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 373,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLoadIgnorePatternsNoFile",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 390,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShouldIgnore",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 398,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanRespectsSwarmignore",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 442,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanNoSwarmignore",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 470,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLoadIgnorePatternsMergesBothFiles",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 485,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLoadIgnorePatternsSwarmindexignoreOnly",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 502,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanRespectsSwarmindexignore",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 512,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScanIncludesSymbols",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 540,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLookupFindsSymbols",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 574,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLookupRanksSymbolsAndFiles",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 613,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "mkFile",
+    "kind": "func",
+    "path": "index/index_test.go",
+    "line": 650,
+    "package": "index"
+  },
+  {
     "name": "locate.go",
     "kind": "file",
     "path": "index/locate.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "LocateMatch",
+    "kind": "struct",
+    "path": "index/locate.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "LocateResult",
+    "kind": "struct",
+    "path": "index/locate.go",
+    "line": 22,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Locate",
+    "kind": "method",
+    "path": "index/locate.go",
+    "line": 30,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "deduplicateLocateMatches",
+    "kind": "func",
+    "path": "index/locate.go",
+    "line": 124,
+    "package": "index"
+  },
+  {
+    "name": "nameWithoutExt",
+    "kind": "func",
+    "path": "index/locate.go",
+    "line": 147,
+    "package": "index"
+  },
+  {
+    "name": "FormatLocate",
+    "kind": "func",
+    "path": "index/locate.go",
+    "line": 156,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "locate_test.go",
@@ -238,10 +3147,120 @@
     "package": "index"
   },
   {
+    "name": "TestLocateFileMatches",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateSymbolMatches",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 45,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateContentMatches",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 75,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateRelevanceRanking",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 105,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateDeduplication",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 138,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateMaxLimit",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 167,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestLocateEmptyQuery",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 202,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatLocateEmpty",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 224,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatLocateWithResults",
+    "kind": "func",
+    "path": "index/locate_test.go",
+    "line": 236,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "refs.go",
     "kind": "file",
     "path": "index/refs.go",
     "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "RefMatch",
+    "kind": "struct",
+    "path": "index/refs.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "RefsResult",
+    "kind": "struct",
+    "path": "index/refs.go",
+    "line": 19,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "definitionPatterns",
+    "kind": "var",
+    "path": "index/refs.go",
+    "line": 27,
+    "package": "index"
+  },
+  {
+    "name": "Refs",
+    "kind": "method",
+    "path": "index/refs.go",
+    "line": 43,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "refsInFile",
+    "kind": "func",
+    "path": "index/refs.go",
+    "line": 104,
     "package": "index"
   },
   {
@@ -252,11 +3271,216 @@
     "package": "index"
   },
   {
+    "name": "TestRefsFindsDefinitionAndReferences",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 7,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRefsMaxResults",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 59,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRefsSymbolNotFound",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 82,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRefsAcrossMultipleFiles",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 104,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRefsDefinitionExcludedFromRefs",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 161,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRefsPythonDef",
+    "kind": "func",
+    "path": "index/refs_test.go",
+    "line": 196,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "related.go",
     "kind": "file",
     "path": "index/related.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "RelatedResult",
+    "kind": "struct",
+    "path": "index/related.go",
+    "line": 12,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "importableExts",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 20,
+    "package": "index"
+  },
+  {
+    "name": "goImportSingle",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 32,
+    "package": "index"
+  },
+  {
+    "name": "goImportLine",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 33,
+    "package": "index"
+  },
+  {
+    "name": "goImportBlock",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 34,
+    "package": "index"
+  },
+  {
+    "name": "goImportEnd",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 35,
+    "package": "index"
+  },
+  {
+    "name": "jsImportFrom",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 38,
+    "package": "index"
+  },
+  {
+    "name": "jsRequire",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 39,
+    "package": "index"
+  },
+  {
+    "name": "pyFromImport",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 42,
+    "package": "index"
+  },
+  {
+    "name": "pyImport",
+    "kind": "var",
+    "path": "index/related.go",
+    "line": 43,
+    "package": "index"
+  },
+  {
+    "name": "Related",
+    "kind": "method",
+    "path": "index/related.go",
+    "line": 47,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "extractImports",
+    "kind": "method",
+    "path": "index/related.go",
+    "line": 95,
+    "package": "index"
+  },
+  {
+    "name": "extractGoImports",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 141,
+    "package": "index"
+  },
+  {
+    "name": "extractJSImports",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 172,
+    "package": "index"
+  },
+  {
+    "name": "extractPyImports",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 187,
+    "package": "index"
+  },
+  {
+    "name": "resolveImport",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 201,
+    "package": "index"
+  },
+  {
+    "name": "resolveGoImport",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 215,
+    "package": "index"
+  },
+  {
+    "name": "resolveJSImport",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 238,
+    "package": "index"
+  },
+  {
+    "name": "resolvePyImport",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 273,
+    "package": "index"
+  },
+  {
+    "name": "findImporters",
+    "kind": "method",
+    "path": "index/related.go",
+    "line": 300,
+    "package": "index"
+  },
+  {
+    "name": "findTestFiles",
+    "kind": "method",
+    "path": "index/related.go",
+    "line": 326,
+    "package": "index"
+  },
+  {
+    "name": "FormatRelated",
+    "kind": "func",
+    "path": "index/related.go",
+    "line": 376,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "related_test.go",
@@ -266,11 +3490,193 @@
     "package": "index"
   },
   {
+    "name": "TestRelatedGoImports",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedGoSingleImport",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 53,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedJSImports",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 89,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedTSImports",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 121,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedPyImports",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 149,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedImporters",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 181,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedGoTestFiles",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 210,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedJSTestFiles",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 240,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedPyTestFiles",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 269,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedNoRelations",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 295,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedFileNotInIndex",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 322,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedJSIndexFile",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 337,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedNonImportableFile",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 363,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatRelatedEmpty",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 382,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatRelatedWithData",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 398,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedPyTestsDir",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 423,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRelatedJSTestsDir",
+    "kind": "func",
+    "path": "index/related_test.go",
+    "line": 449,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "scope.go",
     "kind": "file",
     "path": "index/scope.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "SymbolCount",
+    "kind": "struct",
+    "path": "index/scope.go",
+    "line": 15,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ScopeResult",
+    "kind": "struct",
+    "path": "index/scope.go",
+    "line": 21,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Scope",
+    "kind": "method",
+    "path": "index/scope.go",
+    "line": 33,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "inScope",
+    "kind": "func",
+    "path": "index/scope.go",
+    "line": 162,
+    "package": "index"
+  },
+  {
+    "name": "sortedKeys",
+    "kind": "func",
+    "path": "index/scope.go",
+    "line": 176,
+    "package": "index"
+  },
+  {
+    "name": "FormatScope",
+    "kind": "func",
+    "path": "index/scope.go",
+    "line": 189,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "scope_test.go",
@@ -280,10 +3686,105 @@
     "package": "index"
   },
   {
+    "name": "TestScopeBasicDirectory",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScopeNonRecursiveExcludesSubdirs",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 57,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScopeRecursiveIncludesSubdirs",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 81,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScopeEmptyDirectory",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 105,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScopeDependencies",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 129,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestScopeTrailingSlash",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 163,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatScopeEmpty",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 184,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatScopeWithData",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 200,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestInScope",
+    "kind": "func",
+    "path": "index/scope_test.go",
+    "line": 228,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "search.go",
     "kind": "file",
     "path": "index/search.go",
     "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "SearchMatch",
+    "kind": "struct",
+    "path": "index/search.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Search",
+    "kind": "method",
+    "path": "index/search.go",
+    "line": 19,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "searchFile",
+    "kind": "func",
+    "path": "index/search.go",
+    "line": 45,
     "package": "index"
   },
   {
@@ -294,11 +3795,83 @@
     "package": "index"
   },
   {
+    "name": "TestSearchHappyPath",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 9,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSearchRegex",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 46,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSearchMaxResults",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 66,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSearchNoMatches",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 90,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSearchBinaryFileSkipped",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 109,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSearchInvalidRegex",
+    "kind": "func",
+    "path": "index/search_test.go",
+    "line": 138,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "show.go",
     "kind": "file",
     "path": "index/show.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "ShowLine",
+    "kind": "struct",
+    "path": "index/show.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ShowResult",
+    "kind": "struct",
+    "path": "index/show.go",
+    "line": 16,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "ShowFile",
+    "kind": "func",
+    "path": "index/show.go",
+    "line": 28,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "show_test.go",
@@ -308,11 +3881,146 @@
     "package": "index"
   },
   {
+    "name": "writeTestFile",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 9,
+    "package": "index"
+  },
+  {
+    "name": "TestShowFile_FullFile",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 18,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_LineRange",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 41,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_SingleLine",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 64,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_OpenEndedStart",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 81,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_OpenEndedEnd",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 102,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_StartBeyondEnd",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 123,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_StartGreaterThanEnd",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 134,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_NonexistentFile",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 145,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_BinaryFile",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 152,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_EmptyFile",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 172,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_Directory",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 188,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestShowFile_EndBeyondFileClamps",
+    "kind": "func",
+    "path": "index/show_test.go",
+    "line": 196,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "stale.go",
     "kind": "file",
     "path": "index/stale.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "StaleResult",
+    "kind": "struct",
+    "path": "index/stale.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "StaleSummary",
+    "kind": "struct",
+    "path": "index/stale.go",
+    "line": 23,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Stale",
+    "kind": "method",
+    "path": "index/stale.go",
+    "line": 31,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatStale",
+    "kind": "func",
+    "path": "index/stale.go",
+    "line": 119,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "stale_test.go",
@@ -322,11 +4030,141 @@
     "package": "index"
   },
   {
+    "name": "TestStaleFreshIndex",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestStaleNewFile",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 48,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestStaleDeletedFile",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 88,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestStaleModifiedFile",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 130,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestStaleCombined",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 172,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatStaleUpToDate",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 225,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatStaleWithChanges",
+    "kind": "func",
+    "path": "index/stale_test.go",
+    "line": 239,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "summary.go",
     "kind": "file",
     "path": "index/summary.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "languageMap",
+    "kind": "var",
+    "path": "index/summary.go",
+    "line": 14,
+    "package": "index"
+  },
+  {
+    "name": "entryPointNames",
+    "kind": "var",
+    "path": "index/summary.go",
+    "line": 44,
+    "package": "index"
+  },
+  {
+    "name": "entryPointPaths",
+    "kind": "var",
+    "path": "index/summary.go",
+    "line": 65,
+    "package": "index"
+  },
+  {
+    "name": "manifestNames",
+    "kind": "var",
+    "path": "index/summary.go",
+    "line": 70,
+    "package": "index"
+  },
+  {
+    "name": "LanguageStat",
+    "kind": "struct",
+    "path": "index/summary.go",
+    "line": 94,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "SummaryResult",
+    "kind": "struct",
+    "path": "index/summary.go",
+    "line": 100,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Summary",
+    "kind": "method",
+    "path": "index/summary.go",
+    "line": 113,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "countLines",
+    "kind": "func",
+    "path": "index/summary.go",
+    "line": 192,
+    "package": "index"
+  },
+  {
+    "name": "isEntryPoint",
+    "kind": "func",
+    "path": "index/summary.go",
+    "line": 203,
+    "package": "index"
+  },
+  {
+    "name": "FormatSummary",
+    "kind": "func",
+    "path": "index/summary.go",
+    "line": 216,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "summary_test.go",
@@ -336,11 +4174,138 @@
     "package": "index"
   },
   {
+    "name": "TestLanguageMap",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 9,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestEntryPointDetection",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 38,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestManifestDetection",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 63,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestCountLines",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 84,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryLOC",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 105,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryLanguages",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 124,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryEntryPoints",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 148,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryManifests",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 172,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryTopDirectories",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 189,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSummaryFromLoadedIndex",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 213,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatSummary",
+    "kind": "func",
+    "path": "index/summary_test.go",
+    "line": 241,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "symbols.go",
     "kind": "file",
     "path": "index/symbols.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "SymbolMatch",
+    "kind": "struct",
+    "path": "index/symbols.go",
+    "line": 14,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "SymbolsResult",
+    "kind": "struct",
+    "path": "index/symbols.go",
+    "line": 24,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "Symbols",
+    "kind": "method",
+    "path": "index/symbols.go",
+    "line": 35,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "matchRank",
+    "kind": "func",
+    "path": "index/symbols.go",
+    "line": 101,
+    "package": "index"
+  },
+  {
+    "name": "FormatSymbols",
+    "kind": "func",
+    "path": "index/symbols.go",
+    "line": 113,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "symbols_test.go",
@@ -350,11 +4315,339 @@
     "package": "index"
   },
   {
+    "name": "TestSymbolsBasicSearch",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 10,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsKindFilter",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 50,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsCaseInsensitive",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 79,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsResultOrdering",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 102,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsMaxLimit",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 136,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsNoMatches",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 165,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestSymbolsMultipleFiles",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 190,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatSymbolsEmpty",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 226,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatSymbolsWithResults",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 241,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatSymbolsTruncated",
+    "kind": "func",
+    "path": "index/symbols_test.go",
+    "line": 262,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "sample.go",
+    "kind": "file",
+    "path": "index/testdata/sample.go",
+    "line": 0,
+    "package": "index/testdata"
+  },
+  {
+    "name": "ExportedFunc",
+    "kind": "func",
+    "path": "index/testdata/sample.go",
+    "line": 3,
+    "package": "index/testdata",
+    "exported": true
+  },
+  {
+    "name": "unexportedFunc",
+    "kind": "func",
+    "path": "index/testdata/sample.go",
+    "line": 4,
+    "package": "index/testdata"
+  },
+  {
+    "name": "Config",
+    "kind": "struct",
+    "path": "index/testdata/sample.go",
+    "line": 6,
+    "package": "index/testdata",
+    "exported": true
+  },
+  {
+    "name": "testmap.go",
+    "kind": "file",
+    "path": "index/testmap.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "TestMapEntry",
+    "kind": "struct",
+    "path": "index/testmap.go",
+    "line": 11,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMapSummary",
+    "kind": "struct",
+    "path": "index/testmap.go",
+    "line": 18,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestMapResult",
+    "kind": "struct",
+    "path": "index/testmap.go",
+    "line": 26,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "sourceExts",
+    "kind": "var",
+    "path": "index/testmap.go",
+    "line": 32,
+    "package": "index"
+  },
+  {
+    "name": "isTestFilePath",
+    "kind": "func",
+    "path": "index/testmap.go",
+    "line": 42,
+    "package": "index"
+  },
+  {
+    "name": "TestMap",
+    "kind": "method",
+    "path": "index/testmap.go",
+    "line": 59,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "FormatTestMap",
+    "kind": "func",
+    "path": "index/testmap.go",
+    "line": 149,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "testmap_test.go",
+    "kind": "file",
+    "path": "index/testmap_test.go",
+    "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "TestTestMapGoFiles",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapPythonFiles",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 61,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapJSFiles",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 97,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapPathFilter",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 130,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapUntestedFilter",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 160,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapTestedFilter",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 193,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapMaxLimit",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 226,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapNoSourceFiles",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 257,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapSortedByPath",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 280,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestIsTestFilePath",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 309,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatTestMapEmpty",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 332,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatTestMapWithData",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 343,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTestMapJSSpecFiles",
+    "kind": "func",
+    "path": "index/testmap_test.go",
+    "line": 375,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "todos.go",
     "kind": "file",
     "path": "index/todos.go",
     "line": 0,
     "package": "index"
+  },
+  {
+    "name": "TodoComment",
+    "kind": "struct",
+    "path": "index/todos.go",
+    "line": 13,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TodosResult",
+    "kind": "struct",
+    "path": "index/todos.go",
+    "line": 22,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "todoPattern",
+    "kind": "var",
+    "path": "index/todos.go",
+    "line": 28,
+    "package": "index"
+  },
+  {
+    "name": "Todos",
+    "kind": "method",
+    "path": "index/todos.go",
+    "line": 33,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "todosInFile",
+    "kind": "func",
+    "path": "index/todos.go",
+    "line": 70,
+    "package": "index"
+  },
+  {
+    "name": "FormatTodos",
+    "kind": "func",
+    "path": "index/todos.go",
+    "line": 99,
+    "package": "index",
+    "exported": true
   },
   {
     "name": "todos_test.go",
@@ -364,10 +4657,152 @@
     "package": "index"
   },
   {
+    "name": "TestTodosDetectsAllTags",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 8,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosCaseInsensitive",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 46,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosMessageExtraction",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 73,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosTagFilter",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 102,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosTagFilterCaseInsensitive",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 136,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosMaxLimit",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 161,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosSkipsBinaryFiles",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 189,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosLineNumbers",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 212,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosByTagCounts",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 239,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosMultipleFiles",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 272,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestTodosNoResults",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 300,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatTodosEmpty",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 325,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestFormatTodosWithResults",
+    "kind": "func",
+    "path": "index/todos_test.go",
+    "line": 337,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "tree.go",
     "kind": "file",
     "path": "index/tree.go",
     "line": 0,
+    "package": "index"
+  },
+  {
+    "name": "TreeNode",
+    "kind": "struct",
+    "path": "index/tree.go",
+    "line": 12,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "BuildTree",
+    "kind": "func",
+    "path": "index/tree.go",
+    "line": 20,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "buildChildren",
+    "kind": "func",
+    "path": "index/tree.go",
+    "line": 48,
+    "package": "index"
+  },
+  {
+    "name": "RenderTree",
+    "kind": "func",
+    "path": "index/tree.go",
+    "line": 95,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "renderChildren",
+    "kind": "func",
+    "path": "index/tree.go",
+    "line": 102,
     "package": "index"
   },
   {
@@ -378,10 +4813,158 @@
     "package": "index"
   },
   {
+    "name": "TestBuildTree",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 9,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeDepth",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 44,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeSkipsDirs",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 70,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestRenderTree",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 95,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeJSON",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 136,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeNonexistent",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 167,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeRespectsSwarmignore",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 174,
+    "package": "index",
+    "exported": true
+  },
+  {
+    "name": "TestBuildTreeFile",
+    "kind": "func",
+    "path": "index/tree_test.go",
+    "line": 203,
+    "package": "index",
+    "exported": true
+  },
+  {
     "name": "main.go",
     "kind": "file",
     "path": "main.go",
     "line": 0,
+    "package": "(root)"
+  },
+  {
+    "name": "extractJSONFlag",
+    "kind": "func",
+    "path": "main.go",
+    "line": 17,
+    "package": "(root)"
+  },
+  {
+    "name": "fatal",
+    "kind": "func",
+    "path": "main.go",
+    "line": 32,
+    "package": "(root)"
+  },
+  {
+    "name": "main",
+    "kind": "func",
+    "path": "main.go",
+    "line": 43,
+    "package": "(root)"
+  },
+  {
+    "name": "parseIntFlag",
+    "kind": "func",
+    "path": "main.go",
+    "line": 834,
+    "package": "(root)"
+  },
+  {
+    "name": "hasBoolFlag",
+    "kind": "func",
+    "path": "main.go",
+    "line": 847,
+    "package": "(root)"
+  },
+  {
+    "name": "parseStringFlag",
+    "kind": "func",
+    "path": "main.go",
+    "line": 858,
+    "package": "(root)"
+  },
+  {
+    "name": "resolveRoot",
+    "kind": "func",
+    "path": "main.go",
+    "line": 868,
+    "package": "(root)"
+  },
+  {
+    "name": "findIndexRoot",
+    "kind": "func",
+    "path": "main.go",
+    "line": 878,
+    "package": "(root)"
+  },
+  {
+    "name": "extensionSummary",
+    "kind": "func",
+    "path": "main.go",
+    "line": 898,
+    "package": "(root)"
+  },
+  {
+    "name": "validateQuery",
+    "kind": "func",
+    "path": "main.go",
+    "line": 920,
+    "package": "(root)"
+  },
+  {
+    "name": "parseLineRange",
+    "kind": "func",
+    "path": "main.go",
+    "line": 930,
+    "package": "(root)"
+  },
+  {
+    "name": "printUsage",
+    "kind": "func",
+    "path": "main.go",
+    "line": 965,
     "package": "(root)"
   },
   {
@@ -392,10 +4975,203 @@
     "package": "(root)"
   },
   {
+    "name": "TestParseIntFlagDefault",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 10,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestParseIntFlagWithFlag",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 17,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestParseIntFlagWithOtherFlags",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 24,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestParseIntFlagInvalidValue",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 31,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestParseIntFlagZero",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 38,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestParseIntFlagNoValue",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 45,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestValidateQuery",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 52,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestResolveRootWithFlag",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 71,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestResolveRootWithoutFlag",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 86,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestResolveRootFlagWithoutValue",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 116,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestExtractJSONFlagNotPresent",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 145,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestExtractJSONFlagAtEnd",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 156,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestExtractJSONFlagBeforeCommand",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 167,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestExtractJSONFlagBetweenArgs",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 178,
+    "package": "(root)",
+    "exported": true
+  },
+  {
+    "name": "TestExtractJSONFlagEmpty",
+    "kind": "func",
+    "path": "main_test.go",
+    "line": 189,
+    "package": "(root)",
+    "exported": true
+  },
+  {
     "name": "goparser.go",
     "kind": "file",
     "path": "parsers/goparser.go",
     "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "init",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 12,
+    "package": "parsers"
+  },
+  {
+    "name": "GoParser",
+    "kind": "struct",
+    "path": "parsers/goparser.go",
+    "line": 17,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "Extensions",
+    "kind": "method",
+    "path": "parsers/goparser.go",
+    "line": 19,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "Parse",
+    "kind": "method",
+    "path": "parsers/goparser.go",
+    "line": 23,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "funcSymbol",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 46,
+    "package": "parsers"
+  },
+  {
+    "name": "genDeclSymbols",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 65,
+    "package": "parsers"
+  },
+  {
+    "name": "receiverTypeName",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 110,
+    "package": "parsers"
+  },
+  {
+    "name": "funcSignature",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 124,
+    "package": "parsers"
+  },
+  {
+    "name": "fieldListString",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 150,
+    "package": "parsers"
+  },
+  {
+    "name": "exprString",
+    "kind": "func",
+    "path": "parsers/goparser.go",
+    "line": 170,
     "package": "parsers"
   },
   {
@@ -406,10 +5182,224 @@
     "package": "parsers"
   },
   {
+    "name": "sampleGoSource",
+    "kind": "const",
+    "path": "parsers/goparser_test.go",
+    "line": 7,
+    "package": "parsers"
+  },
+  {
+    "name": "TestGoParserBasic",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 49,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserSignatures",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 77,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserLineNumbers",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 108,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserEmptyFile",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 126,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserSyntaxError",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 137,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserExtensions",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 145,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestGoParserVariadic",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 153,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestForExtension",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 173,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "symbolsByName",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 184,
+    "package": "parsers"
+  },
+  {
+    "name": "assertSymbol",
+    "kind": "func",
+    "path": "parsers/goparser_test.go",
+    "line": 192,
+    "package": "parsers"
+  },
+  {
     "name": "jsparser.go",
     "kind": "file",
     "path": "parsers/jsparser.go",
     "line": 0,
+    "package": "parsers"
+  },
+  {
+    "name": "init",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 8,
+    "package": "parsers"
+  },
+  {
+    "name": "JSParser",
+    "kind": "struct",
+    "path": "parsers/jsparser.go",
+    "line": 14,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "Extensions",
+    "kind": "method",
+    "path": "parsers/jsparser.go",
+    "line": 16,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "jsFuncRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 22,
+    "package": "parsers"
+  },
+  {
+    "name": "jsClassRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 25,
+    "package": "parsers"
+  },
+  {
+    "name": "jsInterfaceRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 28,
+    "package": "parsers"
+  },
+  {
+    "name": "jsTypeRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 31,
+    "package": "parsers"
+  },
+  {
+    "name": "jsEnumRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 34,
+    "package": "parsers"
+  },
+  {
+    "name": "jsVarRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 37,
+    "package": "parsers"
+  },
+  {
+    "name": "jsMethodRe",
+    "kind": "var",
+    "path": "parsers/jsparser.go",
+    "line": 40,
+    "package": "parsers"
+  },
+  {
+    "name": "Parse",
+    "kind": "method",
+    "path": "parsers/jsparser.go",
+    "line": 43,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "matchTopLevel",
+    "kind": "method",
+    "path": "parsers/jsparser.go",
+    "line": 146,
+    "package": "parsers"
+  },
+  {
+    "name": "matchMethod",
+    "kind": "method",
+    "path": "parsers/jsparser.go",
+    "line": 219,
+    "package": "parsers"
+  },
+  {
+    "name": "countBraces",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 265,
+    "package": "parsers"
+  },
+  {
+    "name": "findJSBlockEnd",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 315,
+    "package": "parsers"
+  },
+  {
+    "name": "trimFirstBrace",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 332,
+    "package": "parsers"
+  },
+  {
+    "name": "removeInlineBlockComments",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 340,
+    "package": "parsers"
+  },
+  {
+    "name": "isJSKeyword",
+    "kind": "func",
+    "path": "parsers/jsparser.go",
+    "line": 357,
     "package": "parsers"
   },
   {
@@ -420,11 +5410,144 @@
     "package": "parsers"
   },
   {
+    "name": "sampleJSSource",
+    "kind": "const",
+    "path": "parsers/jsparser_test.go",
+    "line": 7,
+    "package": "parsers"
+  },
+  {
+    "name": "TestJSParserBasic",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 75,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "sampleTSSource",
+    "kind": "const",
+    "path": "parsers/jsparser_test.go",
+    "line": 117,
+    "package": "parsers"
+  },
+  {
+    "name": "TestTSParserBasic",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 177,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserLineNumbers",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 216,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserEmptyFile",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 233,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserCommentsOnly",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 244,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserExtensions",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 263,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserForExtension",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 277,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserReactComponent",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 286,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserSignatures",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 314,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestJSParserBracesInStrings",
+    "kind": "func",
+    "path": "parsers/jsparser_test.go",
+    "line": 346,
+    "package": "parsers",
+    "exported": true
+  },
+  {
     "name": "parsers.go",
     "kind": "file",
     "path": "parsers/parsers.go",
     "line": 0,
     "package": "parsers"
+  },
+  {
+    "name": "Symbol",
+    "kind": "struct",
+    "path": "parsers/parsers.go",
+    "line": 4,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "Parser",
+    "kind": "interface",
+    "path": "parsers/parsers.go",
+    "line": 15,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "registry",
+    "kind": "var",
+    "path": "parsers/parsers.go",
+    "line": 21,
+    "package": "parsers"
+  },
+  {
+    "name": "Register",
+    "kind": "func",
+    "path": "parsers/parsers.go",
+    "line": 24,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "ForExtension",
+    "kind": "func",
+    "path": "parsers/parsers.go",
+    "line": 32,
+    "package": "parsers",
+    "exported": true
   },
   {
     "name": "pyparser.go",
@@ -434,11 +5557,185 @@
     "package": "parsers"
   },
   {
+    "name": "init",
+    "kind": "func",
+    "path": "parsers/pyparser.go",
+    "line": 9,
+    "package": "parsers"
+  },
+  {
+    "name": "PythonParser",
+    "kind": "struct",
+    "path": "parsers/pyparser.go",
+    "line": 14,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "Extensions",
+    "kind": "method",
+    "path": "parsers/pyparser.go",
+    "line": 16,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "pyFuncRe",
+    "kind": "var",
+    "path": "parsers/pyparser.go",
+    "line": 21,
+    "package": "parsers"
+  },
+  {
+    "name": "pyClassRe",
+    "kind": "var",
+    "path": "parsers/pyparser.go",
+    "line": 22,
+    "package": "parsers"
+  },
+  {
+    "name": "pyConstRe",
+    "kind": "var",
+    "path": "parsers/pyparser.go",
+    "line": 23,
+    "package": "parsers"
+  },
+  {
+    "name": "pyDecoratorRe",
+    "kind": "var",
+    "path": "parsers/pyparser.go",
+    "line": 24,
+    "package": "parsers"
+  },
+  {
+    "name": "Parse",
+    "kind": "method",
+    "path": "parsers/pyparser.go",
+    "line": 27,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "lineIndent",
+    "kind": "func",
+    "path": "parsers/pyparser.go",
+    "line": 142,
+    "package": "parsers"
+  },
+  {
+    "name": "isUpperSnakeCase",
+    "kind": "func",
+    "path": "parsers/pyparser.go",
+    "line": 153,
+    "package": "parsers"
+  },
+  {
+    "name": "findPythonBlockEnd",
+    "kind": "func",
+    "path": "parsers/pyparser.go",
+    "line": 174,
+    "package": "parsers"
+  },
+  {
+    "name": "buildSignature",
+    "kind": "func",
+    "path": "parsers/pyparser.go",
+    "line": 194,
+    "package": "parsers"
+  },
+  {
     "name": "pyparser_test.go",
     "kind": "file",
     "path": "parsers/pyparser_test.go",
     "line": 0,
     "package": "parsers"
+  },
+  {
+    "name": "samplePythonSource",
+    "kind": "const",
+    "path": "parsers/pyparser_test.go",
+    "line": 7,
+    "package": "parsers"
+  },
+  {
+    "name": "TestPythonParserBasic",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 55,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserSignatures",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 88,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserLineNumbers",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 121,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserEmptyFile",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 138,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserCommentsOnly",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 149,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserNestedClass",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 166,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserExtensions",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 194,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserForExtension",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 202,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserSingleLetterNotConst",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 209,
+    "package": "parsers",
+    "exported": true
+  },
+  {
+    "name": "TestPythonParserMixedFile",
+    "kind": "func",
+    "path": "parsers/pyparser_test.go",
+    "line": 240,
+    "package": "parsers",
+    "exported": true
   },
   {
     "name": "swarm-index",

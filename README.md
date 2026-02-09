@@ -220,8 +220,8 @@ swarm-index lookup "handleAuth" --json
 
 | Command | Description |
 |---|---|
-| `scan <directory>` | Walk a directory tree, index all source files, and persist the index to disk. Prints file counts and language breakdown. |
-| `lookup <query> [--root <dir>] [--max N] [--exact]` | Search the index for files matching a query. By default, results are fuzzy-matched and ranked by relevance (exact name > prefix > substring > path > typo-tolerant). Use `--exact` for unranked substring-only matching (old behavior). With `--json`, results include a `score` field. Use `--root` to specify the project root and `--max` to limit results (default 20). |
+| `scan <directory>` | Walk a directory tree, index all source files and their symbols (functions, types, structs, etc.), and persist the index to disk. Prints file counts and language breakdown. |
+| `lookup <query> [--root <dir>] [--max N] [--exact]` | Search the index for files and symbols matching a query. Finds both filenames and symbol definitions (functions, types, structs, etc.) extracted during scan. By default, results are fuzzy-matched and ranked by relevance (exact name > prefix > substring > path > typo-tolerant). Use `--exact` for unranked substring-only matching (old behavior). With `--json`, results include a `score` field. Use `--root` to specify the project root and `--max` to limit results (default 20). |
 | `search <pattern> [--root <dir>] [--max N]` | Regex search across indexed file contents. Returns matching lines with file paths and line numbers. Use `--max` to limit results (default 50). Binary files are skipped. |
 | `summary [--root <dir>]` | Show a project overview: language breakdown, file count, LOC, entry points, dependency manifests, and top-level directories. Requires a prior `scan`. |
 | `tree <directory> [--depth N]` | Print the directory structure of a project, respecting the same skip rules as `scan`. Use `--depth` to limit depth (default unlimited). Supports `--json`. |
@@ -250,12 +250,17 @@ swarm-index lookup "handleAuth" --json
 | `impact <symbol-or-file> [--root <dir>] [--depth N] [--max N]` | Analyze the blast radius of a symbol or file by tracing transitive references/importers. Symbol mode finds direct references, then references to enclosing functions, recursively. File mode traces the chain of importers. Use `--depth` to limit traversal (default 3, where 1 = direct refs only). Use `--max` to cap total results (default 100). Requires a prior `scan`. |
 | `version` | Print the current version |
 
-## Custom ignore rules (`.swarmignore`)
+## Custom ignore rules
 
-Place a `.swarmignore` file at your project root to exclude additional paths from scanning and tree output. The syntax follows `.gitignore` conventions:
+You can exclude paths from scanning and tree output using either (or both) of these files:
+
+- **`.swarmignore`** — at the project root
+- **`swarm/.swarmindexignore`** — inside the `swarm/` directory
+
+Both use the same `.gitignore`-style syntax. Patterns from both files are merged.
 
 ```
-# .swarmignore — paths to exclude from swarm-index scan
+# Example ignore file — one pattern per line
 
 # Generated protobuf code
 proto_out/
@@ -280,19 +285,23 @@ secrets.json
 - `name` — skip files or dirs matching the basename exactly
 - `/path` — match only at the project root
 
-The `.swarmignore` file is respected by both `scan` and `tree` commands.
+Both files are respected by `scan`, `tree`, and `stale` commands.
 
 ## How it works
 
-1. **Scan** recursively walks the target directory, recording every file while automatically skipping noise directories (`.git`, `node_modules`, `vendor`, `__pycache__`, `dist`, `build`, hidden dirs, etc.). It also skips any `swarm/index/` directory to avoid indexing its own output. The index is persisted to disk so subsequent commands work without re-scanning.
+1. **Scan** recursively walks the target directory, recording every file while automatically skipping noise directories (`.git`, `node_modules`, `vendor`, `__pycache__`, `dist`, `build`, hidden dirs, etc.). It also skips any `swarm/index/` directory to avoid indexing its own output. The index is persisted to `./swarm/index/` relative to the current working directory so subsequent commands work without re-scanning.
 
 2. Each file is recorded as an **Entry** with:
-   - `Name` — the filename
-   - `Kind` — currently always `file`
+   - `Name` — the filename (or symbol name for symbol entries)
+   - `Kind` — `file`, `func`, `method`, `struct`, `interface`, `type`, `const`, or `var`
    - `Path` — path relative to the scanned root
+   - `Line` — line number (symbols only)
    - `Package` — the parent directory
+   - `Exported` — whether the symbol is publicly exported
 
-3. **Lookup** performs fuzzy matching and relevance-ranked scoring across all entries. Exact name matches rank highest, followed by prefix, substring, path, and typo-tolerant (Levenshtein distance ≤ 2) matches. Use `--exact` for simple substring matching. Results are formatted for quick consumption (or `--json` for structured agent consumption with scores).
+   After adding each file entry, the scanner checks for a language parser (Go, JS/TS, Python) and extracts top-level symbols (functions, types, structs, etc.), adding them as additional entries alongside the file entry.
+
+3. **Lookup** performs fuzzy matching and relevance-ranked scoring across all entries — both files and symbols. Exact name matches rank highest, followed by prefix, substring, path, and typo-tolerant (Levenshtein distance ≤ 2) matches. Use `--exact` for simple substring matching. Results are formatted for quick consumption (or `--json` for structured agent consumption with scores).
 
 ## Project structure
 

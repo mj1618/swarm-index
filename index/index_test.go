@@ -482,6 +482,171 @@ func TestScanNoSwarmignore(t *testing.T) {
 	}
 }
 
+func TestLoadIgnorePatternsMergesBothFiles(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, ".swarmignore", "*.log\n")
+	mkFile(t, tmp, "swarm/.swarmindexignore", "vendor/\nsecrets.json\n")
+
+	patterns := loadIgnorePatterns(tmp)
+	want := []string{"*.log", "vendor/", "secrets.json"}
+	if len(patterns) != len(want) {
+		t.Fatalf("loadIgnorePatterns() returned %d patterns, want %d: %v", len(patterns), len(want), patterns)
+	}
+	for i, p := range patterns {
+		if p != want[i] {
+			t.Errorf("pattern[%d] = %q, want %q", i, p, want[i])
+		}
+	}
+}
+
+func TestLoadIgnorePatternsSwarmindexignoreOnly(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "swarm/.swarmindexignore", "*.min.js\n")
+
+	patterns := loadIgnorePatterns(tmp)
+	if len(patterns) != 1 || patterns[0] != "*.min.js" {
+		t.Errorf("loadIgnorePatterns() = %v, want [*.min.js]", patterns)
+	}
+}
+
+func TestScanRespectsSwarmindexignore(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "swarm/.swarmindexignore", "generated/\n*.min.js\n")
+	mkFile(t, tmp, "main.go", "package main")
+	mkFile(t, tmp, "generated/output.go", "package gen")
+	mkFile(t, tmp, "lib/app.min.js", "minified")
+	mkFile(t, tmp, "lib/app.js", "normal")
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	// main.go + lib/app.js = 2 (swarm/ dir is skipped by shouldSkipDir)
+	if got := idx.FileCount(); got != 2 {
+		t.Errorf("FileCount() = %d, want 2", got)
+	}
+
+	for _, e := range idx.Entries {
+		if strings.Contains(e.Path, "generated") {
+			t.Errorf("index contains ignored directory entry: %s", e.Path)
+		}
+		if strings.HasSuffix(e.Path, ".min.js") {
+			t.Errorf("index contains ignored file entry: %s", e.Path)
+		}
+	}
+}
+
+func TestScanIncludesSymbols(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "sample.go", `package sample
+
+func ExportedFunc() {}
+func unexportedFunc() {}
+type Config struct{}
+`)
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	// Should have 1 file entry + symbols (ExportedFunc, unexportedFunc, Config)
+	if idx.FileCount() != 1 {
+		t.Errorf("FileCount() = %d, want 1", idx.FileCount())
+	}
+
+	kinds := map[string]int{}
+	for _, e := range idx.Entries {
+		kinds[e.Kind]++
+	}
+	if kinds["file"] != 1 {
+		t.Errorf("file entries = %d, want 1", kinds["file"])
+	}
+	if kinds["func"] < 2 {
+		t.Errorf("func entries = %d, want >= 2", kinds["func"])
+	}
+	if kinds["struct"] < 1 {
+		t.Errorf("struct entries = %d, want >= 1", kinds["struct"])
+	}
+}
+
+func TestLookupFindsSymbols(t *testing.T) {
+	tmp := t.TempDir()
+	mkFile(t, tmp, "sample.go", `package sample
+
+func ExportedFunc() {}
+func unexportedFunc() {}
+type Config struct{}
+`)
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	results := idx.Match("ExportedFunc")
+	if len(results) == 0 {
+		t.Fatal("Match('ExportedFunc') returned 0 results, want >= 1")
+	}
+
+	found := false
+	for _, r := range results {
+		if r.Name == "ExportedFunc" && r.Kind == "func" {
+			found = true
+			if r.Line == 0 {
+				t.Error("ExportedFunc entry has Line=0, want > 0")
+			}
+			if !r.Exported {
+				t.Error("ExportedFunc should be Exported=true")
+			}
+			if r.Path != "sample.go" {
+				t.Errorf("ExportedFunc Path = %q, want %q", r.Path, "sample.go")
+			}
+		}
+	}
+	if !found {
+		t.Errorf("Match('ExportedFunc') did not return a func entry; got %+v", results)
+	}
+}
+
+func TestLookupRanksSymbolsAndFiles(t *testing.T) {
+	tmp := t.TempDir()
+	// A file named "config.go" and a type named "Config" inside another file.
+	mkFile(t, tmp, "config.go", "package main\n")
+	mkFile(t, tmp, "types.go", `package main
+
+type Config struct{}
+`)
+
+	idx, err := Scan(tmp)
+	if err != nil {
+		t.Fatalf("Scan() error: %v", err)
+	}
+
+	results := idx.Match("config")
+	if len(results) < 2 {
+		t.Fatalf("Match('config') returned %d results, want >= 2 (file + symbol)", len(results))
+	}
+
+	hasFile := false
+	hasSymbol := false
+	for _, r := range results {
+		if r.Kind == "file" && r.Name == "config.go" {
+			hasFile = true
+		}
+		if r.Kind == "struct" && r.Name == "Config" {
+			hasSymbol = true
+		}
+	}
+	if !hasFile {
+		t.Error("Match('config') missing file entry for config.go")
+	}
+	if !hasSymbol {
+		t.Error("Match('config') missing symbol entry for Config type")
+	}
+}
+
 func mkFile(t *testing.T, base, relPath, content string) {
 	t.Helper()
 	full := filepath.Join(base, relPath)

@@ -48,6 +48,7 @@ func (idx *Index) Stale() (*StaleResult, error) {
 
 	newFiles := []string{}
 	modifiedFiles := []string{}
+	ignorePatterns := loadIgnorePatterns(idx.Root)
 
 	// Walk filesystem using the same skip rules as Scan
 	err = filepath.Walk(idx.Root, func(path string, info os.FileInfo, err error) error {
@@ -56,14 +57,21 @@ func (idx *Index) Stale() (*StaleResult, error) {
 		}
 
 		name := info.Name()
+		relPath, _ := filepath.Rel(idx.Root, path)
+
 		if info.IsDir() {
 			if shouldSkipDir(name) {
+				return filepath.SkipDir
+			}
+			if relPath != "." && shouldIgnore(relPath, true, ignorePatterns) {
 				return filepath.SkipDir
 			}
 			return nil
 		}
 
-		relPath, _ := filepath.Rel(idx.Root, path)
+		if shouldIgnore(relPath, false, ignorePatterns) {
+			return nil
+		}
 
 		if _, ok := indexed[relPath]; ok {
 			// File exists in index — check if modified since scan

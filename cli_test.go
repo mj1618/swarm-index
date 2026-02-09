@@ -41,6 +41,17 @@ func runBinary(args ...string) (stdout, stderr string, err error) {
 	return outBuf.String(), errBuf.String(), err
 }
 
+// runBinaryInDir executes the test binary with a specific working directory.
+func runBinaryInDir(dir string, args ...string) (stdout, stderr string, err error) {
+	cmd := exec.Command(binaryPath, args...)
+	cmd.Dir = dir
+	var outBuf, errBuf strings.Builder
+	cmd.Stdout = &outBuf
+	cmd.Stderr = &errBuf
+	err = cmd.Run()
+	return outBuf.String(), errBuf.String(), err
+}
+
 // makeTestDir creates a temp directory with some sample files for scanning.
 func makeTestDir(t *testing.T) string {
 	t.Helper()
@@ -68,7 +79,7 @@ func makeTestDir(t *testing.T) string {
 
 func TestCLIScanText(t *testing.T) {
 	dir := makeTestDir(t)
-	stdout, _, err := runBinary("scan", dir)
+	stdout, _, err := runBinaryInDir(dir, "scan", ".")
 	if err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
@@ -82,7 +93,7 @@ func TestCLIScanText(t *testing.T) {
 
 func TestCLIScanJSON(t *testing.T) {
 	dir := makeTestDir(t)
-	stdout, _, err := runBinary("scan", dir, "--json")
+	stdout, _, err := runBinaryInDir(dir, "scan", ".", "--json")
 	if err != nil {
 		t.Fatalf("scan --json failed: %v", err)
 	}
@@ -122,7 +133,7 @@ func TestCLIScanNonexistentDir(t *testing.T) {
 func TestCLILookupText(t *testing.T) {
 	dir := makeTestDir(t)
 	// Scan first.
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	stdout, _, err := runBinary("lookup", "helper", "--root", dir)
@@ -136,7 +147,7 @@ func TestCLILookupText(t *testing.T) {
 
 func TestCLILookupJSON(t *testing.T) {
 	dir := makeTestDir(t)
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	stdout, _, err := runBinary("lookup", "helper", "--root", dir, "--json")
@@ -154,7 +165,7 @@ func TestCLILookupJSON(t *testing.T) {
 
 func TestCLILookupNoMatches(t *testing.T) {
 	dir := makeTestDir(t)
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	stdout, _, err := runBinary("lookup", "zzzznonexistent", "--root", dir)
@@ -168,7 +179,7 @@ func TestCLILookupNoMatches(t *testing.T) {
 
 func TestCLILookupNoMatchesJSON(t *testing.T) {
 	dir := makeTestDir(t)
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	stdout, _, err := runBinary("lookup", "zzzznonexistent", "--root", dir, "--json")
@@ -186,7 +197,7 @@ func TestCLILookupNoMatchesJSON(t *testing.T) {
 
 func TestCLILookupEmptyQuery(t *testing.T) {
 	dir := makeTestDir(t)
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	_, stderr, err := runBinary("lookup", "", "--root", dir)
@@ -200,7 +211,7 @@ func TestCLILookupEmptyQuery(t *testing.T) {
 
 func TestCLILookupMaxFlag(t *testing.T) {
 	dir := makeTestDir(t)
-	if _, _, err := runBinary("scan", dir); err != nil {
+	if _, _, err := runBinaryInDir(dir, "scan", "."); err != nil {
 		t.Fatalf("scan failed: %v", err)
 	}
 	// Query "." which matches all files, limit to 1.

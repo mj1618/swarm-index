@@ -9,6 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/matt/swarm-index/parsers"
 )
 
 // Entry represents a single indexed item (file, symbol, package, etc.).
@@ -208,6 +210,27 @@ func Scan(root string) (*Index, error) {
 			Package: pkg,
 		})
 
+		// Parse symbols from source files using the parser registry.
+		ext := filepath.Ext(name)
+		if p := parsers.ForExtension(ext); p != nil {
+			content, readErr := os.ReadFile(path)
+			if readErr == nil {
+				symbols, parseErr := p.Parse(relPath, content)
+				if parseErr == nil {
+					for _, sym := range symbols {
+						idx.Entries = append(idx.Entries, Entry{
+							Name:     sym.Name,
+							Kind:     sym.Kind,
+							Path:     relPath,
+							Line:     sym.Line,
+							Package:  pkg,
+							Exported: sym.Exported,
+						})
+					}
+				}
+			}
+		}
+
 		return nil
 	})
 	if err != nil {
@@ -275,10 +298,23 @@ func openTextFile(path string) (*os.File, error) {
 	return f, nil
 }
 
-// loadIgnorePatterns reads a .swarmignore file from root and returns the
-// patterns. Returns nil with no error if the file doesn't exist.
+// loadIgnorePatterns reads ignore patterns from .swarmignore at root and
+// swarm/.swarmindexignore, merging them. Returns nil if neither file exists.
 func loadIgnorePatterns(root string) []string {
-	f, err := os.Open(filepath.Join(root, ".swarmignore"))
+	var patterns []string
+	for _, name := range []string{".swarmignore", filepath.Join("swarm", ".swarmindexignore")} {
+		patterns = append(patterns, readIgnoreFile(filepath.Join(root, name))...)
+	}
+	if len(patterns) == 0 {
+		return nil
+	}
+	return patterns
+}
+
+// readIgnoreFile parses a gitignore-style file and returns its patterns.
+// Returns nil if the file doesn't exist.
+func readIgnoreFile(path string) []string {
+	f, err := os.Open(path)
 	if err != nil {
 		return nil
 	}

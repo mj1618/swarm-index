@@ -60,20 +60,20 @@ func main() {
 		if err != nil {
 			fatal(jsonOutput, fmt.Sprintf("error: %v", err))
 		}
-		if err := idx.Save(dir); err != nil {
+		if err := idx.Save("."); err != nil {
 			fatal(jsonOutput, fmt.Sprintf("error saving index: %v", err))
 		}
 		if jsonOutput {
 			result := map[string]interface{}{
 				"filesIndexed": idx.FileCount(),
 				"packages":     idx.PackageCount(),
-				"indexPath":    dir + "/swarm/index/",
+				"indexPath":    "./swarm/index/",
 				"extensions":   idx.ExtensionCounts(),
 			}
 			data, _ := json.Marshal(result)
 			fmt.Println(string(data))
 		} else {
-			fmt.Printf("Index saved to %s/swarm/index/ (%d files, %d packages)\n", dir, idx.FileCount(), idx.PackageCount())
+			fmt.Printf("Index saved to ./swarm/index/ (%d files, %d packages)\n", idx.FileCount(), idx.PackageCount())
 			if summary := extensionSummary(idx.ExtensionCounts()); summary != "" {
 				fmt.Printf("  %s\n", summary)
 			}
