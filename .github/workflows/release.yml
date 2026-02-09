@@ -70,6 +70,9 @@ jobs:
 
       - name: Update latest release
         run: |
+          VERSION=${{ steps.version.outputs.version }}
+          VERSION_NUM=${VERSION#v}
+
           # Delete existing latest release and tag
           gh release delete latest --yes --cleanup-tag || true
 
@@ -78,13 +81,22 @@ jobs:
           git push origin latest --force
 
           # Download all assets from the versioned release
-          mkdir -p /tmp/release-assets
-          gh release download ${{ steps.version.outputs.version }} --dir /tmp/release-assets
+          mkdir -p /tmp/release-assets /tmp/latest-assets
+          gh release download "$VERSION" --dir /tmp/release-assets
 
-          # Create latest release with same assets
+          # Copy versioned assets and create version-less copies for stable URLs
+          # e.g. swarm-index_0.0.48_darwin_arm64.tar.gz -> swarm-index_darwin_arm64.tar.gz
+          for f in /tmp/release-assets/*; do
+            name=$(basename "$f")
+            cp "$f" "/tmp/latest-assets/$name"
+            newname=$(echo "$name" | sed "s/_${VERSION_NUM}_/_/; s/_${VERSION_NUM}\././" )
+            cp "$f" "/tmp/latest-assets/$newname"
+          done
+
+          # Create latest release with both versioned and stable-URL assets
           gh release create latest \
-            --title "Latest Release (${{ steps.version.outputs.version }})" \
-            --notes "This release always points to the latest version. Current: ${{ steps.version.outputs.version }}" \
-            /tmp/release-assets/*
+            --title "Latest Release ($VERSION)" \
+            --notes "This release always points to the latest version. Current: $VERSION" \
+            /tmp/latest-assets/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
